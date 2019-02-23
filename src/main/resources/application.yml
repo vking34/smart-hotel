@@ -1,0 +1,16 @@
+#----------------------server---------------------------
+
+server:
+  port: 80
+
+#----------------------spring---------------------------
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: smart-hotel
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_null
