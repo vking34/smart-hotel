@@ -7,9 +7,13 @@ server:
 spring:
   data:
     mongodb:
-      host: localhost
-      port: 27017
+      #host: localhost
+      #port: 27017
+      host: ds052408.mlab.com
+      port: 52408
       database: smart-hotel
+      username: vking34
+      password: vking34
 
   jackson:
     property-naming-strategy: SNAKE_CASE

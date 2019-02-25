@@ -19,6 +19,15 @@ public class Hotel {
     @Field("address")
     private String address;
 
+    @Field("description")
+    private String description;
+
+    @Field("point")
+    private Float point;
+
+    @Field("ratings")
+    private Integer ratings;
+
     @Field("location")
     private Location location;
 
