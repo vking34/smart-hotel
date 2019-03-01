@@ -7,8 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Location {
 
-    private Float lat;
+    private String type;
 
-    private Float lng;
+    private Double coordinates[];
 
 }

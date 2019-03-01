@@ -1,26 +1,18 @@
 package com.hust.smarthotel.components.hotel.domain_model;
 
-import lombok.AllArgsConstructor;
+import com.hust.smarthotel.components.hotel.app_model.BasicHotel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Document(collection = "Hotel")
-@AllArgsConstructor
-public class Hotel {
+public class Hotel extends BasicHotel {
     @Id
     private String id;
-
-    @Field("name")
-    private String name;
-
-    @Field("address")
-    private String address;
-
-    @Field("description")
-    private String description;
 
     @Field("point")
     private Float point;
@@ -28,16 +20,13 @@ public class Hotel {
     @Field("ratings")
     private Integer ratings;
 
-    @Field("location")
-    private Location location;
-
-    @Field("facilities")
-    private Facilities facilities;
-
-    @Field("status")
-    private Boolean status;
-
     @Field("active")
     private Boolean active;
 
+    public Hotel(BasicHotel basicHotel) {
+        super(basicHotel);
+        this.point = (float) 0;
+        this.ratings = 0;
+        this.active = true;
+    }
 }

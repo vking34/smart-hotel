@@ -3,13 +3,14 @@ package com.hust.smarthotel.components.room.controller;
 
 import com.hust.smarthotel.components.room.domain_model.Rooms;
 import com.hust.smarthotel.components.room.domain_service.RoomService;
+import com.hust.smarthotel.generic.constant.UrlConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api")
+@RequestMapping(UrlConstants.API)
 public class RoomController {
 
     @Autowired

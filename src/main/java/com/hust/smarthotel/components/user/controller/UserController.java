@@ -3,13 +3,14 @@ package com.hust.smarthotel.components.user.controller;
 import com.hust.smarthotel.components.user.domain_model.SysUser;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.domain_service.UserService;
+import com.hust.smarthotel.generic.constant.UrlConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/users")
+@RequestMapping(UrlConstants.API+ "/users")
 public class UserController {
 
     @Autowired
