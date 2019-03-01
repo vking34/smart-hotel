@@ -3,6 +3,7 @@ package com.hust.smarthotel.components.hotel.domain_model;
 import com.hust.smarthotel.components.hotel.app_model.BasicHotel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Document(collection = "Hotel")
+@NoArgsConstructor
 public class Hotel extends BasicHotel {
     @Id
     private String id;
