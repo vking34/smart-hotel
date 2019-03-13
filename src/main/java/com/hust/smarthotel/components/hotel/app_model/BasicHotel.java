@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -15,14 +17,20 @@ public class BasicHotel {
 
     @ApiModelProperty(notes = "Hotel Name", required = true)
     @Field("name")
+    @NotNull
+    @Size(min = 1, max = 200)
     private String name;
 
     @ApiModelProperty(notes = "Hotel Address", required = true)
     @Field("address")
+    @NotNull
+    @Size(min = 1, max = 300)
     private String address;
 
     @ApiModelProperty(notes = "Description about hotel")
     @Field("description")
+    @NotNull
+    @Size(min = 1, max = 500)
     private String description;
 
     @ApiModelProperty(notes = "Location of hotel", required = true)
@@ -43,6 +51,7 @@ public class BasicHotel {
 
     @ApiModelProperty(notes = "Active or not?", required = true)
     @Field("status")
+    @NotNull
     private Boolean status;
 
     public BasicHotel(BasicHotel hotel){

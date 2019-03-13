@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class SysUser {
 
     @Field("username")
+    
     private String username;
 
     @Field("password")

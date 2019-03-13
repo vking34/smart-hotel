@@ -1,6 +1,7 @@
 package com.hust.smarthotel.components.hotel.domain_service;
 
 import com.hust.smarthotel.components.hotel.app_model.BasicHotel;
+import com.hust.smarthotel.components.hotel.app_model.HotelStatus;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,5 @@ public interface HotelService {
     public Hotel deleteHotel(String id);
     public Page<Hotel> findHotelsAround(Double lng, Double lat, Integer radius);
     public Hotel findHotelById(String hotelId);
+    public Hotel changeHotelStatus(String hotelId, HotelStatus status);
 }

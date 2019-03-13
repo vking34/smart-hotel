@@ -1,11 +1,13 @@
 package com.hust.smarthotel.components.hotel.domain_service;
 
 import com.hust.smarthotel.components.hotel.app_model.BasicHotel;
+import com.hust.smarthotel.components.hotel.app_model.HotelStatus;
 import com.hust.smarthotel.generic.util.PageRequestCreator;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -56,5 +58,16 @@ public class HotelServiceImpl implements HotelService {
 
     public Hotel findHotelById(String hotelId){
         return hotelRepository.findHotelById(hotelId);
+    }
+
+
+    @Override
+    public Hotel changeHotelStatus(String hotelId, HotelStatus status) {
+        Hotel hotel = hotelRepository.findHotelById(hotelId);
+        if (hotel == null) return null;
+
+        hotel.setStatus(status.getStatus());
+        asyncTasks.updateHotel(hotel);
+        return hotel;
     }
 }

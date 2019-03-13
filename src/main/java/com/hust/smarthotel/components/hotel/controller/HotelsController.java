@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -43,7 +45,8 @@ public class HotelsController {
 
     @ApiOperation(value = "Create a hotel")
     @PostMapping
-    Hotel createHotel(@RequestBody BasicHotel hotel){
-        return hotelService.createHotel(hotel);
+    ResponseEntity<HotelResponse> createHotel(@Valid @RequestBody BasicHotel basicHotel){
+        Hotel hotel = hotelService.createHotel(basicHotel);
+        return new ResponseEntity<HotelResponse>(new HotelResponse(hotel), HttpStatus.ACCEPTED);
     }
 }
