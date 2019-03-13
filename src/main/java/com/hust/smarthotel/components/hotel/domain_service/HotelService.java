@@ -13,4 +13,5 @@ public interface HotelService {
     public Hotel updateHotel(String id, BasicHotel basicHotel);
     public Hotel deleteHotel(String id);
     public Page<Hotel> findHotelsAround(Double lng, Double lat, Integer radius);
+    public Hotel findHotelById(String hotelId);
 }

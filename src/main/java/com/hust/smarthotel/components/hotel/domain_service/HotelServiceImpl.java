@@ -7,13 +7,15 @@ import com.hust.smarthotel.components.hotel.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class HotelServiceImpl implements HotelService {
 
     @Autowired
     private HotelRepository hotelRepository;
+
+    @Autowired
+    private HotelAsyncTasks asyncTasks;
 
     public Page<Hotel> findAllSortedByPointDesc(Integer page, Integer pageSize){
 
@@ -34,6 +36,13 @@ public class HotelServiceImpl implements HotelService {
         Hotel hotel = hotelRepository.findHotelById(id);
         if (hotel == null)
             return null;
+        hotel.setName(basicHotel.getName());
+        hotel.setAddress(basicHotel.getAddress());
+        hotel.setDescription(basicHotel.getDescription());
+        hotel.setLocation(basicHotel.getLocation());
+        hotel.setFacilities(basicHotel.getFacilities());
+        hotel.setStatus(basicHotel.getStatus());
+        asyncTasks.updateHotel(hotel);
         return hotel;
     }
 
@@ -43,5 +52,9 @@ public class HotelServiceImpl implements HotelService {
 
     public Page<Hotel> findHotelsAround(Double lng, Double lat, Integer radius){
         return hotelRepository.findHotelsAround(lng, lat, radius, PageRequestCreator.getDescPageRequest(0, 10, "point"));
+    }
+
+    public Hotel findHotelById(String hotelId){
+        return hotelRepository.findHotelById(hotelId);
     }
 }

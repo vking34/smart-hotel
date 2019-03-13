@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HotelRepository extends MongoRepository<Hotel, String> {
+    @Query(value = "{ active : true }", fields = "{ photos : 0 , active : 0 }")
     public Page<Hotel> findAll(Pageable pageable);
 
     @Query("{ name: { '$regex': ?0 , '$options': 'i' }}")
