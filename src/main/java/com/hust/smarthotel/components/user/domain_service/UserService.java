@@ -84,7 +84,7 @@ public class UserService {
         user.setEmail(requestUser.getEmail());
         user.setPhone(requestUser.getPhone());
         user.setPicture(requestUser.getPicture());
-        asynTasks.updateClient(user);
+        asynTasks.updateUser(user);
         return new UserResponse(true, null, null, user);
     }
 
@@ -95,4 +95,14 @@ public class UserService {
         asynTasks.deleteUser(user);
         return new ManagerResponse(true, null, null, user);
     }
+
+    public ManagerResponse addHotelToManager(String hotelId, Manager manager){
+        Hotel hotel = hotelRepository.findHotelById(hotelId);
+        if (hotel == null)
+            return HOTEL_NOT_EXISTING;
+        manager.setHotelId(hotelId);
+        asynTasks.updateUser(manager);
+        return new ManagerResponse(true, null, null, manager);
+    }
+
 }

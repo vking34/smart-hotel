@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface UserAsynTasks {
 
-    void updateClient(User client);
+    void updateUser(User user);
     void deleteUser(User user);
 }

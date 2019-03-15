@@ -72,18 +72,20 @@ public class UsersController {
         return new ResponseEntity<>(managerResponse, HttpStatus.ACCEPTED);
     }
 
-//    @ApiOperation("Add/Update hotel id for a manager")
-//    @PostMapping("/managers/{managerId}/hotels/{hotelId}")
-//    ResponseEntity<ManagerResponse> addHotelToManager(@PathVariable("managerId") String managerId,
-//                                                      @PathVariable("hotelId") String hotelId){
-//        Manager manager = userService.findUser(managerId);
-//        if (manager == null)
-//            return new ResponseEntity(ErrorResponses.USER_NOT_FOUND, HttpStatus.BAD_REQUEST);
-//        else if (manager.getRole().equals(RoleConstants.MANAGER))
-//            return new ResponseEntity(ErrorResponses.ADD_HOTEL_NOT_ALLOW, HttpStatus.FORBIDDEN);
-//
-//        userService
-//        return new ResponseEntity<ManagerResponse>(new ManagerResponse(true, null, null, manager), HttpStatus.ACCEPTED);
-//    }
+    @ApiOperation("Add/Update hotel id for a manager")
+    @PostMapping("/managers/{managerId}/hotels/{hotelId}")
+    ResponseEntity<ManagerResponse> addHotelToManager(@PathVariable("managerId") String managerId,
+                                                      @PathVariable("hotelId") String hotelId){
+        Manager manager = userService.findUser(managerId);
+        if (manager == null)
+            return new ResponseEntity<ManagerResponse>(ErrorResponses.MANAGER_NOT_FOUND, HttpStatus.BAD_REQUEST);
+        else if (!manager.getRole().equals(RoleConstants.MANAGER))
+            return new ResponseEntity<ManagerResponse>(ErrorResponses.ADD_HOTEL_NOT_ALLOW, HttpStatus.FORBIDDEN);
+
+        ManagerResponse managerResponse = userService.addHotelToManager(hotelId, manager);
+        if (!managerResponse.getStatus())
+            return new ResponseEntity<ManagerResponse>(managerResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ManagerResponse>(managerResponse, HttpStatus.ACCEPTED);
+    }
 
 }

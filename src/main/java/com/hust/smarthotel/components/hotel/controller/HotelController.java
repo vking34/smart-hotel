@@ -49,7 +49,8 @@ public class HotelController {
     }
 
     @PostMapping("/status")
-    ResponseEntity<HotelResponse> changeHotelStatus(@PathVariable String hotelId, @Valid @RequestBody HotelStatus hotelStatus){
+    ResponseEntity<HotelResponse> changeHotelStatus(@PathVariable String hotelId,
+                                                    @Valid @RequestBody HotelStatus hotelStatus){
         Hotel hotel = hotelService.changeHotelStatus(hotelId, hotelStatus);
         if (hotel == null)
             return new ResponseEntity(ErrorResponses.NOT_FOUND, HttpStatus.NOT_FOUND);

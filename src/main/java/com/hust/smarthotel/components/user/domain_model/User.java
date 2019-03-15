@@ -1,5 +1,6 @@
 package com.hust.smarthotel.components.user.domain_model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;

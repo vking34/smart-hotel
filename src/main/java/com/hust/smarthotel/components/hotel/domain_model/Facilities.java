@@ -9,4 +9,5 @@ public class Facilities {
     private Boolean wifi;
     private Boolean bar;
     private Boolean laundry;
+    private Boolean fitness;
 }

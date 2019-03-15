@@ -15,7 +15,7 @@ public class UserAsyncImpl implements UserAsynTasks {
 
     @Async
     @Override
-    public void updateClient(User client) {
+    public void updateUser(User client) {
         userRepository.save(client);
     }
 

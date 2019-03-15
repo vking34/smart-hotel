@@ -51,7 +51,7 @@ public class BasicHotel {
 
     @ApiModelProperty(notes = "Active or not?", required = true)
     @Field("status")
-    @NotNull
+//    @NotNull
     private Boolean status;
 
     public BasicHotel(BasicHotel hotel){
