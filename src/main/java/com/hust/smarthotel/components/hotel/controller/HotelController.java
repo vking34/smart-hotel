@@ -7,13 +7,13 @@ import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.domain_service.HotelService;
 import com.hust.smarthotel.generic.constant.UrlConstants;
 import com.hust.smarthotel.generic.response.ErrorResponses;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -24,11 +24,13 @@ public class HotelController {
     private HotelService hotelService;
 
 
+    @ApiOperation("Get more information about a hotel")
     @GetMapping
     Hotel getHotel(@PathVariable String hotelId){
         return hotelService.findHotelById(hotelId);
     }
 
+    @ApiOperation("Update information for a hotel")
     @PutMapping
     ResponseEntity<HotelResponse> updateHotel(@PathVariable String hotelId, @Valid @RequestBody BasicHotel basicHotel){
         Hotel hotel = hotelService.updateHotel(hotelId, basicHotel);
