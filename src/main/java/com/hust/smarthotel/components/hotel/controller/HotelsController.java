@@ -46,7 +46,9 @@ public class HotelsController {
     @ApiOperation(value = "Create a hotel")
     @PostMapping
     ResponseEntity<HotelResponse> createHotel(@Valid @RequestBody BasicHotel basicHotel){
-        Hotel hotel = hotelService.createHotel(basicHotel);
-        return new ResponseEntity<HotelResponse>(new HotelResponse(hotel), HttpStatus.ACCEPTED);
+        HotelResponse hotelResponse = hotelService.createHotel(basicHotel);
+        if (!hotelResponse.getStatus())
+            return new ResponseEntity<HotelResponse>(hotelResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<HotelResponse>(hotelResponse, HttpStatus.ACCEPTED);
     }
 }

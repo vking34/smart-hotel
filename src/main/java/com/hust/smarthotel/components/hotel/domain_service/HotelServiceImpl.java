@@ -1,7 +1,9 @@
 package com.hust.smarthotel.components.hotel.domain_service;
 
 import com.hust.smarthotel.components.hotel.app_model.BasicHotel;
+import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelStatus;
+import com.hust.smarthotel.generic.response.ErrorResponses;
 import com.hust.smarthotel.generic.util.PageRequestCreator;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.repository.HotelRepository;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+
 
 @Component
 public class HotelServiceImpl implements HotelService {
@@ -28,10 +31,17 @@ public class HotelServiceImpl implements HotelService {
         return hotelRepository.findHotelsByName(name, PageRequestCreator.getSimplePageRequest(page, pageSize));
     }
 
-    public Hotel createHotel(BasicHotel basicHotel){
+    public HotelResponse createHotel(BasicHotel basicHotel){
         Hotel hotel = new Hotel(basicHotel);
-        hotelRepository.insert(hotel);
-        return hotel;
+
+        try {
+            hotelRepository.insert(hotel);
+        }
+        catch ( Exception e){
+            return ErrorResponses.INVALID_COORDINATES;
+        }
+
+        return new HotelResponse(true, null, null, hotel);
     }
 
     public Hotel updateHotel(String id, BasicHotel basicHotel){
