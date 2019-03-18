@@ -49,9 +49,8 @@ public class UsersController {
     @PostMapping("/clients")
     ResponseEntity<UserResponse> createClient(@Valid @RequestBody User requestClient){
         UserResponse userResponse = userService.createClient(requestClient);
-        if (!userResponse.getStatus()){
+        if (!userResponse.getStatus())
             return new ResponseEntity<UserResponse>(userResponse, HttpStatus.BAD_REQUEST);
-        }
         return new ResponseEntity<UserResponse>(userResponse, HttpStatus.ACCEPTED);
     }
 
@@ -66,9 +65,8 @@ public class UsersController {
     @PostMapping("/managers")
     ResponseEntity createManager(@Valid @RequestBody Manager requestedManager){
         ManagerResponse managerResponse = userService.createManger(requestedManager);
-        if (!managerResponse.getStatus()){
+        if (!managerResponse.getStatus())
             return new ResponseEntity<>(managerResponse, HttpStatus.BAD_REQUEST);
-        }
         return new ResponseEntity<>(managerResponse, HttpStatus.ACCEPTED);
     }
 

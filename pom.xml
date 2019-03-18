@@ -55,6 +55,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <!--Documenting Restful API-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -72,6 +77,13 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-bean-validators</artifactId>
             <version>2.9.2</version>
+        </dependency>
+
+        <!--realtime 3rd api-->
+        <dependency>
+            <groupId>com.pusher</groupId>
+            <artifactId>pusher-http-java</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
     </dependencies>

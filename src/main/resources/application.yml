@@ -1,7 +1,8 @@
-#----------------------server---------------------------
+#--------------------web-server-------------------------
 
 server:
   port: 80
+
 
 #----------------------spring---------------------------
 spring:
@@ -18,3 +19,12 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null
+
+
+#----------------------pusher---------------------------
+pusher:
+  id: 737748
+  key: 69053ddd28185a9726aa
+  secret: 4e988776643fcce1a466
+  cluster: ap1
+  encrypted: true
