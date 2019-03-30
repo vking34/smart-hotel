@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.USER_INACTIVE;
 import static com.hust.smarthotel.generic.constant.RoleConstants.ROLE;
 
 
+@Service
 public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
