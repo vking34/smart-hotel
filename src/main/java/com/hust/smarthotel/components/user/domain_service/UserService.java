@@ -7,6 +7,7 @@ import com.hust.smarthotel.components.user.app_model.UserResponse;
 import com.hust.smarthotel.components.user.domain_model.Manager;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.repository.UserRepository;
+import com.hust.smarthotel.generic.util.EncryptedPasswordUtils;
 import com.hust.smarthotel.generic.util.PageRequestCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,6 +52,7 @@ public class UserService {
             return USER_EXISTS;
 
         client.setRole(CLIENT);
+        client.setPassword(EncryptedPasswordUtils.encryptPassword(client.getPassword()));
         client.setActive(true);
         user = userRepository.save(client);
         return new UserResponse(true, null,null, user);
