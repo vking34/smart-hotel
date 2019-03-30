@@ -20,8 +20,13 @@ spring:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null
 
+#----------------------security--------------------------
+security:
+  jwt:
+    expiry-in-milliseconds: 86400000  # 1 day
+    secret-key: vking34
 
-#----------------------pusher---------------------------
+#----------------------pusher----------------------------
 pusher:
   id: 737748
   key: 69053ddd28185a9726aa
