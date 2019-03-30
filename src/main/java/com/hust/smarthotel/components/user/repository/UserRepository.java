@@ -19,6 +19,8 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     Manager findUserById(String id);
 
+    User findUserByUsername(String username);
+
     @Query(value = "{}", fields = "{ full_name : 0 , email : 0 , phone : 0 }")
     Page<User> findAll(Pageable pageable);
 

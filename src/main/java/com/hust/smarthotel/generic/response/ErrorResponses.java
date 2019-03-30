@@ -1,5 +1,6 @@
 package com.hust.smarthotel.generic.response;
 
+import com.hust.smarthotel.components.auth.model.FailAuthenResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.user.app_model.ManagerResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
@@ -23,4 +24,9 @@ public class ErrorResponses {
 
     public static final UsernameNotFoundException USER_NOT_FOUND_EXCEPTION = new UsernameNotFoundException("User not found");
     public static final UsernameNotFoundException USER_INACTIVE = new UsernameNotFoundException("User is inactive");
+
+
+    public static final FailAuthenResponse FAIL_AUTHEN_RESPONSE = new FailAuthenResponse(false, "Username/Password is wrong", 401);
+
+
 }
