@@ -1,6 +1,7 @@
 package com.hust.smarthotel.components.user.repository;
 
 import com.hust.smarthotel.components.user.domain_model.Manager;
+import com.hust.smarthotel.components.user.domain_model.SysUser;
 import com.hust.smarthotel.components.user.domain_model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,9 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
+
+    @Query(value = "{ username: ?0 }")
+    SysUser findSysUserByUsername(String username);
 
     Manager findUserById(String id);
 

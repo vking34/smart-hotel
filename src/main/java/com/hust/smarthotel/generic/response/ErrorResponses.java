@@ -4,6 +4,7 @@ import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.user.app_model.ManagerResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
 import com.hust.smarthotel.generic.model.ErrorResponse;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class ErrorResponses {
     public static final ErrorResponse NOT_FOUND = new ErrorResponse("Not found entity by id", "NOTFOUND", 101);
@@ -20,6 +21,6 @@ public class ErrorResponses {
     public static final ManagerResponse HOTEL_NOT_EXISTING = new ManagerResponse(false, "The hotel does not exists", 203, null);
     public static final ManagerResponse ADD_HOTEL_NOT_ALLOW = new ManagerResponse(false, "Your role is not allowed to add hotel", 206, null);
 
-
-
+    public static final UsernameNotFoundException USER_NOT_FOUND_EXCEPTION = new UsernameNotFoundException("User not found");
+    public static final UsernameNotFoundException USER_INACTIVE = new UsernameNotFoundException("User is inactive");
 }

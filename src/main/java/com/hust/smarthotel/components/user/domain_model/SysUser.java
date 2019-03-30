@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
-class SysUser {
+public class SysUser {
 
     @Field("username")
     @Size(min = 6, max = 100)
