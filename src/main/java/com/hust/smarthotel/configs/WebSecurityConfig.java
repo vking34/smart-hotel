@@ -43,7 +43,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), userRepository, jwtUtil));
-        
+
+//        http.authorizeRequests()
+//                .antMatchers("/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}")
+
     }
 
     @Override
