@@ -64,9 +64,21 @@ public class JwtUtil {
             userDetails = customUserDetailService.loadUserByUserId(user_id);
         }
 
-
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
+    public Claims getClaims(String token){
+        if (token == null)
+            return null;
+        Claims claims = null;
+        try {
+            claims = Jwts.parser().setSigningKey(secretKey)
+                    .parseClaimsJws(token)
+                    .getBody();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return claims;
+    }
 
 }

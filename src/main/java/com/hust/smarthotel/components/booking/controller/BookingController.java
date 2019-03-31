@@ -1,6 +1,5 @@
 package com.hust.smarthotel.components.booking.controller;
 
-
 import com.hust.smarthotel.components.booking.app_model.BookingRequest;
 import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
@@ -38,8 +37,8 @@ public class BookingController {
     private BookingService bookingService;
 
     @PostMapping
-//    @PreAuthorize("hasAnyRole('ROLE_USER')")
-    ResponseEntity bookRoom(@Valid @RequestBody BookingRequest bookingRequest){
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
+    ResponseEntity<BookingResponse> bookRoom(@Valid @RequestBody BookingRequest bookingRequest){
         Hotel hotel = hotelService.findHotelById(bookingRequest.getHotelId());
         if (hotel == null)
             return HOTEL_NOT_FOUND;
@@ -54,4 +53,6 @@ public class BookingController {
         publisher.announceBookRequest(bookingRecord.getHotelId(), bookingRecord.getId());
         return new ResponseEntity<>(bookingResponse, HttpStatus.ACCEPTED);
     }
+
+
 }

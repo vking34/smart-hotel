@@ -22,6 +22,13 @@ public class BookingService {
         return new BookingResponse(true, null, null, bookingRecord);
     }
 
+    public BookingRecord findBookingRecordById(String id){
+        BookingRecord record = bookingRepository.findBookingRecordById(id);
+        if (record == null)
+            record = new BookingRecord();
+        return record;
+    }
+
     public Page<BookingRecord> getBookingRecords(){
         return bookingRepository.findAll(PageRequestCreator.getSimplePageRequest(0,10));
     }

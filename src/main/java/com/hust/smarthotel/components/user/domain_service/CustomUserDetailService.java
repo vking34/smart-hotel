@@ -44,11 +44,11 @@ public class CustomUserDetailService implements UserDetailsService {
         if (!user.getActive())
             throw USER_INACTIVE;
 
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(ROLE + user.getRole());
-        return new User(user.getUsername(), user.getPassword(), authorities);
-//        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-//        authorities.add(new SimpleGrantedAuthority(ROLE + user.getRole()));
+//        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(ROLE + user.getRole());
 //        return new User(user.getUsername(), user.getPassword(), authorities);
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority(ROLE + user.getRole()));
+        return new User(user.getUsername(), user.getPassword(), authorities);
 
     }
 }
