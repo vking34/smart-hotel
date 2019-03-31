@@ -2,10 +2,15 @@ package com.hust.smarthotel.generic.util;
 
 
 import com.hust.smarthotel.components.user.domain_model.User;
+import com.hust.smarthotel.components.user.domain_service.CustomUserDetailService;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -23,6 +28,9 @@ public class JwtUtil {
     @Value("${security.jwt.secret-key}")
     private String secretKey;
 
+    @Autowired
+    private CustomUserDetailService customUserDetailService;
+
     public String createToken(User user){
         return Jwts.builder()
                 .setSubject(user.getId())
@@ -34,6 +42,29 @@ public class JwtUtil {
                 .setExpiration(new Date(new Date().getTime() + expiryInMilliSeconds))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
+    }
+
+    public UsernamePasswordAuthenticationToken getAuthorizationFromToken(String token){
+        if (token == null)
+            return null;
+
+        String user_id = null;
+
+        try {
+            Claims claims = Jwts.parser().setSigningKey(secretKey)
+                    .parseClaimsJws(token)
+                    .getBody();
+            user_id = claims.getSubject();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        UserDetails userDetails = null;
+        if (user_id != null){
+            userDetails = customUserDetailService.loadUserByUserId(user_id);
+        }
+
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
 

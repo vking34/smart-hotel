@@ -1,6 +1,7 @@
 package com.hust.smarthotel.configs;
 
 import com.hust.smarthotel.components.auth.filters.JWTAuthenticationFilter;
+import com.hust.smarthotel.components.auth.filters.JWTAuthorizationFilter;
 import com.hust.smarthotel.components.user.domain_service.CustomUserDetailService;
 import com.hust.smarthotel.components.user.repository.UserRepository;
 import com.hust.smarthotel.generic.util.JwtUtil;
@@ -44,8 +45,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), userRepository, jwtUtil));
 
-//        http.authorizeRequests()
-//                .antMatchers("/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}")
+        http.authorizeRequests()
+                .antMatchers("/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}").permitAll()
+                .and()
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil));
 
     }
 

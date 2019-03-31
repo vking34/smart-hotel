@@ -34,4 +34,15 @@ public class CustomUserDetailService implements UserDetailsService {
         List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(ROLE + user.getRole());
         return new User(s, user.getPassword(), authorities);
     }
+
+    public UserDetails loadUserByUserId(String userId) throws UsernameNotFoundException{
+        SysUser user = userRepository.findUserById(userId);
+        if (user == null)
+            throw USER_NOT_FOUND_EXCEPTION;
+        if (!user.getActive())
+            throw USER_INACTIVE;
+
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(ROLE + user.getRole());
+            return new User(user.getUsername(), user.getPassword(), authorities);
+    }
 }

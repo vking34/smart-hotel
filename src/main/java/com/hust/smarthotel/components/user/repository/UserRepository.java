@@ -17,6 +17,7 @@ public interface UserRepository extends MongoRepository<User, String> {
     @Query(value = "{ username: ?0 }")
     SysUser findSysUserByUsername(String username);
 
+
     Manager findUserById(String id);
 
     User findUserByUsername(String username);
