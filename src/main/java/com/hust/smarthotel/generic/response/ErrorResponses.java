@@ -1,12 +1,15 @@
 package com.hust.smarthotel.generic.response;
 
 import com.hust.smarthotel.components.auth.model.FailAuthenResponse;
+import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.user.app_model.ManagerResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
 import com.hust.smarthotel.generic.model.ErrorResponse;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ErrorResponses {
     public static final ErrorResponse NOT_FOUND = new ErrorResponse("Not found entity by id", "NOTFOUND", 101);
 
@@ -28,5 +31,7 @@ public class ErrorResponses {
 
     public static final FailAuthenResponse FAIL_AUTHEN_RESPONSE = new FailAuthenResponse(false, "Username/Password is wrong", 401);
 
+    public static final BookingResponse BOOKING_HOTEL_NOT_FOUND = new BookingResponse(false, "Target hotel is not found", 501, null);
+    public static final BookingResponse BOOKING_INVALID_DATE = new BookingResponse(false, "Checkin Date must be before Checkout Date", 502, null);
 
 }

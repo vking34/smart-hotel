@@ -64,6 +64,7 @@ public class JwtUtil {
             userDetails = customUserDetailService.loadUserByUserId(user_id);
         }
 
+
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 

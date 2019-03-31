@@ -45,6 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), userRepository, jwtUtil));
 
+
+        // filter all patterns start with /api/v1
         http.authorizeRequests()
                 .antMatchers("/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}").permitAll()
                 .and()

@@ -19,7 +19,6 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(UrlConstants.API + "/hotels")
-
 public class HotelsController {
 
     @Autowired
