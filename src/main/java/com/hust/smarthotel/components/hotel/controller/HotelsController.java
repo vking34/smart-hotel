@@ -5,12 +5,12 @@ import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.domain_service.HotelService;
 import com.hust.smarthotel.generic.constant.UrlConstants;
-import com.hust.smarthotel.generic.response.ErrorResponses;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,8 +25,10 @@ public class HotelsController {
     @Autowired
     private HotelService hotelService;
 
+
     @ApiOperation(value = "Get/Search/Filter hotels...")
     @GetMapping
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     Page<Hotel> getHotels(@RequestParam(value = "page", required = false) Integer page,
                           @RequestParam(value = "page_size", required = false) Integer pageSize,
                           @RequestParam(value = "name", required = false) String name,
