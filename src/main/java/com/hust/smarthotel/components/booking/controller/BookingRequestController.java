@@ -26,7 +26,7 @@ public class BookingRequestController {
                                    @PathVariable String bookingRecordId){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
-        System.out.println(claims);
+//        System.out.println(claims);
 
         return bookingService.findBookingRecordById(bookingRecordId);
     }
