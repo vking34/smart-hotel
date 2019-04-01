@@ -1,23 +1,58 @@
 package com.hust.smarthotel.components.booking.controller;
 
-
+import com.hust.smarthotel.components.booking.app_model.BookingRequest;
+import com.hust.smarthotel.components.booking.app_model.BookingResponse;
+import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
+import com.hust.smarthotel.components.booking.domain_service.BookingService;
+import com.hust.smarthotel.components.hotel.domain_model.Hotel;
+import com.hust.smarthotel.components.hotel.domain_service.HotelService;
 import com.hust.smarthotel.components.publish.Publisher;
+import com.hust.smarthotel.generic.constant.UrlConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import java.time.LocalDateTime;
 
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_HOTEL_NOT_FOUND;
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_INVALID_DATE;;
 
 @RestController
-@RequestMapping("/booking")
+@CrossOrigin(origins = "*")
+@RequestMapping(UrlConstants.API +"/booking")
 public class BookingController {
+
+    private static final ResponseEntity HOTEL_NOT_FOUND = new ResponseEntity<>(BOOKING_HOTEL_NOT_FOUND, HttpStatus.BAD_REQUEST);
+    private static final ResponseEntity INVALID_DATE = new ResponseEntity<>(BOOKING_INVALID_DATE, HttpStatus.BAD_REQUEST);
 
     @Autowired
     private Publisher publisher;
 
+    @Autowired
+    private HotelService hotelService;
+
+    @Autowired
+    private BookingService bookingService;
+
     @PostMapping
-    String bookRoom(){
-        publisher.announce();
-        return "ok";
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
+    ResponseEntity<BookingResponse> bookRoom(@Valid @RequestBody BookingRequest bookingRequest){
+        Hotel hotel = hotelService.findHotelById(bookingRequest.getHotelId());
+        if (hotel == null)
+            return HOTEL_NOT_FOUND;
+
+        LocalDateTime checkinDate = bookingRequest.getCheckinDate();
+        LocalDateTime checkoutDate = bookingRequest.getCheckoutDate();
+        if (checkinDate.isAfter(checkoutDate) || checkinDate.isEqual(checkoutDate))
+            return INVALID_DATE;
+
+        BookingResponse bookingResponse = bookingService.insert(bookingRequest);
+        BookingRecord bookingRecord = bookingResponse.getBookingRecord();
+        publisher.announceBookRequest(bookingRecord.getHotelId(), bookingRecord.getId());
+        return new ResponseEntity<>(bookingResponse, HttpStatus.ACCEPTED);
     }
+
+
 }

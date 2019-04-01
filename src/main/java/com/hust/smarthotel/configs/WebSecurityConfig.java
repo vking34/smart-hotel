@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -21,6 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 @Configuration
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -45,8 +47,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), userRepository, jwtUtil));
 
+
+        // filter all patterns start with /api/v1
         http.authorizeRequests()
-                .antMatchers("/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}").permitAll()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil));
 

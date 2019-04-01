@@ -3,11 +3,15 @@ package com.hust.smarthotel.components.publish;
 
 import com.pusher.rest.Pusher;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
 
+import static com.hust.smarthotel.generic.constant.ChannelConstant.BOOKING_CHANNEL;
+import static com.hust.smarthotel.generic.constant.ChannelConstant.EVENT_PREFIX;
+import static com.hust.smarthotel.generic.constant.ChannelConstant.BOOKING_REQUEST_ID;
 
 @Service
 public class Publisher {
@@ -36,7 +40,8 @@ public class Publisher {
         pusher.setEncrypted(isEncrypted);
     }
 
-    public void announce(){
-        pusher.trigger("my-channel", "my-event", Collections.singletonMap("message", "hello world"));
+    @Async
+    public void announceBookRequest(String hotelId, String requestId){
+        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX + hotelId, Collections.singletonMap(BOOKING_REQUEST_ID, requestId));
     }
 }

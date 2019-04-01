@@ -19,7 +19,6 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(UrlConstants.API + "/hotels")
-
 public class HotelsController {
 
     @Autowired
@@ -28,7 +27,6 @@ public class HotelsController {
 
     @ApiOperation(value = "Get/Search/Filter hotels...")
     @GetMapping
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     Page<Hotel> getHotels(@RequestParam(value = "page", required = false) Integer page,
                           @RequestParam(value = "page_size", required = false) Integer pageSize,
                           @RequestParam(value = "name", required = false) String name,
