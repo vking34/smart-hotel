@@ -8,15 +8,20 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 
 @Data
 @NoArgsConstructor
 public class SysUser {
 
+    @Pattern(regexp = "^(?=.{8,100}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")
+                                                                        // no _ or . at the end
+                                                          // allowed characters a-zA-Z0-9._
+                                             // no __ or _. or ._ or .. inside
+                                      // no _ or . at the beginning
+                        // 8-100 chars long
     @Field("username")
-    @Size(min = 6, max = 100)
     private String username;
 
     @Field("password")
