@@ -34,4 +34,5 @@ public class ErrorResponses {
     public static final BookingResponse BOOKING_HOTEL_NOT_FOUND = new BookingResponse(false, "Target hotel is not found", 501, null);
     public static final BookingResponse BOOKING_INVALID_DATE = new BookingResponse(false, "Checkin Date must be before Checkout Date", 502, null);
 
+    public static final BookingResponse FORBIDDEN_GETTING_BOOKING_RECORD = new BookingResponse(false, "Forbidden to get the booking record", 601, null);
 }
