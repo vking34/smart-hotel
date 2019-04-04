@@ -3,6 +3,7 @@ package com.hust.smarthotel.generic.response;
 import com.hust.smarthotel.components.auth.model.FailAuthenResponse;
 import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
+import com.hust.smarthotel.components.review.app_model.ReviewResponse;
 import com.hust.smarthotel.components.user.app_model.ManagerResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
 import com.hust.smarthotel.generic.model.ErrorResponse;
@@ -35,4 +36,6 @@ public class ErrorResponses {
     public static final BookingResponse BOOKING_INVALID_DATE = new BookingResponse(false, "Checkin Date must be before Checkout Date", 502, null);
 
     public static final BookingResponse FORBIDDEN_GETTING_BOOKING_RECORD = new BookingResponse(false, "Forbidden to get the booking record", 601, null);
+
+    public static final ReviewResponse REVIEW_HOTEL_NOT_FOUND = new ReviewResponse(false, "Hotel not found", 701, null);
 }
