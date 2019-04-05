@@ -10,6 +10,7 @@ import com.hust.smarthotel.generic.constant.UrlConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 import static com.hust.smarthotel.generic.response.ErrorResponses.REVIEW_HOTEL_NOT_FOUND;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(UrlConstants.API + "/hotels/{hotelId}/reviews")
 public class ReviewController {
 
@@ -35,6 +37,7 @@ public class ReviewController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
     ResponseEntity<ReviewResponse> postReview(@PathVariable String hotelId, @Valid @RequestBody Review review){
         Hotel hotel = hotelService.findHotelById(hotelId);
         if (hotel == null)
@@ -42,7 +45,7 @@ public class ReviewController {
 
         review.setCreatedTime(LocalDateTime.now());
 
-        reviewService.saveReview(hotelId, review);
+        reviewService.pushReview(hotelId, review);
         return new ResponseEntity<>(new ReviewResponse(true, null, null, review), HttpStatus.ACCEPTED);
     }
 
