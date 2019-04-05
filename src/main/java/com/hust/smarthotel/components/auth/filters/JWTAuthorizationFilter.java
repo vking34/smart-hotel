@@ -32,7 +32,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
-        System.out.println(token);
         UsernamePasswordAuthenticationToken authenticationToken = jwtUtil.getAuthorizationFromToken(token);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 

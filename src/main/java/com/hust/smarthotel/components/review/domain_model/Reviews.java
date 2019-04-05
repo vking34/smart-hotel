@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,4 +23,10 @@ public class Reviews {
 
     @Field("reviews")
     List<Review> reviews;
+
+    public Reviews(String hotelId){
+        this.hotelId = hotelId;
+        this.reviews = new ArrayList<Review>();
+    }
+
 }

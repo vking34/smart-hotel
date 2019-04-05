@@ -17,7 +17,7 @@ public class Hotel extends BasicHotel {
     private String id;
 
     @Field("point")
-    private Float point;
+    private Double point;
 
     @Field("ratings")
     private Integer ratings;
@@ -27,7 +27,7 @@ public class Hotel extends BasicHotel {
 
     public Hotel(BasicHotel basicHotel) {
         super(basicHotel);
-        this.point = (float) 0;
+        this.point = (double) 0;
         this.ratings = 0;
         this.active = true;
     }
