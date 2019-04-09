@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0edd3080-ac0c-4fae-a77b-e4d892106aa2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/configs/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/configs/WebSecurityConfig.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -64,8 +63,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/configs/WebSecurityConfig.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="713">
-                  <caret line="80" column="5" lean-forward="true" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+                <state relative-caret-position="673">
+                  <caret line="78" column="48" selection-start-line="78" selection-start-column="48" selection-end-line="78" selection-end-column="48" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -482,12 +481,12 @@
       <workItem from="1554429265600" duration="11346000" />
       <workItem from="1554794043609" duration="1051000" />
       <workItem from="1554801154066" duration="1122000" />
-      <workItem from="1554818262073" duration="619000" />
+      <workItem from="1554818262073" duration="1012000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="204580000" />
+    <option name="totallyTimeSpent" value="204973000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -986,8 +985,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/configs/WebSecurityConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="713">
-          <caret line="80" column="5" lean-forward="true" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+        <state relative-caret-position="673">
+          <caret line="78" column="48" selection-start-line="78" selection-start-column="48" selection-end-line="78" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
