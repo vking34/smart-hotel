@@ -15,4 +15,9 @@ public class IndexController {
     String getIndex(Model model){
         return "index";
     }
+
+    @GetMapping("/signup")
+    String getSignUp(Model model){
+        return "signup";
+    }
 }

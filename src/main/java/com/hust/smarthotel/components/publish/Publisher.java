@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.Collections;
 
-import static com.hust.smarthotel.generic.constant.ChannelConstant.BOOKING_CHANNEL;
-import static com.hust.smarthotel.generic.constant.ChannelConstant.EVENT_PREFIX;
-import static com.hust.smarthotel.generic.constant.ChannelConstant.BOOKING_REQUEST_ID;
+import static com.hust.smarthotel.generic.constant.ChannelConstant.*;
 
 @Service
 public class Publisher {
@@ -42,6 +40,12 @@ public class Publisher {
 
     @Async
     public void announceBookRequest(String hotelId, String requestId){
-        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX + hotelId, Collections.singletonMap(BOOKING_REQUEST_ID, requestId));
+        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, Collections.singletonMap(BOOKING_REQUEST_ID, requestId));
     }
+
+    @Async
+    public void announceBookingStateToClient(String requestId, String status){
+        pusher.trigger(CLIENT_CHANNEL, EVEN_PREFIX_CLIENT + requestId, Collections.singletonMap(STATUS_RESULT, status));
+    }
+
 }

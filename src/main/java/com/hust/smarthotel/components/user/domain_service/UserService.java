@@ -2,9 +2,7 @@ package com.hust.smarthotel.components.user.domain_service;
 
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.repository.HotelRepository;
-import com.hust.smarthotel.components.user.app_model.ManagerResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
-import com.hust.smarthotel.components.user.domain_model.Manager;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.repository.UserRepository;
 import com.hust.smarthotel.generic.util.EncryptedPasswordUtils;
@@ -16,7 +14,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.hust.smarthotel.generic.constant.RoleConstants.*;
-import static com.hust.smarthotel.generic.response.ErrorResponses.*;
+import static com.hust.smarthotel.generic.response.ErrorResponses.USER_EXISTS;
+import static com.hust.smarthotel.generic.response.ErrorResponses.USER_NOT_FOUND;
+import static com.hust.smarthotel.generic.response.ErrorResponses.USER_EMAIL_PHONE_EXISTS;
+
 
 @Service
 public class UserService {
@@ -30,7 +31,7 @@ public class UserService {
     @Autowired
     private UserAsynTasks asynTasks;
 
-    public Manager findUser(String userId){
+    public User findUser(String userId){
         return userRepository.findUserById(userId);
     }
 
@@ -38,7 +39,7 @@ public class UserService {
         return userRepository.findAll(PageRequestCreator.getSimplePageRequest(page, pageSize));
     }
 
-    public Page<Manager> findManagers(Integer page, Integer pageSize){
+    public Page<User> findManagers(Integer page, Integer pageSize){
         return userRepository.findManagers(PageRequestCreator.getSimplePageRequest(page, pageSize));
     }
 
@@ -47,31 +48,23 @@ public class UserService {
     }
 
     public UserResponse createClient(User client){
+        return createUser(client, CLIENT);
+    }
+
+    public UserResponse createManager(User manger){
+        return createUser(manger, MANAGER);
+    }
+
+    private UserResponse createUser(User client, String role){
         User user = userRepository.findUser(client.getUsername(), client.getEmail(), client.getPhone());
         if (user != null)
             return USER_EXISTS;
 
-        client.setRole(CLIENT);
+        client.setRole(role);
         client.setPassword(EncryptedPasswordUtils.encryptPassword(client.getPassword()));
         client.setActive(true);
         user = userRepository.save(client);
         return new UserResponse(true, null,null, user);
-    }
-
-    public ManagerResponse createManger(Manager requestManager){
-        User user = userRepository.findUser(requestManager.getUsername(), requestManager.getEmail(), requestManager.getPhone());
-        if (user != null)
-            return MANAGER_RESPONSE;
-        String hotelId = requestManager.getHotelId();
-        if (!hotelId.equals("")){
-            Hotel hotel = hotelRepository.findHotelById(hotelId);
-            if (hotel == null) return HOTEL_NOT_EXISTING;
-        }
-
-        requestManager.setRole(MANAGER);
-        requestManager.setActive(true);
-        Manager manager = userRepository.save(requestManager);
-        return new ManagerResponse(true, null, null, manager);
     }
 
     public UserResponse updateClient(String userId, User requestUser){
@@ -80,7 +73,7 @@ public class UserService {
             return USER_NOT_FOUND;
         List<User> users = userRepository.findUserByEmailOrPhone(requestUser.getEmail(), requestUser.getPhone());
         if (users.size() > 1)
-            return EMAIL_PHONE_EXISTS;
+            return USER_EMAIL_PHONE_EXISTS;
         user.setName(requestUser.getName());
         user.setFullName(requestUser.getFullName());
         user.setEmail(requestUser.getEmail());
@@ -90,21 +83,11 @@ public class UserService {
         return new UserResponse(true, null, null, user);
     }
 
-    public ManagerResponse deleteUser(String userId){
-        Manager user = userRepository.findUserById(userId);
+    public UserResponse deleteUser(String userId){
+        User user = userRepository.findUserById(userId);
         if (user == null)
-            return MANAGER_NOT_FOUND;
+            return USER_NOT_FOUND;
         asynTasks.deleteUser(user);
-        return new ManagerResponse(true, null, null, user);
+        return new UserResponse(true, null, null, user);
     }
-
-    public ManagerResponse addHotelToManager(String hotelId, Manager manager){
-        Hotel hotel = hotelRepository.findHotelById(hotelId);
-        if (hotel == null)
-            return HOTEL_NOT_EXISTING;
-        manager.setHotelId(hotelId);
-        asynTasks.updateUser(manager);
-        return new ManagerResponse(true, null, null, manager);
-    }
-
 }

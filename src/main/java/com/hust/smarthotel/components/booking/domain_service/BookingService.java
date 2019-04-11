@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class BookingService {
 
@@ -27,6 +29,12 @@ public class BookingService {
         if (record == null)
             record = new BookingRecord();
         return record;
+    }
+
+    public BookingRecord changeState(BookingRecord bookingRecord, String status){
+        bookingRecord.setStatus(status);
+        bookingRecord.setUpdatedTime(LocalDateTime.now());
+        return bookingRepository.save(bookingRecord);
     }
 
     public Page<BookingRecord> getBookingRecords(){
