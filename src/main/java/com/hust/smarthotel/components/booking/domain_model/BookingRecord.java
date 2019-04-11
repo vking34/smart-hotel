@@ -25,12 +25,16 @@ public class BookingRecord extends BookingRequest {
     @Field("created_date")
     private LocalDateTime createdDate;
 
+    @Field("updated_time")
+    private LocalDateTime updatedTime;
+
     @Field("status")
     private String status;
 
     public BookingRecord(BookingRequest bookingRequest){
         super(bookingRequest);
         this.createdDate = LocalDateTime.now();
+        this.updatedTime = LocalDateTime.now();
         this.status = NEW_CREATED;
     }
 }

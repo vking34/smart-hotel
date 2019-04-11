@@ -2,6 +2,7 @@ package com.hust.smarthotel.components.booking.controller;
 
 
 import com.hust.smarthotel.components.booking.app_model.BookingResponse;
+import com.hust.smarthotel.components.booking.app_model.StateRequest;
 import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.hust.smarthotel.components.booking.domain_service.BookingService;
 import com.hust.smarthotel.components.mananging.domain_model.Managing;
@@ -16,7 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
+import javax.validation.Valid;
+
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_FORBIDDEN_GETTING_RECORD;
 
 
@@ -49,8 +51,40 @@ public class BookingRequestController {
         Managing managing = managingService.findManaging(userId, bookingRecord.getHotelId());
         if (managing == null)
             return FORBIDDEN;
-        
+
         return new ResponseEntity<>(new BookingResponse(true, null, null, bookingRecord), HttpStatus.ACCEPTED);
     }
+
+    @PostMapping("/{bookingRecordId}")
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    ResponseEntity<BookingResponse> changeState(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                               @PathVariable String bookingRecordId,
+                               @Valid @RequestBody StateRequest stateRequest){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+
+        String userId = claims.getSubject();
+        BookingRecord bookingRecord = bookingService.findBookingRecordById(bookingRecordId);
+
+        Managing managing = managingService.findManaging(userId, bookingRecord.getHotelId());
+        if (managing == null)
+            return FORBIDDEN;
+
+        bookingRecord = bookingService.changeState(bookingRecord, stateRequest.getStatus());
+        return new ResponseEntity<>(new BookingResponse(true, null, null, bookingRecord), HttpStatus.ACCEPTED);
+    }
+
+
+//    ResponseEntity checkAuthorization(String authorizationField, String bookingRecordId){
+//        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+//        Claims claims = jwtUtil.getClaims(token);
+//
+//        String userId = claims.getSubject();
+//        BookingRecord bookingRecord = bookingService.findBookingRecordById(bookingRecordId);
+//
+//        Managing managing = managingService.findManaging(userId, bookingRecord.getHotelId());
+//        if (managing == null)
+//            return FORBIDDEN;
+//    }
 
 }
