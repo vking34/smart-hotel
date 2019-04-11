@@ -7,6 +7,7 @@ import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.hust.smarthotel.components.booking.domain_service.BookingService;
 import com.hust.smarthotel.components.mananging.domain_model.Managing;
 import com.hust.smarthotel.components.mananging.domain_service.ManagingService;
+import com.hust.smarthotel.components.publish.Publisher;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
 import com.hust.smarthotel.generic.constant.UrlConstants;
 import com.hust.smarthotel.generic.util.JwtUtil;
@@ -37,6 +38,9 @@ public class BookingRequestController {
 
     @Autowired
     private ManagingService managingService;
+
+    @Autowired
+    private Publisher publisher;
 
     @GetMapping("/{bookingRecordId}")
     @PreAuthorize("hasRole('ROLE_MANAGER')")
@@ -71,6 +75,7 @@ public class BookingRequestController {
             return FORBIDDEN;
 
         bookingRecord = bookingService.changeState(bookingRecord, stateRequest.getStatus());
+        publisher.announceBookingStateToClient(bookingRecordId, stateRequest.getStatus());
         return new ResponseEntity<>(new BookingResponse(true, null, null, bookingRecord), HttpStatus.ACCEPTED);
     }
 }

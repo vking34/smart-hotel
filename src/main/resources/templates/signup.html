@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
+
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('69053ddd28185a9726aa', {
+            cluster: 'ap1',
+            forceTLS: true
+        });
+
+        var channel = pusher.subscribe('CLIENT_CHANNEL');
+        channel.bind('client_5cae8f916a8a680004ad3bbe', function(data) {
+            alert(JSON.stringify(data));
+        });
+    </script>
+
+</head>
+<body>
+
+<h1>Pusher Client</h1>
+
+</body>
+</html>
