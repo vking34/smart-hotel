@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import static com.hust.smarthotel.generic.response.ErrorResponses.HOTEL_INVALID_COORDINATES;
-
+import static com.hust.smarthotel.generic.response.ErrorResponses.HOTEL_EXISTS;
 
 @Component
 public class HotelServiceImpl implements HotelService {
@@ -32,6 +32,10 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public HotelResponse createHotel(BasicHotel basicHotel){
+
+        if (hotelRepository.findHotelByPhoneNumber(basicHotel.getPhoneNumber()) != null)
+            return HOTEL_EXISTS;
+
         Hotel hotel = new Hotel(basicHotel);
 
         try {

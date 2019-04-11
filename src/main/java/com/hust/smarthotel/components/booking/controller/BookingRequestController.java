@@ -73,18 +73,4 @@ public class BookingRequestController {
         bookingRecord = bookingService.changeState(bookingRecord, stateRequest.getStatus());
         return new ResponseEntity<>(new BookingResponse(true, null, null, bookingRecord), HttpStatus.ACCEPTED);
     }
-
-
-//    ResponseEntity checkAuthorization(String authorizationField, String bookingRecordId){
-//        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
-//        Claims claims = jwtUtil.getClaims(token);
-//
-//        String userId = claims.getSubject();
-//        BookingRecord bookingRecord = bookingService.findBookingRecordById(bookingRecordId);
-//
-//        Managing managing = managingService.findManaging(userId, bookingRecord.getHotelId());
-//        if (managing == null)
-//            return FORBIDDEN;
-//    }
-
 }

@@ -20,7 +20,7 @@ public class ErrorResponses {
 
 
     public static final HotelResponse HOTEL_INVALID_COORDINATES = new HotelResponse(false, "Longitude <= 180 && Latitude <= 90", 303, null);
-
+    public static final HotelResponse HOTEL_EXISTS = new HotelResponse(false, "Hotel/Phone number exists already", 304, null);
 
     public static final UserResponse USER_EXISTS = new UserResponse(false, "Username/Email/Phone exists", 201, null);
     public static final UserResponse USER_NOT_FOUND = new UserResponse(false, "User not found", 204, null);

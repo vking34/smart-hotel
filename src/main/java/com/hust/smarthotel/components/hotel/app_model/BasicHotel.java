@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class BasicHotel {
     @NotNull
     @Size(min = 1, max = 500)
     private String description;
+
+    @ApiModelProperty(notes = "Hotline", required = true)
+    @Field("phone_number")
+    @Pattern(regexp = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$")
+    private String phoneNumber;
 
     @ApiModelProperty(notes = "Location of hotel", required = true)
     @Field("location")
@@ -62,5 +68,4 @@ public class BasicHotel {
         this.facilities = hotel.getFacilities();
         this.status = hotel.getStatus();
     }
-
 }

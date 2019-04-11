@@ -16,6 +16,9 @@ public interface HotelRepository extends MongoRepository<Hotel, String> {
     public Page<Hotel> findHotelsByName(String name, Pageable pageable);
 
     public Hotel findHotelById(String id);
+
+    public Hotel findHotelByPhoneNumber(String phoneNumber);
+
     public Hotel deleteHotelById(String id);
 
     @Query("{ location: { $near : { $geometry: { type: \"Point\", coordinates: [ ?0 , ?1 ] }, $maxDistance: ?2 } } }")
