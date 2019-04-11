@@ -1,9 +1,9 @@
 package com.hust.smarthotel.components.user.controller;
 
 
-import com.hust.smarthotel.components.user.app_model.ManagerResponse;
+//import com.hust.smarthotel.components.user.app_model.ManagerResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
-import com.hust.smarthotel.components.user.domain_model.Manager;
+//import com.hust.smarthotel.components.user.domain_model.Manager;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.domain_service.UserService;
 import com.hust.smarthotel.generic.constant.UrlConstants;
@@ -28,7 +28,7 @@ public class UserController {
 
     @ApiOperation("Get more information about an user")
     @GetMapping
-    Manager getUser(@PathVariable String userId){
+    User getUser(@PathVariable String userId){
         return userService.findUser(userId);
     }
 
@@ -43,11 +43,11 @@ public class UserController {
 
     @ApiOperation("Delete an user")
     @DeleteMapping
-    ResponseEntity<ManagerResponse> deleteUser(@PathVariable String userId){
-        ManagerResponse userResponse = userService.deleteUser(userId);
+    ResponseEntity<UserResponse> deleteUser(@PathVariable String userId){
+        UserResponse userResponse = userService.deleteUser(userId);
         if (!userResponse.getStatus())
-            return new ResponseEntity<ManagerResponse>(userResponse, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<ManagerResponse>(userResponse, HttpStatus.ACCEPTED);
+            return new ResponseEntity<UserResponse>(userResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<UserResponse>(userResponse, HttpStatus.ACCEPTED);
     }
 
 }
