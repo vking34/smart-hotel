@@ -42,4 +42,5 @@ public class ErrorResponses {
 
     public static final RoomResponse ROOM_FORBIDDEN = new RoomResponse(false, "You are not the manager of this hotel", 901, null);
     public static final RoomResponse ROOM_EXISTS = new RoomResponse(false, "Hotel have rooms already", 902, null);
+    public static final RoomResponse ROOM_NOT_EXIST = new RoomResponse(false, "Room does not exist", 903, null);
 }

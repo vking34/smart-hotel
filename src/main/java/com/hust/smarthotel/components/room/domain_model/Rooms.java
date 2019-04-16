@@ -22,8 +22,8 @@ public class Rooms {
     private String id;
 
     @Field("hotel_id")
-    @NotNull
-    @Pattern(regexp = "^[a-z0-9]{24}$")
+//    @NotNull
+//    @Pattern(regexp = "^[a-z0-9]{24}$")
     private String hotelId;
 
     @Field("rooms")
@@ -33,5 +33,10 @@ public class Rooms {
     public Rooms(String hotelId) {
         this.hotelId = hotelId;
         this.rooms = new ArrayList<>();
+    }
+
+    public Rooms(String hotelId, List<Room> rooms){
+        this.hotelId = hotelId;
+        this.rooms = rooms;
     }
 }
