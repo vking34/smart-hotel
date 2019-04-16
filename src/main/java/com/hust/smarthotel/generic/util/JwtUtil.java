@@ -18,9 +18,9 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private static final String USER_ID = "user_id";
-    private static final String USERNAME = "username";
-    private static final String ROLE = "role";
+    public static final String USER_ID = "user_id";
+    public static final String USERNAME = "username";
+    public static final String ROLE = "role";
 
     @Value("${security.jwt.expiry-in-milliseconds}")
     private int expiryInMilliSeconds;
