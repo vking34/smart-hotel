@@ -5,6 +5,7 @@ import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.mananging.app_model.ManagingResponse;
 import com.hust.smarthotel.components.review.app_model.ReviewResponse;
+import com.hust.smarthotel.components.room.app_model.RoomResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
 import com.hust.smarthotel.generic.model.ErrorResponse;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -39,4 +40,6 @@ public class ErrorResponses {
     public static final ManagingResponse MANAGING_HOTEL_NOT_FOUND = new ManagingResponse(false, "Hotel not found", 803, null);
     public static final ManagingResponse MANAGING_EXISTING_RECORD = new ManagingResponse(false, "The manager manages this hotel already", 804, null);
 
+    public static final RoomResponse ROOM_FORBIDDEN = new RoomResponse(false, "You are not the manager of this hotel", 901, null);
+    public static final RoomResponse ROOM_EXISTS = new RoomResponse(false, "Hotel have rooms already", 902, null);
 }

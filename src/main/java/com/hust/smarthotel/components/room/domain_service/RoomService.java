@@ -1,5 +1,6 @@
 package com.hust.smarthotel.components.room.domain_service;
 
+import com.hust.smarthotel.components.room.app_model.RoomResponse;
 import com.hust.smarthotel.generic.util.PageRequestCreator;
 import com.hust.smarthotel.components.room.domain_model.Rooms;
 import com.hust.smarthotel.components.room.repository.RoomRepository;
@@ -7,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import static com.hust.smarthotel.generic.response.ErrorResponses.ROOM_EXISTS;
 
 @Service
 public class RoomService {
@@ -24,4 +25,13 @@ public class RoomService {
             rooms = new Rooms(hotelId);
         return rooms;
     }
+
+    public RoomResponse createRooms(String hotelId, Rooms rooms){
+        if (roomRepository.findRoomsByHotelId(hotelId) != null)
+            return ROOM_EXISTS;
+
+        roomRepository.save(rooms);
+        return new RoomResponse(true, null, null, rooms);
+    }
+
 }

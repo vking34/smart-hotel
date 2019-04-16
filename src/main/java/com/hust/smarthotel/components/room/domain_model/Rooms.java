@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +22,12 @@ public class Rooms {
     private String id;
 
     @Field("hotel_id")
+    @NotNull
+    @Pattern(regexp = "^[a-z0-9]{24}$")
     private String hotelId;
 
     @Field("rooms")
+    @NotNull
     private List<Room> rooms;
 
     public Rooms(String hotelId) {

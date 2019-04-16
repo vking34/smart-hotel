@@ -62,8 +62,8 @@ public class BookingRequestController {
     @PostMapping("/{bookingRecordId}")
     @PreAuthorize("hasRole('ROLE_MANAGER')")
     ResponseEntity<BookingResponse> changeState(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
-                               @PathVariable String bookingRecordId,
-                               @Valid @RequestBody StateRequest stateRequest){
+                                                @PathVariable String bookingRecordId,
+                                                @Valid @RequestBody StateRequest stateRequest){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
 
