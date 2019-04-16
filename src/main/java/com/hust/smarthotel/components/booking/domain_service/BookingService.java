@@ -40,4 +40,9 @@ public class BookingService {
     public Page<BookingRecord> getBookingRecords(){
         return bookingRepository.findAll(PageRequestCreator.getSimplePageRequest(0,10));
     }
+
+    public Page<BookingRecord> findBookingRecordsByUserId(String userId, Integer page, Integer pageSize){
+        return bookingRepository.findBookingRecordByUserId(userId, PageRequestCreator.getSimplePageRequest(page, pageSize));
+    }
+
 }

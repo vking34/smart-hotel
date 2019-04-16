@@ -1,7 +1,6 @@
 package com.hust.smarthotel.components.booking.app_model;
 
 
-import com.hust.smarthotel.components.user.domain_model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ import java.time.LocalDateTime;
 public class BookingRequest {
 
     @Field("user")
-    private User user;
+    private BUser user;
 
     @Field("hotel_id")
     @Pattern(regexp = "^[a-z0-9]{24}$")

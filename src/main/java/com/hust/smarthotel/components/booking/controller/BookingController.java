@@ -7,8 +7,14 @@ import com.hust.smarthotel.components.booking.domain_service.BookingService;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.domain_service.HotelService;
 import com.hust.smarthotel.components.publish.Publisher;
+import com.hust.smarthotel.generic.constant.HeaderConstant;
+import com.hust.smarthotel.generic.constant.RoleConstants;
 import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,6 +42,10 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
+
     @PostMapping
     @PreAuthorize("hasRole('ROLE_CLIENT')")
     ResponseEntity<BookingResponse> bookRoom(@Valid @RequestBody BookingRequest bookingRequest){
@@ -51,7 +61,23 @@ public class BookingController {
         BookingResponse bookingResponse = bookingService.insert(bookingRequest);
         BookingRecord bookingRecord = bookingResponse.getBookingRecord();
         publisher.announceBookRequest(bookingRecord.getHotelId(), bookingRecord.getId());
-        return new ResponseEntity<>(bookingResponse, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
+    }
+
+    @GetMapping
+//    @PreAuthorize("hasRole('ROLE_CLIENT')")
+    ResponseEntity<Page<BookingRecord>> getBookingRecords(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                          @RequestParam(value = "page", required = false) Integer page,
+                                          @RequestParam(value = "page_size", required = false) Integer pageSize){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+        String role = claims.get(JwtUtil.ROLE, String.class);
+        if (!role.equals(RoleConstants.CLIENT))
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
+        String userId = claims.getSubject();
+
+        return new ResponseEntity<>(bookingService.findBookingRecordsByUserId(userId, page, pageSize), HttpStatus.OK);
     }
 
 
