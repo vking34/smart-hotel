@@ -11,4 +11,6 @@ public interface RoomRepository extends MongoRepository<Rooms, String> {
     public Page<Rooms> findAll(Pageable pageable);
 
     public Rooms findRoomsByHotelId(String hotelId);
+
+    public void deleteRoomsByHotelId(String hotelId);
 }
