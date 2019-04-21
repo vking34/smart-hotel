@@ -13,7 +13,7 @@ import java.util.List;
 public class Room {
 
     @Field("room_type")
-    @Pattern(regexp = "^[A-Z0-9]{2,7}$")
+    @Pattern(regexp = "^[0-9]{1,6}$")
     private String roomType;
 
     @NotBlank
