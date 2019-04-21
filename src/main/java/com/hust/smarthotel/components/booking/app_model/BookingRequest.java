@@ -28,8 +28,8 @@ public class BookingRequest {
     @Pattern(regexp = "^[0-9]{1,6}$")
     private String roomType;
 
-    @JsonProperty("type_rent")
-    @Field("type_rent")
+    @JsonProperty("rent_type")
+    @Field("rent_type")
     @Positive
     private Integer rentType;
 
@@ -45,7 +45,7 @@ public class BookingRequest {
     @JsonProperty("end_time")
     private Integer endTime;
 
-    @Field("quantity")  
+    @Field("quantity")
     @Positive
     private Integer quantity;
 
@@ -69,6 +69,4 @@ public class BookingRequest {
         this.checkinDate = request.checkinDate;
         this.checkoutDate = request.checkoutDate;
     }
-
-
 }
