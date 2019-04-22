@@ -1,6 +1,7 @@
 package com.hust.smarthotel.components.booking.app_model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,12 +25,25 @@ public class BookingRequest {
     private String hotelId;
 
     @Field("room_type")
-    @Pattern(regexp = "^[A-Z0-9]{2,6}$")
+    @Pattern(regexp = "^[0-9]{1,6}$")
     private String roomType;
 
+    @JsonProperty("rent_type")
     @Field("rent_type")
-    @Pattern(regexp = "^[A-Z0-9]{2,5}$")
-    private String rentType;
+    @Positive
+    private Integer rentType;
+
+    @Field("rent_value")
+    @JsonProperty("rent_value")
+    private Integer rentValue;
+
+    @Field("start_time")
+    @JsonProperty("start_time")
+    private Integer startTime;
+
+    @Field("end_time")
+    @JsonProperty("end_time")
+    private Integer endTime;
 
     @Field("quantity")
     @Positive
@@ -48,10 +62,11 @@ public class BookingRequest {
         this.hotelId = request.hotelId;
         this.roomType = request.roomType;
         this.rentType = request.rentType;
+        this.rentValue = request.rentValue;
+        this.startTime = request.startTime;
+        this.endTime = request.endTime;
         this.quantity = request.quantity;
         this.checkinDate = request.checkinDate;
         this.checkoutDate = request.checkoutDate;
     }
-
-
 }
