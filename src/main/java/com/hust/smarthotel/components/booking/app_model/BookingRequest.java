@@ -22,6 +22,7 @@ public class BookingRequest {
 
     @Field("hotel_id")
     @Pattern(regexp = "^[a-z0-9]{24}$")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // not writing in json response
     private String hotelId;
 
     @Field("room_type")

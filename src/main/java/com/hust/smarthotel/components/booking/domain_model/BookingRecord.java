@@ -1,11 +1,13 @@
 package com.hust.smarthotel.components.booking.domain_model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hust.smarthotel.components.booking.app_model.BookingRequest;
 import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -31,8 +33,23 @@ public class BookingRecord extends BookingRequest {
     @Field("status")
     private String status;
 
+    @Field("room_name")
+    private String roomName;
+
+    @Field("rent_name")
+    private String rentName;
+
+    @Field("price")
+    private Integer price;
+
+    @Field("hotel_ref")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private ObjectId hotelRef;
+
+
     public BookingRecord(BookingRequest bookingRequest){
         super(bookingRequest);
+        this.hotelRef = new ObjectId(bookingRequest.getHotelId());
         this.createdDate = LocalDateTime.now();
         this.updatedTime = LocalDateTime.now();
         this.status = NEW_CREATED;

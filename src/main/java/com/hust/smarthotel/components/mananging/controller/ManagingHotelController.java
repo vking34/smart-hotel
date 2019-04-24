@@ -62,7 +62,7 @@ public class ManagingHotelController {
         Claims claims = jwtUtil.getClaims(token);
         String userId = claims.getSubject();
         String role = claims.get(JwtUtil.ROLE, String.class);
-        
+
         if (role.equals(MANAGER) && !managerId.equals(userId))
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 
