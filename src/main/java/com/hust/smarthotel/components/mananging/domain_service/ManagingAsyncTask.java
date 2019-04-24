@@ -1,6 +1,7 @@
 package com.hust.smarthotel.components.mananging.domain_service;
 
 import com.hust.smarthotel.components.mananging.repository.ManagingRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,6 @@ public class ManagingAsyncTask {
 
     @Async
     void deleteRecord(String managerId, String hotelId){
-        managingRepository.deleteByUserIdAndAndHotelId(managerId, hotelId);
+        managingRepository.deleteByUserIdAndAndHotelId(managerId, new ObjectId(hotelId));
     }
 }
