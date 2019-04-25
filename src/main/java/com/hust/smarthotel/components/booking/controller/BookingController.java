@@ -4,6 +4,7 @@ import com.hust.smarthotel.components.booking.app_model.BookingRequest;
 import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.booking.app_model.DetailBookingResponse;
 import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
+import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
 import com.hust.smarthotel.components.booking.domain_service.BookingService;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.domain_service.HotelService;
@@ -66,9 +67,9 @@ public class BookingController {
 
     @GetMapping
 //    @PreAuthorize("hasRole('ROLE_CLIENT')")
-    ResponseEntity<Page<BookingRecord>> getBookingRecords(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
-                                          @RequestParam(value = "page", required = false) Integer page,
-                                          @RequestParam(value = "page_size", required = false) Integer pageSize){
+    ResponseEntity<Page<DetailBookingRecord>> getBookingRecords(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                                                @RequestParam(value = "page", required = false) Integer page,
+                                                                @RequestParam(value = "page_size", required = false) Integer pageSize){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
         String role = claims.get(JwtUtil.ROLE, String.class);

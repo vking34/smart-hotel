@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookingRepository extends MongoRepository<BookingRecord, String> {
+public interface BookingRepository extends MongoRepository<BookingRecord, String>, BookingRepositoryCustom {
 
     public BookingRecord findBookingRecordById(String id);
 
