@@ -1,6 +1,9 @@
 package com.hust.smarthotel.components.publish;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.pusher.rest.Pusher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -8,11 +11,17 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.hust.smarthotel.generic.constant.ChannelConstant.*;
+import static com.hust.smarthotel.generic.constant.BookingState.STATUS;
+import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
 
 @Service
 public class Publisher {
+
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Value("${pusher.id}")
     private String appId;
@@ -40,12 +49,20 @@ public class Publisher {
 
     @Async
     public void announceBookRequest(String hotelId, String requestId){
-        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, Collections.singletonMap(BOOKING_REQUEST_ID, requestId));
+        Map<String, String> data = new HashMap<>();
+        data.put(BOOKING_REQUEST_ID, requestId);
+        data.put(STATUS, NEW_CREATED);
+//        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, Collections.singletonMap(BOOKING_REQUEST_ID, requestId));
+        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, data);
     }
 
     @Async
-    public void announceBookingStateToClient(String requestId, String status){
-        pusher.trigger(CLIENT_CHANNEL, EVEN_PREFIX_CLIENT + requestId, Collections.singletonMap(STATUS_RESULT, status));
+    public void announceBookingStateToClient(String requestId, BookingRecord bookingRecord){
+        Map<String, String> data = new HashMap<>();
+        data.put(BOOKING_REQUEST_ID, bookingRecord.getId());
+        data.put(STATUS, bookingRecord.getStatus());
+
+        pusher.trigger(CLIENT_CHANNEL, EVEN_PREFIX_CLIENT + requestId, data);
     }
 
 }
