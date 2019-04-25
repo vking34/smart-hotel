@@ -7,6 +7,9 @@ import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.repository.HotelRepository;
 import com.hust.smarthotel.generic.util.PageRequestCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,7 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.HOTEL_EXISTS;
 import static com.hust.smarthotel.generic.response.ErrorResponses.HOTEL_INVALID_COORDINATES;
 
 @Service
+@CacheConfig(cacheNames = {"hotels"})
 public class HotelService {
 
     @Autowired
@@ -22,8 +26,8 @@ public class HotelService {
     @Autowired
     private HotelAsyncTasks asyncTasks;
 
+    @Cacheable(value = "desc_hotels_cache")
     public Page<Hotel> findAllSortedByPointDesc(Integer page, Integer pageSize){
-
         return hotelRepository.findAll(PageRequestCreator.getDescPageRequest(page, pageSize, "point"));
     }
 
@@ -48,6 +52,7 @@ public class HotelService {
         return new HotelResponse(true, null, null, hotel);
     }
 
+    @CachePut(value = "desc_hotels_cache")
     public Hotel updateHotel(String id, BasicHotel basicHotel){
         Hotel hotel = hotelRepository.findHotelById(id);
         if (hotel == null)
@@ -62,6 +67,7 @@ public class HotelService {
         return hotel;
     }
 
+    @CachePut(value = "desc_hotels_cache")
     public Hotel deleteHotel(String id){
         return hotelRepository.deleteHotelById(id);
     }
@@ -74,6 +80,7 @@ public class HotelService {
         return hotelRepository.findHotelById(hotelId);
     }
 
+    @CachePut
     public Hotel changeHotelStatus(String hotelId, HotelStatus status) {
         Hotel hotel = hotelRepository.findHotelById(hotelId);
         if (hotel == null) return null;
