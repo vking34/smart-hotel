@@ -2,6 +2,7 @@ package com.hust.smarthotel.components.booking.controller;
 
 
 import com.hust.smarthotel.components.booking.app_model.BookingResponse;
+import com.hust.smarthotel.components.booking.app_model.DetailBookingResponse;
 import com.hust.smarthotel.components.booking.app_model.StateRequest;
 import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_RECORD_NOT_FOUND;
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_FORBIDDEN_GETTING_RECORD;
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_FORBIDDEN_CANCELATION;
 import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
 
 
@@ -32,6 +35,8 @@ public class BookingRequestController {
 
     private static final ResponseEntity<BookingResponse> FORBIDDEN = new ResponseEntity<>(BOOKING_FORBIDDEN_GETTING_RECORD, HttpStatus.FORBIDDEN);
     private static final ResponseEntity FORBIDDEN_GET_BOOKING_RECORD = new ResponseEntity(HttpStatus.FORBIDDEN);
+    private static final ResponseEntity RECORD_NOT_FOUND = new ResponseEntity<>(BOOKING_RECORD_NOT_FOUND, HttpStatus.BAD_REQUEST);
+    private static final ResponseEntity FORBIDDEN_CANCELATION = new ResponseEntity<>(BOOKING_FORBIDDEN_CANCELATION, HttpStatus.FORBIDDEN);
 
     @Autowired
     private BookingService bookingService;
@@ -87,5 +92,30 @@ public class BookingRequestController {
         bookingRecord = bookingService.changeState(bookingRecord, stateRequest);
         publisher.announceBookingStateToClient(bookingRecordId, bookingRecord);
         return new ResponseEntity<>(new BookingResponse(true, null, null, bookingRecord), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{bookingRecordId}")
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
+    ResponseEntity<DetailBookingResponse> cancelBookingRequest(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                                                  @PathVariable String bookingRecordId){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+
+        String userId = claims.getSubject();
+
+        DetailBookingRecord bookingRecord = bookingService.findDetailBookingRecordById(bookingRecordId);
+
+        if (bookingRecord == null)
+            return RECORD_NOT_FOUND;
+
+        if (!bookingRecord.getUser().getId().equals(userId))
+            return FORBIDDEN_CANCELATION;
+
+        DetailBookingResponse bookingResponse = bookingService.cancelBookingRequest(bookingRecord);
+        if (!bookingResponse.getStatus())
+            return new ResponseEntity<>(bookingResponse, HttpStatus.BAD_REQUEST);
+
+        publisher.announceBookingCancelation(bookingRecord);
+        return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
     }
 }

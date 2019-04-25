@@ -61,7 +61,7 @@ public class BookingController {
 
         DetailBookingResponse bookingResponse = bookingService.insert(bookingRequest, hotel);
         BookingRecord bookingRecord = bookingResponse.getBookingRecord();
-        publisher.announceBookRequest(bookingRecord.getHotelId(), bookingRecord.getId());
+        publisher.announceBookingRequest(bookingRecord.getHotelId(), bookingRecord.getId());
         return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
     }
 

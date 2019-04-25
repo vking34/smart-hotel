@@ -4,17 +4,18 @@ import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.hust.smarthotel.components.booking.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class BookingAsyncImpl implements BookingAsyncTasks {
+@Service
+public class BookingAsyncTask {
 
     @Autowired
     private BookingRepository bookingRepository;
 
-//    @Async
-    @Override
-    public void insert(BookingRecord record) {
-        bookingRepository.save(record);
+    @Async
+    public void updateBookingStatus(BookingRecord bookingRecord){
+
+        bookingRepository.save(bookingRecord);
     }
+
 }

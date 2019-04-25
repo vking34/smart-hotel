@@ -4,6 +4,7 @@ package com.hust.smarthotel.components.publish;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
+import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
 import com.pusher.rest.Pusher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -17,6 +18,7 @@ import java.util.Map;
 import static com.hust.smarthotel.generic.constant.ChannelConstant.*;
 import static com.hust.smarthotel.generic.constant.BookingState.STATUS;
 import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
+import static com.hust.smarthotel.generic.constant.BookingState.CANCELED;
 
 @Service
 public class Publisher {
@@ -48,7 +50,7 @@ public class Publisher {
     }
 
     @Async
-    public void announceBookRequest(String hotelId, String requestId){
+    public void announceBookingRequest(String hotelId, String requestId){
         Map<String, String> data = new HashMap<>();
         data.put(BOOKING_REQUEST_ID, requestId);
         data.put(STATUS, NEW_CREATED);
@@ -63,6 +65,15 @@ public class Publisher {
         data.put(STATUS, bookingRecord.getStatus());
 
         pusher.trigger(CLIENT_CHANNEL, EVEN_PREFIX_CLIENT + requestId, data);
+    }
+
+    @Async
+    public void announceBookingCancelation(DetailBookingRecord bookingRecord){
+        Map<String, String> data = new HashMap<>();
+        data.put(BOOKING_REQUEST_ID, bookingRecord.getId());
+        data.put(STATUS, CANCELED);
+
+        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + bookingRecord.getHotel().getId(), data);
     }
 
 }

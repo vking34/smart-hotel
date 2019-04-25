@@ -8,19 +8,22 @@ import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
 import com.hust.smarthotel.components.booking.repository.BookingRepository;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
-import com.hust.smarthotel.components.hotel.repository.HotelRepository;
 import com.hust.smarthotel.components.room.domain_model.Price;
 import com.hust.smarthotel.components.room.domain_model.Room;
 import com.hust.smarthotel.components.room.domain_model.Rooms;
 import com.hust.smarthotel.components.room.repository.RoomRepository;
 import com.hust.smarthotel.generic.util.PageRequestCreator;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_REQUEST_COMPLETED;
+import static com.hust.smarthotel.generic.constant.BookingState.CANCELED;
+import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
 
 @Service
 public class BookingService {
@@ -30,6 +33,9 @@ public class BookingService {
 
     @Autowired
     private RoomRepository roomRepository;
+
+    @Autowired
+    private BookingAsyncTask asyncTask;
 
     public DetailBookingResponse insert(BookingRequest bookingRequest, Hotel hotel){
         DetailBookingRecord bookingRecord = new DetailBookingRecord(bookingRequest);
@@ -63,15 +69,15 @@ public class BookingService {
 
     public BookingRecord findBookingRecordById(String id){
         BookingRecord record = bookingRepository.findBookingRecordById(id);
-        if (record == null)
-            record = new BookingRecord();
+//        if (record == null)
+//            record = new BookingRecord();
         return record;
     }
 
     public DetailBookingRecord findDetailBookingRecordById(String id){
         DetailBookingRecord record = bookingRepository.findDetailBookingRecordById(id);
-        if (record == null)
-            record = new DetailBookingRecord();
+//        if (record == null)
+//            record = new DetailBookingRecord();
         return record;
     }
 
@@ -95,6 +101,14 @@ public class BookingService {
         return bookingRepository.findBookingRecordsOfUser(userId, PageRequestCreator.getSimplePageRequest(page, pageSize));
     }
 
+    public DetailBookingResponse cancelBookingRequest(DetailBookingRecord bookingRecord){
+        if (!bookingRecord.getStatus().equals(NEW_CREATED))
+            return BOOKING_REQUEST_COMPLETED;
+
+        bookingRecord.setStatus(CANCELED);
+        asyncTask.updateBookingStatus(bookingRecord);
+        return new DetailBookingResponse(true, null, null, bookingRecord);
+    }
 
 
 }
