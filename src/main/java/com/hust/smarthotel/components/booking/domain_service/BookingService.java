@@ -3,6 +3,7 @@ package com.hust.smarthotel.components.booking.domain_service;
 import com.hust.smarthotel.components.booking.app_model.BookingRequest;
 import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.booking.app_model.DetailBookingResponse;
+import com.hust.smarthotel.components.booking.app_model.StateRequest;
 import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
 import com.hust.smarthotel.components.booking.repository.BookingRepository;
@@ -13,6 +14,7 @@ import com.hust.smarthotel.components.room.domain_model.Room;
 import com.hust.smarthotel.components.room.domain_model.Rooms;
 import com.hust.smarthotel.components.room.repository.RoomRepository;
 import com.hust.smarthotel.generic.util.PageRequestCreator;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -66,9 +68,22 @@ public class BookingService {
         return record;
     }
 
-    public BookingRecord changeState(BookingRecord bookingRecord, String status){
-        bookingRecord.setStatus(status);
+    public DetailBookingRecord findDetailBookingRecordById(String id){
+        DetailBookingRecord record = bookingRepository.findDetailBookingRecordById(id);
+        if (record == null)
+            record = new DetailBookingRecord();
+        return record;
+    }
+
+    public DetailBookingRecord changeState(DetailBookingRecord bookingRecord, StateRequest stateRequest){
+
+        if (stateRequest.getPrice() != null && !bookingRecord.getPrice().equals(stateRequest.getPrice())){
+            bookingRecord.setPrice(stateRequest.getPrice());
+        }
+
+        bookingRecord.setStatus(stateRequest.getStatus());
         bookingRecord.setUpdatedTime(LocalDateTime.now());
+
         return bookingRepository.save(bookingRecord);
     }
 

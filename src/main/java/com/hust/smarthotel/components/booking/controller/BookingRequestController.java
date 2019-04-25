@@ -4,6 +4,7 @@ package com.hust.smarthotel.components.booking.controller;
 import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.booking.app_model.StateRequest;
 import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
+import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
 import com.hust.smarthotel.components.booking.domain_service.BookingService;
 import com.hust.smarthotel.components.mananging.domain_model.Managing;
 import com.hust.smarthotel.components.mananging.domain_service.ManagingService;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_FORBIDDEN_GETTING_RECORD;
+import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
 
 
 @RestController
@@ -29,6 +31,7 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_FORBID
 public class BookingRequestController {
 
     private static final ResponseEntity<BookingResponse> FORBIDDEN = new ResponseEntity<>(BOOKING_FORBIDDEN_GETTING_RECORD, HttpStatus.FORBIDDEN);
+    private static final ResponseEntity FORBIDDEN_GET_BOOKING_RECORD = new ResponseEntity(HttpStatus.FORBIDDEN);
 
     @Autowired
     private BookingService bookingService;
@@ -43,20 +46,27 @@ public class BookingRequestController {
     private Publisher publisher;
 
     @GetMapping("/{bookingRecordId}")
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
-    ResponseEntity<BookingResponse> getBookingRecord(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT' ,'ROLE_MANAGER')")
+    ResponseEntity<DetailBookingRecord> getBookingRecord(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                      @PathVariable String bookingRecordId){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
 
         String userId = claims.getSubject();
-        BookingRecord bookingRecord = bookingService.findBookingRecordById(bookingRecordId);
+        String role = claims.get(JwtUtil.ROLE, String.class);
 
-        Managing managing = managingService.findManaging(userId, bookingRecord.getHotelId());
-        if (managing == null)
-            return FORBIDDEN;
+        DetailBookingRecord bookingRecord = bookingService.findDetailBookingRecordById(bookingRecordId);
 
-        return new ResponseEntity<>(new BookingResponse(true, null, null, bookingRecord), HttpStatus.ACCEPTED);
+        if (role.equals(MANAGER)){
+            Managing managing = managingService.findManaging(userId, bookingRecord.getHotelRef().toHexString());
+            if (managing == null)
+                return FORBIDDEN_GET_BOOKING_RECORD;
+        } else {
+            if (!userId.equals(bookingRecord.getUser().getId()))
+                return FORBIDDEN_GET_BOOKING_RECORD;
+        }
+
+        return new ResponseEntity<>(bookingRecord, HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/{bookingRecordId}")
@@ -68,14 +78,14 @@ public class BookingRequestController {
         Claims claims = jwtUtil.getClaims(token);
 
         String userId = claims.getSubject();
-        BookingRecord bookingRecord = bookingService.findBookingRecordById(bookingRecordId);
+        DetailBookingRecord bookingRecord = bookingService.findDetailBookingRecordById(bookingRecordId);
 
-        Managing managing = managingService.findManaging(userId, bookingRecord.getHotelId());
+        Managing managing = managingService.findManaging(userId, bookingRecord.getHotelRef().toHexString());
         if (managing == null)
             return FORBIDDEN;
 
-        bookingRecord = bookingService.changeState(bookingRecord, stateRequest.getStatus());
-        publisher.announceBookingStateToClient(bookingRecordId, stateRequest.getStatus());
+        bookingRecord = bookingService.changeState(bookingRecord, stateRequest);
+        publisher.announceBookingStateToClient(bookingRecordId, bookingRecord);
         return new ResponseEntity<>(new BookingResponse(true, null, null, bookingRecord), HttpStatus.ACCEPTED);
     }
 }

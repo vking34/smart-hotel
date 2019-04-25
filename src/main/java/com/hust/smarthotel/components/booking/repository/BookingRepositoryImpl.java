@@ -19,6 +19,7 @@ public class BookingRepositoryImpl implements BookingRepositoryCustom {
 
     private static final Sort DESC_CREATED_DATE = new Sort(Sort.Direction.DESC, "created_date");
     private static final String USER_ID = "user._id";
+    private static final String ID = "_id";
 
     @Autowired
     private final MongoTemplate mongoTemplate;
@@ -47,5 +48,20 @@ public class BookingRepositoryImpl implements BookingRepositoryCustom {
         List<DetailBookingRecord> bookingRecordList = mongoTemplate.aggregate(aggregation, "Reservation", DetailBookingRecord.class).getMappedResults();
 
         return new PageImpl<>(bookingRecordList, pageable, bookingRecordList.size());
+    }
+
+    @Override
+    public DetailBookingRecord findDetailBookingRecordById(String id) {
+        LookupOperation lookupOperation = LookupOperation.newLookup()
+                .from("Hotel")
+                .localField("hotel_ref")
+                .foreignField("_id")
+                .as("hotel");
+
+        MatchOperation matchOperation = Aggregation.match(Criteria.where(ID).is(new ObjectId(id)));
+
+        Aggregation aggregation = Aggregation.newAggregation(matchOperation, lookupOperation);
+
+        return mongoTemplate.aggregate(aggregation, "Reservation", DetailBookingRecord.class).getUniqueMappedResult();
     }
 }

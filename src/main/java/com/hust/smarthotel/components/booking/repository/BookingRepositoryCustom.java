@@ -6,4 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface BookingRepositoryCustom {
     public Page<DetailBookingRecord> findBookingRecordsOfUser(String userId, Pageable pageable);
+
+    public DetailBookingRecord findDetailBookingRecordById(String id);
 }

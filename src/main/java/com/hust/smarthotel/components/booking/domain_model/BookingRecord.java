@@ -1,9 +1,11 @@
 package com.hust.smarthotel.components.booking.domain_model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.hust.smarthotel.components.booking.app_model.BookingRequest;
 import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
 
+import com.hust.smarthotel.generic.util.ObjectIdSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,7 +45,8 @@ public class BookingRecord extends BookingRequest {
     private Integer price;
 
     @Field("hotel_ref")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty("hotel_id")
+    @JsonSerialize(using = ObjectIdSerializer.class)
     private ObjectId hotelRef;
 
 
