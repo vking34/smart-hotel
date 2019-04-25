@@ -2,6 +2,7 @@ package com.hust.smarthotel.generic.response;
 
 import com.hust.smarthotel.components.auth.model.FailAuthenResponse;
 import com.hust.smarthotel.components.booking.app_model.BookingResponse;
+import com.hust.smarthotel.components.booking.app_model.DetailBookingResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.mananging.app_model.ManagingResponse;
 import com.hust.smarthotel.components.review.app_model.ReviewResponse;
@@ -30,8 +31,10 @@ public class ErrorResponses {
 
     public static final BookingResponse BOOKING_HOTEL_NOT_FOUND = new BookingResponse(false, "Target hotel is not found", 501, null);
     public static final BookingResponse BOOKING_INVALID_DATE = new BookingResponse(false, "Checkin Date must be before Checkout Date", 502, null);
-    public static final BookingResponse BOOKING_FORBIDDEN_GETTING_RECORD = new BookingResponse(false, "Forbidden to get the booking record", 601, null);
-
+    public static final BookingResponse BOOKING_FORBIDDEN_GETTING_RECORD = new BookingResponse(false, "Forbidden to get the booking record", 503, null);
+    public static final DetailBookingResponse BOOKING_RECORD_NOT_FOUND = new DetailBookingResponse(false, "The booking record is not found", 504, null);
+    public static final DetailBookingResponse BOOKING_REQUEST_COMPLETED = new DetailBookingResponse(false, "The booking request is completed, not in the PROCESSING state", 505, null);
+    public static final DetailBookingResponse BOOKING_FORBIDDEN_CANCELATION = new DetailBookingResponse(false, "The booking request does not belong to you", 506, null);
 
     public static final ReviewResponse REVIEW_HOTEL_NOT_FOUND = new ReviewResponse(false, "Hotel not found", 701, null);
 

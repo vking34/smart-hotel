@@ -3,16 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="0edd3080-ac0c-4fae-a77b-e4d892106aa2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/StateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/StateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingRequestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/BookingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/BookingRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingAsyncImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingAsyncTasks.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/publish/Publisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/publish/Publisher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/constant/BookingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/constant/BookingState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/response/ErrorResponses.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/response/ErrorResponses.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -56,44 +53,11 @@
                 </provider>
               </entry>
             </file>
-            <file pinned="false" current-in-tab="false">
+            <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Rooms.java">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="400">
                     <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Room.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="400">
-                    <caret line="26" selection-start-line="26" selection-end-line="26" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingService.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="453">
-                    <caret line="70" column="58" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="58" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/BookingRecord.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="660">
-                    <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
                   </state>
                 </provider>
               </entry>
@@ -131,13 +95,13 @@
     <favorites_list name="smart-hotel" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.3152174">
+    <splitter split-orientation="horizontal" split-proportion="0.4232337">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/controller/ManagingHotelController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-27">
+                <state relative-caret-position="900">
                   <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -146,23 +110,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="473">
-                  <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/publish/Publisher.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="398">
-                  <caret line="64" column="77" selection-start-line="64" selection-start-column="77" selection-end-line="64" selection-end-column="77" />
+                <state relative-caret-position="427">
+                  <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -171,10 +123,13 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/auth/filters/JWTAuthenticationFilter.java">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/BookingRequest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-362">
-                  <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="73" />
+                <state relative-caret-position="296">
+                  <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -189,10 +144,10 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/DetailBookingRecord.java">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/response/ErrorResponses.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="240">
-                  <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+                <state relative-caret-position="467">
+                  <caret line="36" column="168" selection-start-line="36" selection-start-column="168" selection-end-line="36" selection-end-column="168" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -208,67 +163,7 @@
             <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryCustom.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="180">
-                  <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryImpl.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="458">
-                  <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/BookingRequest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="120">
-                  <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/BUser.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="520">
-                  <caret line="26" selection-start-line="26" selection-end-line="26" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepository.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_model/Managing.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="467">
-                  <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+                  <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -277,10 +172,34 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingService.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="304">
+                  <caret line="81" column="5" lean-forward="true" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/publish/Publisher.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="467">
+                  <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingRequestController.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="338">
-                  <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+                <state relative-caret-position="158">
+                  <caret line="105" column="65" selection-start-line="105" selection-start-column="65" selection-end-line="105" selection-end-column="65" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -298,24 +217,14 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/StateRequest.java">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/DetailBookingRecord.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="320">
-                  <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+                <state relative-caret-position="340">
+                  <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_service/ManagingService.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="218">
-                  <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
+                    <element signature="e#478#479#0" expanded="true" />
+                    <element signature="e#515#516#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -352,7 +261,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/app_model/ManagingResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_service/ManagingAsynTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/user/domain_service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/auth/filters/JWTAuthenticationFilter.java" />
@@ -374,7 +282,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Price.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Room.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/response/ErrorResponses.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/util/ObjectIdSerializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_model/Managing.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_service/ManagingAsyncTask.java" />
@@ -390,19 +297,21 @@
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/BookingRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/BUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositorImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/DetailBookingRecord.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/util/PageRequestCreator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/BookingRecord.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/signup.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/constant/BookingState.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/StateRequest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/publish/Publisher.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryCustom.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingAsyncTask.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/response/ErrorResponses.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/publish/Publisher.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingRequestController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingService.java" />
       </list>
     </option>
   </component>
@@ -432,6 +341,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -482,27 +392,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-              <item name="filters" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="booking" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -557,73 +446,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="booking" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="mananging" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="mananging" type="462c0819:PsiDirectoryNode" />
-              <item name="app_model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="mananging" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="mananging" type="462c0819:PsiDirectoryNode" />
-              <item name="domain_model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="mananging" type="462c0819:PsiDirectoryNode" />
-              <item name="domain_service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="mananging" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
@@ -643,7 +466,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="room" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
@@ -653,8 +476,41 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="room" type="462c0819:PsiDirectoryNode" />
-              <item name="domain_model" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="app_model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="domain_service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smart-hotel" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="smarthotel" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="smart-hotel" type="b2602c69:ProjectViewProjectNode" />
@@ -723,7 +579,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -734,7 +589,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556167293702" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556187350579" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../shopping-cart-pusher-master" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -845,18 +700,19 @@
       <workItem from="1556010947143" duration="629000" />
       <workItem from="1556092963188" duration="8583000" />
       <workItem from="1556116899465" duration="6469000" />
-      <workItem from="1556156402389" duration="10809000" />
+      <workItem from="1556156402389" duration="11604000" />
+      <workItem from="1556182185959" duration="5089000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="292641000" />
+    <option name="totallyTimeSpent" value="298525000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49487555" visible="true" weight="0.21367522" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49487555" visible="true" weight="0.19337606" />
       <window_info id="Structure" order="1" sideWeight="0.50512445" side_tool="true" weight="0.21100427" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -866,7 +722,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32824427" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27153763" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27153763" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -934,70 +790,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/controller/RoomController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/user/controller/UsersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/user/domain_model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_service/RoomService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="940">
-          <caret line="57" column="39" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_service/RoomAsyncTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="51" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/app_model/RoomRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/hotel/repository/HotelRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="19" column="60" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-mongodb/2.1.5.RELEASE/spring-data-mongodb-2.1.5.RELEASE.jar!/org/springframework/data/mongodb/core/mapping/DBRef.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1012,16 +804,6 @@
           <folding>
             <element signature="e#3914#3915#0" expanded="true" />
             <element signature="e#3961#3962#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/response/ErrorResponses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="41" column="150" selection-start-line="41" selection-start-column="150" selection-end-line="41" selection-end-column="150" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1057,16 +839,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/hotel/controller/HotelsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="30" selection-end-column="95" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1111,67 +883,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/repository/ManagingRepositoryCustom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="26" selection-start-column="26" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Rooms.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Room.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Price.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-mongodb/2.1.5.RELEASE/spring-data-mongodb-2.1.5.RELEASE.jar!/org/springframework/data/mongodb/core/mapping/Field.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/BookingRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/repository/ManagingRepositoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="36" column="78" selection-start-line="36" selection-start-column="78" selection-end-line="36" selection-end-column="100" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1211,47 +926,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_service/ManagingService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_model/ExtendedManaging.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/BUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/BookingRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_model/Managing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1265,9 +943,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/util/JwtUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/controller/ManagingHotelController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
+        <state relative-caret-position="900">
           <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1275,10 +960,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/auth/filters/JWTAuthenticationFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+        <state relative-caret-position="100">
+          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/constant/BookingState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="69" selection-start-line="8" selection-start-column="69" selection-end-line="8" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="940">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1292,40 +1001,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/DetailBookingRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/util/JwtUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/auth/filters/JWTAuthenticationFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-362">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/constant/BookingState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="69" selection-start-line="8" selection-start-column="69" selection-end-line="8" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/StateRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
+        <state relative-caret-position="220">
           <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1333,10 +1011,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/publish/Publisher.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_service/ManagingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="64" column="77" selection-start-line="64" selection-start-column="77" selection-end-line="64" selection-end-column="77" />
+        <state relative-caret-position="260">
+          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/repository/ManagingRepositoryCustom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Price.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/user/repository/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/hotel/controller/HotelsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="47" column="83" lean-forward="true" selection-start-line="47" selection-start-column="83" selection-end-line="47" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/hotel/app_model/BasicHotel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="38" column="19" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/user/app_model/UserResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/BUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/user/domain_service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/domain_model/Managing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1346,37 +1102,117 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryCustom.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
-          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepositoryImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingAsyncTasks.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+        <state relative-caret-position="120">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingAsyncImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Room.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/repository/BookingRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/app_model/BookingRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="296">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingAsyncTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="70" column="58" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="58" />
+        <state relative-caret-position="340">
+          <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/mananging/repository/ManagingRepositoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="674">
+          <caret line="36" column="78" selection-start-line="36" selection-start-column="78" selection-end-line="36" selection-end-column="100" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/room/domain_model/Rooms.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/generic/response/ErrorResponses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="36" column="168" selection-start-line="36" selection-start-column="168" selection-end-line="36" selection-end-column="168" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/DetailBookingRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#478#479#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_model/BookingRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/publish/Publisher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1385,8 +1221,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/controller/BookingRequestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="158">
+          <caret line="105" column="65" selection-start-line="105" selection-start-column="65" selection-end-line="105" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hust/smarthotel/components/booking/domain_service/BookingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="81" column="5" lean-forward="true" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
