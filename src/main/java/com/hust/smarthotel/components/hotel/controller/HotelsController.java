@@ -32,7 +32,7 @@ public class HotelsController {
                           @RequestParam(value = "name", required = false) String name,
                           @RequestParam(value = "lng", required = false) Double lng,
                           @RequestParam(value = "lat", required = false) Double lat,
-                          @RequestParam(value = "radius", required = false) Integer radius
+                          @RequestParam(value = "radius", required = false) Long radius
     ){
 
         if (name != null)
