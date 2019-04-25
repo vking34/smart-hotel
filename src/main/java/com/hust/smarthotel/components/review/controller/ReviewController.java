@@ -3,6 +3,7 @@ package com.hust.smarthotel.components.review.controller;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.domain_service.HotelService;
 import com.hust.smarthotel.components.review.app_model.ReviewResponse;
+import com.hust.smarthotel.components.review.domain_model.BasicReview;
 import com.hust.smarthotel.components.review.domain_model.Review;
 import com.hust.smarthotel.components.review.domain_model.Reviews;
 import com.hust.smarthotel.components.review.domain_service.ReviewService;
@@ -38,12 +39,13 @@ public class ReviewController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_CLIENT')")
-    ResponseEntity<ReviewResponse> postReview(@PathVariable String hotelId, @Valid @RequestBody Review review){
+    ResponseEntity<ReviewResponse> postReview(@PathVariable String hotelId, @Valid @RequestBody BasicReview basicReview){
         Hotel hotel = hotelService.findHotelById(hotelId);
         if (hotel == null)
             return HOTEL_NOT_FOUND;
 
-        review.setCreatedTime(LocalDateTime.now());
+
+        Review review = new Review(basicReview);
 
         reviewService.pushReview(hotelId, review);
         return new ResponseEntity<>(new ReviewResponse(true, null, null, review), HttpStatus.ACCEPTED);

@@ -16,19 +16,13 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Review {
-
-    @NotNull
-    private User user;
-
-
-    @Field("rating_point")
-    @JsonProperty("rating_point")
-    private Integer ratingPoint;
-
-    @Size(max = 400)
-    private String comment;
+public class Review extends BasicReview {
 
     @Field("created_time")
     private LocalDateTime createdTime;
+
+    public Review(BasicReview basicReview){
+        super(basicReview);
+        this.createdTime = LocalDateTime.now();
+    }
 }

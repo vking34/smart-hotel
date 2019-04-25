@@ -22,6 +22,6 @@ public interface HotelRepository extends MongoRepository<Hotel, String> {
     public Hotel deleteHotelById(String id);
 
     @Query("{ location: { $near : { $geometry: { type: \"Point\", coordinates: [ ?0 , ?1 ] }, $maxDistance: ?2 } } }")
-    public Page<Hotel> findHotelsAround(Double lng, Double lat, Integer radius, Pageable pageable);
+    public Page<Hotel> findHotelsAround(Double lng, Double lat, Long radius, Pageable pageable);
 
 }
