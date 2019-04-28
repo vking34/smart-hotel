@@ -14,6 +14,7 @@ public class HotelResponse {
     public String message;
     public Integer code;
     public Hotel hotel;
+
     public HotelResponse(Hotel hotel){
         this.status = true;
         this.hotel = hotel;

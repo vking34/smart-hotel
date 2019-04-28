@@ -66,6 +66,9 @@ public class BasicHotel {
         this.description = hotel.getDescription();
         this.location = hotel.getLocation();
         this.facilities = hotel.getFacilities();
-        this.status = hotel.getStatus();
+        if (hotel.getStatus() == null)
+            this.status = true;
+        else
+            this.status = hotel.getStatus();
     }
 }

@@ -20,9 +20,11 @@ public class ErrorResponses {
     public static final UsernameNotFoundException USER_NOT_FOUND_EXCEPTION = new UsernameNotFoundException("User not found");
     public static final UsernameNotFoundException USER_INACTIVE = new UsernameNotFoundException("User is inactive");
 
-
+    public static final HotelResponse HOTEL_NOT_FOUND = new HotelResponse(false, "Hotel is not found", 301, null);
     public static final HotelResponse HOTEL_INVALID_COORDINATES = new HotelResponse(false, "Longitude <= 180 && Latitude <= 90", 303, null);
     public static final HotelResponse HOTEL_EXISTS = new HotelResponse(false, "Hotel/Phone number exists already", 304, null);
+    public static final HotelResponse HOTEL_OUT_OF_MANAGING = new HotelResponse(false, "Manager already manages the allowed number of hotels", 305, null);
+    public static final HotelResponse HOTEL_NOT_MANAGED_BY_THIS_MANAGER = new HotelResponse(false, "This manager does not manager this hotel", 302, null);
 
     public static final UserResponse USER_EXISTS = new UserResponse(false, "Username/Email/Phone exists", 201, null);
     public static final UserResponse USER_NOT_FOUND = new UserResponse(false, "User not found", 204, null);
