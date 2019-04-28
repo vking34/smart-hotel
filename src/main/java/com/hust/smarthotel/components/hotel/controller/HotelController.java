@@ -5,12 +5,16 @@ import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelStatus;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.domain_service.HotelService;
+import com.hust.smarthotel.generic.constant.HeaderConstant;
 import com.hust.smarthotel.generic.constant.UrlConstants;
 import com.hust.smarthotel.generic.response.ErrorResponses;
+import com.hust.smarthotel.generic.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
@@ -23,6 +27,8 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @ApiOperation("Get more information about a hotel")
     @GetMapping
@@ -32,29 +38,50 @@ public class HotelController {
 
     @ApiOperation("Update information for a hotel")
     @PutMapping
-    ResponseEntity<HotelResponse> updateHotel(@PathVariable String hotelId, @Valid @RequestBody BasicHotel basicHotel){
-        Hotel hotel = hotelService.updateHotel(hotelId, basicHotel);
-        if (hotel == null)
-            return new ResponseEntity(ErrorResponses.NOT_FOUND, HttpStatus.NOT_FOUND);
-        return new ResponseEntity(new HotelResponse(hotel), HttpStatus.ACCEPTED);
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    ResponseEntity<HotelResponse> updateHotel(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                              @PathVariable String hotelId, @Valid @RequestBody BasicHotel basicHotel){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+        String userId = claims.getSubject();
+        String role = claims.get(JwtUtil.ROLE, String.class);
+
+        HotelResponse hotelResponse = hotelService.updateHotel(hotelId, basicHotel, role, userId);
+        if (!hotelResponse.getStatus())
+            return new ResponseEntity<>(hotelResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(hotelResponse, HttpStatus.OK);
     }
 
     @DeleteMapping
-    ResponseEntity<HotelResponse> deleteHotel(@PathVariable String hotelId){
-        Hotel hotel = hotelService.deleteHotel(hotelId);
-        if (hotel == null)
-            return new ResponseEntity(ErrorResponses.NOT_FOUND, HttpStatus.NOT_FOUND);
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    ResponseEntity<HotelResponse> deleteHotel(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                              @PathVariable String hotelId){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+        String userId = claims.getSubject();
+        String role = claims.get(JwtUtil.ROLE, String.class);
 
-        return new ResponseEntity<HotelResponse>(new HotelResponse(hotel), HttpStatus.ACCEPTED);
+        HotelResponse hotelResponse = hotelService.deleteHotel(hotelId, role, userId);
+
+        if (!hotelResponse.getStatus())
+            return new ResponseEntity<>(hotelResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(hotelResponse, HttpStatus.OK);
     }
 
     @PostMapping("/status")
-    ResponseEntity<HotelResponse> changeHotelStatus(@PathVariable String hotelId,
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    ResponseEntity<HotelResponse> changeHotelStatus(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                                    @PathVariable String hotelId,
                                                     @Valid @RequestBody HotelStatus hotelStatus){
-        Hotel hotel = hotelService.changeHotelStatus(hotelId, hotelStatus);
-        if (hotel == null)
-            return new ResponseEntity(ErrorResponses.NOT_FOUND, HttpStatus.NOT_FOUND);
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+        String userId = claims.getSubject();
+        String role = claims.get(JwtUtil.ROLE, String.class);
 
-        return new ResponseEntity<HotelResponse>(new HotelResponse(hotel), HttpStatus.ACCEPTED);
+        HotelResponse hotelResponse = hotelService.changeHotelStatus(hotelId, hotelStatus, role, userId);
+
+        if (!hotelResponse.getStatus())
+            return new ResponseEntity<>(hotelResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(hotelResponse, HttpStatus.OK);
     }
 }

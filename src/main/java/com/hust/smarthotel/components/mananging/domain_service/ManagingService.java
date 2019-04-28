@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.hust.smarthotel.generic.response.ErrorResponses.MANAGING_EXISTING_RECORD;
 import static com.hust.smarthotel.generic.response.ErrorResponses.MANAGING_RECORD_NOT_FOUND;
 
@@ -49,4 +51,7 @@ public class ManagingService {
         return new ManagingResponse(true, null, null, managing);
     }
 
+    public List<Managing> findManagingByManagerId(String managerId){
+        return managingRepository.findManagingByUserId(managerId);
+    }
 }
