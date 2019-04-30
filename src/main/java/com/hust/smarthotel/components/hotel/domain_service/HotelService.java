@@ -66,7 +66,7 @@ public class HotelService {
         Hotel hotel = new Hotel(basicHotel);
 
         try {
-            hotelRepository.insert(hotel);
+            insertHotel(hotel);
         }
         catch ( Exception e){
             return HOTEL_INVALID_COORDINATES;
@@ -76,6 +76,11 @@ public class HotelService {
             asyncTasks.insertManaging(managerId, hotel.getId());
 
         return new HotelResponse(true, null, null, hotel);
+    }
+
+    @CacheEvict(value = "desc_hotels_cache", allEntries = true)
+    public void insertHotel(Hotel hotel){
+        hotelRepository.insert(hotel);
     }
 
     @CacheEvict(value = "desc_hotels_cache", allEntries = true)
