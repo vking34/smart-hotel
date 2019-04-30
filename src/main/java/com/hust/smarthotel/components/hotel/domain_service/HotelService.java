@@ -48,6 +48,7 @@ public class HotelService {
         return hotelRepository.findHotelsByName(name, PageRequestCreator.getSimplePageRequest(page, pageSize));
     }
 
+    @CacheEvict(value = "desc_hotels_cache", allEntries = true)
     public HotelResponse createHotel(BasicHotel basicHotel, String role, String managerId){
 
         if (hotelRepository.findHotelByPhoneNumber(basicHotel.getPhoneNumber()) != null)
@@ -66,7 +67,7 @@ public class HotelService {
         Hotel hotel = new Hotel(basicHotel);
 
         try {
-            insertHotel(hotel);
+            hotelRepository.insert(hotel);
         }
         catch ( Exception e){
             return HOTEL_INVALID_COORDINATES;
@@ -76,11 +77,6 @@ public class HotelService {
             asyncTasks.insertManaging(managerId, hotel.getId());
 
         return new HotelResponse(true, null, null, hotel);
-    }
-
-    @CacheEvict(value = "desc_hotels_cache", allEntries = true)
-    public void insertHotel(Hotel hotel){
-        hotelRepository.insert(hotel);
     }
 
     @CacheEvict(value = "desc_hotels_cache", allEntries = true)
