@@ -48,7 +48,7 @@ public class ReviewController {
         Review review = new Review(basicReview);
 
         reviewService.pushReview(hotelId, review);
-        return new ResponseEntity<>(new ReviewResponse(true, null, null, review), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(new ReviewResponse(true, null, null, review), HttpStatus.OK);
     }
 
 }
