@@ -10,6 +10,7 @@ import com.hust.smarthotel.components.mananging.domain_service.ManagingService;
 import com.hust.smarthotel.generic.util.PageRequestCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -77,7 +78,7 @@ public class HotelService {
         return new HotelResponse(true, null, null, hotel);
     }
 
-    @CachePut(value = "desc_hotels_cache")
+    @CacheEvict(value = "desc_hotels_cache", allEntries = true)
     public HotelResponse updateHotel(String hotelId, BasicHotel basicHotel, String role, String managerId){
 
         Hotel hotel = hotelRepository.findHotelById(hotelId);
@@ -105,7 +106,7 @@ public class HotelService {
         return new HotelResponse(true, null, null, hotel);
     }
 
-    @CachePut(value = "desc_hotels_cache")
+    @CacheEvict(value = "desc_hotels_cache", allEntries = true)
     public HotelResponse deleteHotel(String hotelId, String role, String managerId){
         Hotel hotel = hotelRepository.findHotelById(hotelId);
         if (hotel == null)

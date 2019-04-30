@@ -77,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/login", new CorsConfiguration().applyPermitDefaultValues());
+//        source.registerCorsConfiguration("/api/{v1/:[a-zA-Z0-9\\/-?&=.]+}", new CorsConfiguration().applyPermitDefaultValues());
         return source;
     }
 
