@@ -27,9 +27,9 @@ public class ErrorResponses {
     public static final HotelResponse HOTEL_NOT_MANAGED_BY_THIS_MANAGER = new HotelResponse(false, "This manager does not manager this hotel", 302, null);
 
     public static final UserResponse USER_EXISTS = new UserResponse(false, "Username/Email/Phone exists", 201, null);
-    public static final UserResponse USER_NOT_FOUND = new UserResponse(false, "User not found", 204, null);
-    public static final UserResponse USER_EMAIL_PHONE_EXISTS = new UserResponse(false, "Username/Email/Phone exists", 201, null);
-
+    public static final UserResponse USER_NOT_FOUND = new UserResponse(false, "User not found", 202, null);
+    public static final UserResponse USER_EMAIL_PHONE_EXISTS = new UserResponse(false, "Email/Phone exists", 203, null);
+    public static final UserResponse USER_FORBIDDEN = new UserResponse(false, "Access token does not belong to this user", 204, null);
 
     public static final BookingResponse BOOKING_HOTEL_NOT_FOUND = new BookingResponse(false, "Target hotel is not found", 501, null);
     public static final BookingResponse BOOKING_INVALID_DATE = new BookingResponse(false, "Checkin Date must be before Checkout Date", 502, null);

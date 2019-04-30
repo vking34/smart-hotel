@@ -61,6 +61,6 @@ public class HotelsController {
         HotelResponse hotelResponse = hotelService.createHotel(basicHotel, role, userId);
         if (!hotelResponse.getStatus())
             return new ResponseEntity<>(hotelResponse, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(hotelResponse, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(hotelResponse, HttpStatus.OK);
     }
 }

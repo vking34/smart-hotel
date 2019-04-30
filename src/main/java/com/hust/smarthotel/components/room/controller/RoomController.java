@@ -89,7 +89,7 @@ public class RoomController {
         if (!roomResponse.getStatus())
             return new ResponseEntity<>(roomResponse, HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(roomResponse, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(roomResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{hotelId}/rooms")
@@ -108,6 +108,6 @@ public class RoomController {
         if (!roomResponse.getStatus())
             return new ResponseEntity<>(roomResponse, HttpStatus.BAD_REQUEST);
 
-        return new ResponseEntity<>(roomResponse, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(roomResponse, HttpStatus.OK);
     }
 }

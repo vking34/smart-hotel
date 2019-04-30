@@ -100,7 +100,7 @@ public class HotelService {
             hotel.setStatus(true);
         else
             hotel.setStatus(basicHotel.getStatus());
-        
+
         asyncTasks.updateHotel(hotel);
         return new HotelResponse(true, null, null, hotel);
     }

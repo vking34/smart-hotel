@@ -24,6 +24,7 @@ public class UsersController {
     private UserService userService;
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     Page<User> getUsers(@RequestParam(value = "page", required = false) Integer page,
                         @RequestParam(value = "page_size", required = false) Integer pageSize,
                         @RequestParam(value = "name", required = false) String name,
@@ -48,7 +49,7 @@ public class UsersController {
         UserResponse userResponse = userService.createClient(requestClient);
         if (!userResponse.getStatus())
             return new ResponseEntity<>(userResponse, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(userResponse, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Get/Search/Filter Managers... Manager have one more field hotel_id than Client")
@@ -65,7 +66,7 @@ public class UsersController {
         UserResponse userResponse = userService.createManager(manager);
         if (!userResponse.getStatus())
             return new ResponseEntity<>(userResponse, HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(userResponse, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 
 }

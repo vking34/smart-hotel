@@ -2,6 +2,7 @@ package com.hust.smarthotel.components.user.domain_service;
 
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.repository.HotelRepository;
+import com.hust.smarthotel.components.user.app_model.UpdatedUser;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.repository.UserRepository;
@@ -67,7 +68,7 @@ public class UserService {
         return new UserResponse(true, null,null, user);
     }
 
-    public UserResponse updateClient(String userId, User requestUser){
+    public UserResponse updateClient(String userId, UpdatedUser requestUser){
         User user = userRepository.findUserById(userId);
         if (user == null)
             return USER_NOT_FOUND;
@@ -78,7 +79,6 @@ public class UserService {
         user.setFullName(requestUser.getFullName());
         user.setEmail(requestUser.getEmail());
         user.setPhone(requestUser.getPhone());
-        user.setPicture(requestUser.getPicture());
         asynTasks.updateUser(user);
         return new UserResponse(true, null, null, user);
     }
