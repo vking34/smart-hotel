@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_RECORD_NOT_FOUND;
@@ -56,7 +55,6 @@ public class BookingRequestController {
                                                      @PathVariable String bookingRecordId){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
-
         String userId = claims.getSubject();
         String role = claims.get(JwtUtil.ROLE, String.class);
 
@@ -81,8 +79,8 @@ public class BookingRequestController {
                                                 @Valid @RequestBody StateRequest stateRequest){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
-
         String userId = claims.getSubject();
+
         DetailBookingRecord bookingRecord = bookingService.findDetailBookingRecordById(bookingRecordId);
 
         Managing managing = managingService.findManaging(userId, bookingRecord.getHotelRef().toHexString());
@@ -100,11 +98,9 @@ public class BookingRequestController {
                                                                   @PathVariable String bookingRecordId){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
-
         String userId = claims.getSubject();
 
         DetailBookingRecord bookingRecord = bookingService.findDetailBookingRecordById(bookingRecordId);
-
         if (bookingRecord == null)
             return RECORD_NOT_FOUND;
 

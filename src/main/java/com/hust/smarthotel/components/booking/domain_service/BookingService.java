@@ -22,8 +22,11 @@ import java.util.List;
 
 
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_REQUEST_COMPLETED;
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_INVALID_ROOM_TYPE;
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_INVALID_RENT_TYPE;
 import static com.hust.smarthotel.generic.constant.BookingState.CANCELED;
 import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
+
 
 @Service
 public class BookingService {
@@ -51,6 +54,12 @@ public class BookingService {
             }
         }
 
+        if (priceList == null)
+            return BOOKING_INVALID_ROOM_TYPE;
+
+
+        boolean rentTypeValidation = false;
+
         for (Price price : priceList){
             if (price.getRentType().equals(bookingRequest.getRentType())
             && price.getRentValue().equals(bookingRequest.getRentValue())
@@ -58,20 +67,17 @@ public class BookingService {
             && price.getEndTime().equals(bookingRequest.getEndTime())){
                 bookingRecord.setRentName(price.getName());
                 bookingRecord.setPrice(price.getPrice());
+                rentTypeValidation = true;
                 break;
             }
         }
 
+        if (!rentTypeValidation)
+            return BOOKING_INVALID_RENT_TYPE;
+
         bookingRepository.save(bookingRecord);
         bookingRecord.setHotel(hotel);
         return new DetailBookingResponse(true, null, null, bookingRecord);
-    }
-
-    public BookingRecord findBookingRecordById(String id){
-        BookingRecord record = bookingRepository.findBookingRecordById(id);
-//        if (record == null)
-//            record = new BookingRecord();
-        return record;
     }
 
     public DetailBookingRecord findDetailBookingRecordById(String id){
@@ -93,10 +99,6 @@ public class BookingService {
         return bookingRepository.save(bookingRecord);
     }
 
-    public Page<BookingRecord> getBookingRecords(){
-        return bookingRepository.findAll(PageRequestCreator.getSimplePageRequest(0,10));
-    }
-
     public Page<DetailBookingRecord> findBookingRecordsByUserId(String userId, Integer page, Integer pageSize){
         return bookingRepository.findBookingRecordsOfUser(userId, PageRequestCreator.getSimplePageRequest(page, pageSize));
     }
@@ -110,5 +112,7 @@ public class BookingService {
         return new DetailBookingResponse(true, null, null, bookingRecord);
     }
 
-
+    public Page<BookingRecord> getBookingRecords(){
+        return bookingRepository.findAll(PageRequestCreator.getSimplePageRequest(0,10));
+    }
 }

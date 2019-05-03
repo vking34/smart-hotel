@@ -37,6 +37,9 @@ public class ErrorResponses {
     public static final DetailBookingResponse BOOKING_RECORD_NOT_FOUND = new DetailBookingResponse(false, "The booking record is not found", 504, null);
     public static final DetailBookingResponse BOOKING_REQUEST_COMPLETED = new DetailBookingResponse(false, "The booking request is completed, not in the PROCESSING state", 505, null);
     public static final DetailBookingResponse BOOKING_FORBIDDEN_CANCELATION = new DetailBookingResponse(false, "The booking request does not belong to you", 506, null);
+    public static final DetailBookingResponse BOOKING_INVALID_ROOM_TYPE = new DetailBookingResponse(false, "Invalid Room Type", 507, null);
+    public static final DetailBookingResponse BOOKING_INVALID_RENT_TYPE = new DetailBookingResponse(false, "Invalid Rent Value/ Rent Type/ Start time/ End Time", 508, null);
+
 
     public static final ReviewResponse REVIEW_HOTEL_NOT_FOUND = new ReviewResponse(false, "Hotel not found", 701, null);
 
