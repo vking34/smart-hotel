@@ -6,6 +6,7 @@ import com.hust.smarthotel.components.booking.app_model.BookingRequest;
 import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
 
 import com.hust.smarthotel.generic.util.ObjectIdSerializer;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,6 +48,7 @@ public class BookingRecord extends BookingRequest {
     @Field("hotel_ref")
     @JsonProperty("hotel_id")
     @JsonSerialize(using = ObjectIdSerializer.class)
+    @ApiModelProperty(hidden = true)
     private ObjectId hotelRef;
 
 

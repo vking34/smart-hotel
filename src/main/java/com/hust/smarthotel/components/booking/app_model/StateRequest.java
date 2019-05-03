@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 public class StateRequest {
 
-    @Pattern(regexp = "^(DENIED|ACCEPTED|CHANGED_ACCEPTED)$")
+    @Pattern(regexp = "^(CANCELED|DENIED|ACCEPTED|CHANGED_ACCEPTED)$")
     @NotNull
     private String status;
 

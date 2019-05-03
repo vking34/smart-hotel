@@ -60,6 +60,10 @@ public class BookingController {
             return INVALID_DATE;
 
         DetailBookingResponse bookingResponse = bookingService.insert(bookingRequest, hotel);
+
+        if (!bookingResponse.getStatus())
+            return new ResponseEntity<>(bookingResponse, HttpStatus.BAD_REQUEST);
+
         BookingRecord bookingRecord = bookingResponse.getBookingRecord();
         publisher.announceBookingRequest(bookingRecord.getHotelId(), bookingRecord.getId());
         return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
