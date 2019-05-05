@@ -64,6 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         webSecurity.ignoring()
                 .antMatchers("/signup")
                 .antMatchers("/swagger-ui.html")
+                .antMatchers("/images/**")
         ;
     }
 
