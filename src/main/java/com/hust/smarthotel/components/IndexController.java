@@ -13,11 +13,18 @@ public class IndexController {
 
     @RequestMapping(method = RequestMethod.GET)
     String getIndex(Model model){
-        return "index";
+//        return "index";
+        return "admin";
     }
 
     @GetMapping("/signup")
     String getSignUp(Model model){
         return "signup";
+    }
+
+    @GetMapping("/admin")
+    String getAdminPage(Model model){
+        System.out.println("get admin page");
+        return "admin";
     }
 }

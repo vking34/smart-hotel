@@ -33,3 +33,9 @@ pusher:
   secret: 4e988776643fcce1a466
   cluster: ap1
   encrypted: true
+
+#----------------------photo----------------------------
+photo:
+  base-path: /root/IdeaProjects/smart-hotel/images/
+  base-url: /images/
+  file-ending: .jpg

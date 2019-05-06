@@ -5,6 +5,7 @@ import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.booking.app_model.DetailBookingResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.mananging.app_model.ManagingResponse;
+import com.hust.smarthotel.components.photo.app_model.PhotoResponse;
 import com.hust.smarthotel.components.review.app_model.ReviewResponse;
 import com.hust.smarthotel.components.room.app_model.RoomResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
@@ -52,4 +53,9 @@ public class ErrorResponses {
     public static final RoomResponse ROOM_FORBIDDEN = new RoomResponse(false, "You are not the manager of this hotel", 901, null);
     public static final RoomResponse ROOM_EXISTS = new RoomResponse(false, "Hotel have rooms already", 902, null);
     public static final RoomResponse ROOM_NOT_EXIST = new RoomResponse(false, "Room does not exist", 903, null);
+
+    public static final PhotoResponse PHOTO_HOTEL_NOT_MANAGER = new PhotoResponse(false, "Not manager", 600, null);
+    public static final PhotoResponse PHOTO_HOTEL_NOT_MANAGING = new PhotoResponse(false, "This manager does not manage this hotel", 601, null);
+    public static final PhotoResponse PHOTO_INTERNAL_ERROR = new PhotoResponse(false, "Internal Server Error: IOException", 602, null);
+    public static final PhotoResponse PHOTO_HOTEL_NOT_FOUND = new PhotoResponse(false, "Hotel is not found", 603, null);
 }
