@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
+import com.hust.smarthotel.components.publish.model.HotelNotification;
 import com.pusher.rest.Pusher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -51,10 +52,11 @@ public class Publisher {
 
     @Async
     public void announceBookingRequest(String hotelId, String requestId){
-        Map<String, String> data = new HashMap<>();
-        data.put(BOOKING_REQUEST_ID, requestId);
-        data.put(STATUS, NEW_CREATED);
+//        Map<String, String> data = new HashMap<>();
+//        data.put(BOOKING_REQUEST_ID, requestId);
+//        data.put(STATUS, NEW_CREATED);
 //        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, Collections.singletonMap(BOOKING_REQUEST_ID, requestId));
+        HotelNotification data = new HotelNotification(requestId, NEW_CREATED);
         pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, data);
     }
 
