@@ -51,13 +51,17 @@ public class Publisher {
     }
 
     @Async
-    public void announceBookingRequest(String hotelId, String requestId){
+    public void announceBookingRequest(String hotelId, String requestId) {
 //        Map<String, String> data = new HashMap<>();
 //        data.put(BOOKING_REQUEST_ID, requestId);
 //        data.put(STATUS, NEW_CREATED);
 //        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, Collections.singletonMap(BOOKING_REQUEST_ID, requestId));
         HotelNotification data = new HotelNotification(requestId, NEW_CREATED);
-        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, data);
+        try {
+            pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, OBJECT_MAPPER.writeValueAsString(data));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Async

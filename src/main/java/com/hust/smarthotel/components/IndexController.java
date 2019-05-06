@@ -13,8 +13,8 @@ public class IndexController {
 
     @RequestMapping(method = RequestMethod.GET)
     String getIndex(Model model){
-//        return "index";
-        return "admin";
+        return "index";
+//        return "admin";
     }
 
     @GetMapping("/signup")
