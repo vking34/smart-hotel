@@ -36,6 +36,6 @@ pusher:
 
 #----------------------photo----------------------------
 photo:
-  base-path: /root/IdeaProjects/smart-hotel/images/
+  dir-path: /images
   base-url: /images/
-  file-ending: .jpg
+  photo-max: 5
