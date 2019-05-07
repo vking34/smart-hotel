@@ -14,10 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
 import javax.validation.constraints.NotNull;
-import java.io.IOException;
 
 import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
 import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_HOTEL_NOT_MANAGER;
@@ -32,6 +29,8 @@ public class PhotoController {
     private static final ResponseEntity NOT_MANAGER = new ResponseEntity<>(PHOTO_HOTEL_NOT_MANAGER, HttpStatus.FORBIDDEN);
     private static final ResponseEntity NOT_MANAGING = new ResponseEntity<>(PHOTO_HOTEL_NOT_MANAGING, HttpStatus.FORBIDDEN);
 
+
+
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -44,7 +43,8 @@ public class PhotoController {
     @PostMapping("/hotels/{hotelId}/photos")
     public ResponseEntity<PhotoResponse> uploadPhoto(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                      @PathVariable String hotelId,
-                                                     @RequestParam("file") MultipartFile multipartFile){
+                                                     @NotNull @RequestParam("file") MultipartFile multipartFile,
+                                                     @NotNull @RequestParam("type") String type){
         System.out.println("upload ...");
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
@@ -59,16 +59,18 @@ public class PhotoController {
             return NOT_MANAGING;
         }
 
+
         System.out.println("upload photo...");
         System.out.println(multipartFile);
+        System.out.println(type);
 
         PhotoResponse photoResponse;
-//        if (isAvatar)
-            photoResponse = photoService.setLogoToHotel(hotelId, multipartFile);
 
+        photoResponse = photoService.addPhotoToHotel(hotelId, multipartFile, type);
 
         if (!photoResponse.getStatus())
             return new ResponseEntity<>(photoResponse, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(photoResponse, HttpStatus.OK);
+
     }
 }

@@ -12,8 +12,11 @@ public class ResourceConfig implements WebMvcConfigurer {
     @Autowired
     private PhotoService photoService;
 
+
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry){
-        registry.addResourceHandler(photoService.baseUrl.concat("**")).addResourceLocations("file:".concat(photoService.basePath));
+        String imagePath = PhotoService.ABSOLUTE_PATH.concat(photoService.dirPath);
+
+        registry.addResourceHandler(photoService.baseUrl.concat("**")).addResourceLocations("file:".concat(imagePath));
     }
 }

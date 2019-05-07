@@ -58,4 +58,6 @@ public class ErrorResponses {
     public static final PhotoResponse PHOTO_HOTEL_NOT_MANAGING = new PhotoResponse(false, "This manager does not manage this hotel", 601, null);
     public static final PhotoResponse PHOTO_INTERNAL_ERROR = new PhotoResponse(false, "Internal Server Error: IOException", 602, null);
     public static final PhotoResponse PHOTO_HOTEL_NOT_FOUND = new PhotoResponse(false, "Hotel is not found", 603, null);
+    public static final PhotoResponse PHOTO_INVALID_TYPE = new PhotoResponse(false, "Invalid type", 604, null);
+    public static final PhotoResponse PHOTO_MAX_PHOTOS = new PhotoResponse(false, "Number of photos is maximum", 605, null);
 }

@@ -17,4 +17,10 @@ public class PhotoAsyncTask {
         hotel.setLogo(logoUrl);
         hotelRepository.save(hotel);
     }
+
+    @Async
+    public void addPhotoToHotel(Hotel hotel, String photoUrl){
+        hotel.getPhotos().add(photoUrl);
+        hotelRepository.save(hotel);
+    }
 }
