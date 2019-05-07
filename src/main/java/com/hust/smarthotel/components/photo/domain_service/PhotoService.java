@@ -56,7 +56,7 @@ public class PhotoService {
 
 
         String fileName = generateFileName(hotelId);
-        String filePath = ABSOLUTE_PATH.concat(dirPath).concat("/").concat(fileName);
+        String filePath = ABSOLUTE_PATH.concat(dirPath).concat(fileName);
         System.out.println(filePath);
 
         String url = baseUrl.concat(fileName);
