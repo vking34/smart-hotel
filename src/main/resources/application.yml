@@ -20,6 +20,12 @@ spring:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null
 
+  # set max size allowed for upload file in normal upload and multipart/form-data
+  servlet:
+    multipart:
+      max-file-size: 3MB
+      max-request-size: 3MB
+
 #----------------------security--------------------------
 security:
   jwt:

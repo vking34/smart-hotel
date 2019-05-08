@@ -64,4 +64,8 @@ public class ErrorResponses {
     public static final PhotoResponse PHOTO_INDEX_OUT_OF_BOUND = new PhotoResponse(false, "Position is out of bounds", 606, null);
     public static final PhotoResponse PHOTO_INVALID_TOKEN = new PhotoResponse(false, "Invalid Access Token", 607, null);
     public static final PhotoResponse PHOTO_USER_NOT_FOUND = new PhotoResponse(false, "User not found", 608, null);
+    public static final PhotoResponse PHOTO_NOT_IMAGE = new PhotoResponse(false, "Not image file", 609, null);
+    public static final PhotoResponse PHOTO_OVER_SIZE = new PhotoResponse(false, "The image file is over size", 610, null);
+
+
 }
