@@ -2,13 +2,15 @@ package com.hust.smarthotel.components.photo.domain_service;
 
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.domain_service.HotelService;
+import com.hust.smarthotel.components.photo.app_model.DeletePhotoRequest;
 import com.hust.smarthotel.components.photo.app_model.PhotoResponse;
+import com.hust.smarthotel.components.user.domain_model.User;
+import com.hust.smarthotel.components.user.domain_service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -17,7 +19,8 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_INTERNAL
 import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_HOTEL_NOT_FOUND;
 import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_INVALID_TYPE;
 import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_MAX_PHOTOS;
-
+import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_INDEX_OUT_OF_BOUND;
+import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_USER_NOT_FOUND;
 
 @Service
 public class PhotoService {
@@ -27,6 +30,7 @@ public class PhotoService {
     // types
     private static final String LOGO = "logo";
     private static final String PHOTO = "photo";
+    private static final String ALL = "all";
 
     @Value("${photo.dir-path}")
     public String dirPath;
@@ -40,6 +44,9 @@ public class PhotoService {
 
     @Autowired
     private HotelService hotelService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private PhotoAsyncTask asyncTask;
@@ -57,12 +64,11 @@ public class PhotoService {
 
         String fileName = generateFileName(hotelId);
         String filePath = ABSOLUTE_PATH.concat(dirPath).concat(fileName);
-        System.out.println(filePath);
+//        System.out.println(filePath);
 
         String url = baseUrl.concat(fileName);
 
         try{
-            System.out.printf("File name = %s, size= %s", multipartFile.getOriginalFilename(), multipartFile.getSize());
             File file = new File(filePath);
             multipartFile.transferTo(file);
         }catch (IOException e){
@@ -82,6 +88,64 @@ public class PhotoService {
         }
 
         return new PhotoResponse(true, null, null, url);
+    }
+
+    public PhotoResponse deletePhoto(String hotelId, DeletePhotoRequest request){
+        Hotel hotel = hotelService.findHotelById(hotelId);
+        if (hotel == null)
+            return PHOTO_HOTEL_NOT_FOUND;
+
+        PhotoResponse photoResponse = null;
+        switch (request.getType()){
+            case LOGO:
+                asyncTask.deleteHotelLogo(hotel);
+                photoResponse = new PhotoResponse(true, null, null, hotel.getLogo());
+                break;
+
+            case PHOTO:
+                if (request.getPosition() >= hotel.getPhotos().size()){
+                    return PHOTO_INDEX_OUT_OF_BOUND;
+                }
+                asyncTask.removePhoto(hotel, request.getPosition());
+                photoResponse = new PhotoResponse(true, null, null, null);
+                break;
+
+            case ALL:
+                asyncTask.deleteAllPhotosOfHotel(hotel);
+                photoResponse = new PhotoResponse(true, null, null, null);
+                break;
+        }
+
+        return photoResponse;
+    }
+
+    public PhotoResponse setUserAvatar(String userId, MultipartFile multipartFile){
+        User user = userService.findUser(userId);
+        if (user == null)
+            return PHOTO_USER_NOT_FOUND;
+
+        String fileName = generateFileName(userId);
+        String filePath = ABSOLUTE_PATH.concat(dirPath).concat(fileName);
+        String url = baseUrl.concat(fileName);
+
+        try{
+            File file = new File(filePath);
+            multipartFile.transferTo(file);
+        }catch (IOException e){
+            return PHOTO_INTERNAL_ERROR;
+        }
+
+        asyncTask.changeUserAvatar(user, url);
+        return new PhotoResponse(true, null, null, url);
+    }
+
+    public PhotoResponse removeUserAvatar(String userId){
+        User user = userService.findUser(userId);
+        if (user == null)
+            return PHOTO_USER_NOT_FOUND;
+
+        asyncTask.removeUserAvatar(user);
+        return new PhotoResponse(true, null, null, user.getPicture());
     }
 
     private String generateFileName(String id){

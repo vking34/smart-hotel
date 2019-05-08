@@ -12,6 +12,7 @@ import com.hust.smarthotel.components.mananging.domain_service.ManagingService;
 import com.hust.smarthotel.components.publish.Publisher;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
 import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.response.ErrorResponses;
 import com.hust.smarthotel.generic.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import javax.validation.Valid;
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_RECORD_NOT_FOUND;
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_FORBIDDEN_GETTING_RECORD;
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_FORBIDDEN_CANCELATION;
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_NOT_FOUND;
 import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
 
 
@@ -32,10 +34,11 @@ import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
 @RequestMapping(UrlConstants.API +"/booking")
 public class BookingRequestController {
 
-    private static final ResponseEntity<BookingResponse> FORBIDDEN = new ResponseEntity<>(BOOKING_FORBIDDEN_GETTING_RECORD, HttpStatus.FORBIDDEN);
+    private static final ResponseEntity FORBIDDEN = new ResponseEntity<>(BOOKING_FORBIDDEN_GETTING_RECORD, HttpStatus.FORBIDDEN);
     private static final ResponseEntity FORBIDDEN_GET_BOOKING_RECORD = new ResponseEntity(HttpStatus.FORBIDDEN);
     private static final ResponseEntity RECORD_NOT_FOUND = new ResponseEntity<>(BOOKING_RECORD_NOT_FOUND, HttpStatus.BAD_REQUEST);
     private static final ResponseEntity FORBIDDEN_CANCELATION = new ResponseEntity<>(BOOKING_FORBIDDEN_CANCELATION, HttpStatus.FORBIDDEN);
+    private static final ResponseEntity BOOKING_REQUEST_NOT_FOUND = new ResponseEntity<>(BOOKING_NOT_FOUND, HttpStatus.BAD_REQUEST);
 
     @Autowired
     private BookingService bookingService;
@@ -59,6 +62,8 @@ public class BookingRequestController {
         String role = claims.get(JwtUtil.ROLE, String.class);
 
         DetailBookingRecord bookingRecord = bookingService.findDetailBookingRecordById(bookingRecordId);
+        if (bookingRecord == null)
+            return RECORD_NOT_FOUND;
 
         if (role.equals(MANAGER)){
             Managing managing = managingService.findManaging(userId, bookingRecord.getHotelRef().toHexString());
@@ -82,6 +87,8 @@ public class BookingRequestController {
         String userId = claims.getSubject();
 
         DetailBookingRecord bookingRecord = bookingService.findDetailBookingRecordById(bookingRecordId);
+        if (bookingRecord == null)
+            return BOOKING_REQUEST_NOT_FOUND;
 
         Managing managing = managingService.findManaging(userId, bookingRecord.getHotelRef().toHexString());
         if (managing == null)
