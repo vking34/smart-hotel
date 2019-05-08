@@ -16,8 +16,9 @@
         });
 
         var channel = pusher.subscribe('CLIENT_CHANNEL');
-        channel.bind('client_5cc125eb840ef312ca6b5c89', function(data) {
+        channel.bind('booking_5cd10b92383b8d0004e4ccfc', function(data) {
             alert(JSON.stringify(data));
+            console.log(data.status);
         });
     </script>
 

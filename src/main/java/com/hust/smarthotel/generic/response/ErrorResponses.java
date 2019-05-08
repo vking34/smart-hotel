@@ -35,6 +35,7 @@ public class ErrorResponses {
     public static final BookingResponse BOOKING_HOTEL_NOT_FOUND = new BookingResponse(false, "Target hotel is not found", 501, null);
     public static final BookingResponse BOOKING_INVALID_DATE = new BookingResponse(false, "Checkin Date must be before Checkout Date", 502, null);
     public static final BookingResponse BOOKING_FORBIDDEN_GETTING_RECORD = new BookingResponse(false, "Forbidden to get the booking record", 503, null);
+    public static final BookingResponse BOOKING_NOT_FOUND = new BookingResponse(false, "Booking Request Not Found", 509, null);
     public static final DetailBookingResponse BOOKING_RECORD_NOT_FOUND = new DetailBookingResponse(false, "The booking record is not found", 504, null);
     public static final DetailBookingResponse BOOKING_REQUEST_COMPLETED = new DetailBookingResponse(false, "The booking request is completed, not in the PROCESSING state", 505, null);
     public static final DetailBookingResponse BOOKING_FORBIDDEN_CANCELATION = new DetailBookingResponse(false, "The booking request does not belong to you", 506, null);
@@ -60,4 +61,7 @@ public class ErrorResponses {
     public static final PhotoResponse PHOTO_HOTEL_NOT_FOUND = new PhotoResponse(false, "Hotel is not found", 603, null);
     public static final PhotoResponse PHOTO_INVALID_TYPE = new PhotoResponse(false, "Invalid type", 604, null);
     public static final PhotoResponse PHOTO_MAX_PHOTOS = new PhotoResponse(false, "Number of photos is maximum", 605, null);
+    public static final PhotoResponse PHOTO_INDEX_OUT_OF_BOUND = new PhotoResponse(false, "Position is out of bounds", 606, null);
+    public static final PhotoResponse PHOTO_INVALID_TOKEN = new PhotoResponse(false, "Invalid Access Token", 607, null);
+    public static final PhotoResponse PHOTO_USER_NOT_FOUND = new PhotoResponse(false, "User not found", 608, null);
 }

@@ -12,12 +12,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.hust.smarthotel.generic.constant.ChannelConstant.*;
-import static com.hust.smarthotel.generic.constant.BookingState.STATUS;
 import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
 import static com.hust.smarthotel.generic.constant.BookingState.CANCELED;
 
@@ -52,10 +48,6 @@ public class Publisher {
 
     @Async
     public void announceBookingRequest(String hotelId, String requestId) {
-//        Map<String, String> data = new HashMap<>();
-//        data.put(BOOKING_REQUEST_ID, requestId);
-//        data.put(STATUS, NEW_CREATED);
-//        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, Collections.singletonMap(BOOKING_REQUEST_ID, requestId));
         HotelNotification data = new HotelNotification(requestId, NEW_CREATED);
         try {
             pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + hotelId, OBJECT_MAPPER.writeValueAsString(data));
@@ -66,20 +58,20 @@ public class Publisher {
 
     @Async
     public void announceBookingStateToClient(String requestId, BookingRecord bookingRecord){
-        Map<String, String> data = new HashMap<>();
-        data.put(BOOKING_REQUEST_ID, bookingRecord.getId());
-        data.put(STATUS, bookingRecord.getStatus());
-
-        pusher.trigger(CLIENT_CHANNEL, EVEN_PREFIX_CLIENT + requestId, data);
+        HotelNotification data = new HotelNotification(requestId, bookingRecord.getStatus());
+        pusher.trigger(CLIENT_CHANNEL, EVENT_PREFIX_BOOKING + requestId, data);
     }
 
     @Async
     public void announceBookingCancelation(DetailBookingRecord bookingRecord){
-        Map<String, String> data = new HashMap<>();
-        data.put(BOOKING_REQUEST_ID, bookingRecord.getId());
-        data.put(STATUS, CANCELED);
+        HotelNotification data = new HotelNotification(bookingRecord.getId(), CANCELED);
 
-        pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + bookingRecord.getHotel().getId(), data);
+        try {
+            pusher.trigger(BOOKING_CHANNEL, EVENT_PREFIX_BOOKING + bookingRecord.getHotel().getId(), OBJECT_MAPPER.writeValueAsString(data));
+        }
+        catch (JsonProcessingException e){
+            e.printStackTrace();
+        }
     }
 
 }
