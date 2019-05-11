@@ -1,6 +1,7 @@
 package com.hust.smarthotel.components.hotel.domain_service;
 
 import com.hust.smarthotel.components.hotel.app_model.BasicHotel;
+import com.hust.smarthotel.components.hotel.app_model.Facility;
 import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelStatus;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
@@ -16,6 +17,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 import static com.hust.smarthotel.generic.response.ErrorResponses.HOTEL_EXISTS;
@@ -24,7 +26,7 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.HOTEL_OUT_OF_M
 import static com.hust.smarthotel.generic.response.ErrorResponses.HOTEL_NOT_FOUND;
 import static com.hust.smarthotel.generic.response.ErrorResponses.HOTEL_NOT_MANAGED_BY_THIS_MANAGER;
 import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
-
+import static com.hust.smarthotel.generic.constant.FacilityList.*;
 
 @Service
 @CacheConfig(cacheNames = {"hotels"})
@@ -41,7 +43,7 @@ public class HotelService {
 
     @Cacheable(value = "desc_hotels_cache")
     public Page<Hotel> findAllSortedByPointDesc(Integer page, Integer pageSize){
-        return hotelRepository.findAll(PageRequestCreator.getDescPageRequest(page, pageSize, "point"));
+        return hotelRepository.findAll(PageRequestCreator.getDescPageRequest(page, pageSize, "point", "ratings"));
     }
 
     public Page<Hotel> findHotelsByName(Integer page, Integer pageSize, String name){
@@ -128,6 +130,48 @@ public class HotelService {
 
     public Page<Hotel> findHotelsAround(Double lng, Double lat, Long radius){
         return hotelRepository.findHotelsAround(lng, lat, radius, PageRequestCreator.getDescPageRequest(0, 100, "point"));
+    }
+
+    public Page<Hotel> findHotelsByPointsAndFacilities(Integer page, Integer pageSize,Integer minPoint, Integer maxPoint, String facilities){
+        if (minPoint == null)
+            minPoint = 0;
+        if (maxPoint == null)
+            maxPoint = 5;
+        if (facilities == null)
+            return hotelRepository.findHotelsByPointBetween(minPoint, maxPoint, PageRequestCreator.getDescPageRequest(page, pageSize, "point", "ratings"));
+
+        System.out.println(facilities);
+
+        String[] facilityList = facilities.split(",");
+        Facility facilityCheck = new Facility();
+//        if (facilities.equals(""))
+//            facilityCheck.checkAll();
+//        else {
+        if (!facilities.equals("")){
+            for (String facility : facilityList){
+                switch (facility){
+                    case WIFI:
+                        facilityCheck.setWifi(true);
+                        break;
+                    case BAR:
+                        facilityCheck.setBar(true);
+                        break;
+                    case LAUNDRY:
+                        facilityCheck.setLaundry(true);
+                        break;
+                    case FITNESS:
+                        facilityCheck.setFitness(true);
+                        break;
+                }
+            }
+        }
+        System.out.println(minPoint);
+        System.out.println(maxPoint);
+        System.out.println("wifi: " + facilityCheck.getWifi());
+        System.out.println("bar: " + facilityCheck.getBar());
+        System.out.println("laundry: " + facilityCheck.getLaundry());
+        System.out.println("fitness: " + facilityCheck.getFitness());
+        return hotelRepository.findHotelsByPointBetweenAndFacilitiesWifiAndFacilitiesBarAndFacilitiesLaundryAndFacilitiesFitness(minPoint, maxPoint, facilityCheck.getWifi(), facilityCheck.getBar(), facilityCheck.getLaundry(), facilityCheck.getFitness(), PageRequestCreator.getDescPageRequest(page, pageSize, "point", "ratings"));
     }
 
     public Hotel findHotelById(String hotelId){

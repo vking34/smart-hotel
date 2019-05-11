@@ -10,7 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
+import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
 
 @Data
 @NoArgsConstructor
@@ -21,23 +22,37 @@ public class User extends SysUser {
     private String id;
 
     @Field("name")
-    @Size(min = 1, max = 100)
+    @Pattern(regexp = "^.{1,100}$")
     private String name;
 
     @Field("full_name")
-    @Size(min = 1, max = 200)
+    @Pattern(regexp = "^.{1,200}$")
     @JsonProperty(value = "full_name")
     private String fullName;
 
     @Field("email")
 //    @Pattern(regexp = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
     @Email
+    @NotNull
     private String email;
 
     @Field("phone")
     @Pattern(regexp = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$")
+    @NotNull
     private String phone;
 
     @Field("picture")
     private String picture;
+
+    public User(Manager manager){
+        this.setUsername(manager.getUsername());
+        this.setPassword(manager.getPassword());
+        this.setActive(true);
+        this.setRole(MANAGER);
+        this.name = manager.getName();
+        this.fullName = manager.getFullName();
+        this.email = manager.getEmail();
+        this.phone = manager.getPhone();
+    }
+
 }

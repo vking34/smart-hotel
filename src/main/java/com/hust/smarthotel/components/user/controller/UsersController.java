@@ -1,6 +1,10 @@
 package com.hust.smarthotel.components.user.controller;
 
+import com.hust.smarthotel.components.hotel.app_model.ManagerStatus;
+import com.hust.smarthotel.components.user.app_model.ManagerResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
+import com.hust.smarthotel.components.user.domain_model.BasicManager;
+import com.hust.smarthotel.components.user.domain_model.Manager;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.domain_service.UserService;
 import com.hust.smarthotel.generic.constant.UrlConstants;
@@ -69,4 +73,35 @@ public class UsersController {
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 
+    @PostMapping("/verifying-managers")
+    ResponseEntity<ManagerResponse> requestManager(@Valid @RequestBody BasicManager manager){
+        ManagerResponse managerResponse = userService.requestVerifyingManager(manager);
+        if (!managerResponse.getStatus())
+            return new ResponseEntity<>(managerResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(managerResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/verifying-managers")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    Page<Manager> getVerifyingManagers(@RequestParam(value = "page", required = false) Integer page,
+                                      @RequestParam(value = "page_size", required = false) Integer pageSize,
+                                      @RequestParam(value = "name", required = false) String name,
+                                      @RequestParam(value = "phone", required = false) String phone){
+        return userService.findVerifyingManagers(page, pageSize, name, phone);
+    }
+
+    @GetMapping("/verifying-managers/{managerId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    Manager getVerifyingManager(@PathVariable String managerId){
+        return userService.findManager(managerId);
+    }
+
+    @PostMapping("/verifying-managers/{managerId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    ResponseEntity<UserResponse> changeVerifyingManagerStatus(@PathVariable String managerId,@Valid @RequestBody ManagerStatus managerStatus){
+        UserResponse userResponse = userService.verifyManager(managerId, managerStatus);
+        if (!userResponse.getStatus())
+            return new ResponseEntity<>(userResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    }
 }

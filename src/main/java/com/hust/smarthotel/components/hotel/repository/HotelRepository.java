@@ -24,4 +24,14 @@ public interface HotelRepository extends MongoRepository<Hotel, String> {
     @Query("{ location: { $near : { $geometry: { type: \"Point\", coordinates: [ ?0 , ?1 ] }, $maxDistance: ?2 } } }")
     public Page<Hotel> findHotelsAround(Double lng, Double lat, Long radius, Pageable pageable);
 
+    public Page<Hotel> findHotelsByPointBetween(Integer minPoint, Integer maxPoint, Pageable pageable);
+
+    @Query("{ point : { $gt : ?0, $lt : ?1 }, \"facilities.wifi\" : ?2, \"facilities.bar\" : ?3 , \"facilities.laundry\" : ?4 , \"facilities.fitness\" : ?5 }")
+    public Page<Hotel> findHotelsByPointBetweenAndFacilitiesWifiAndFacilitiesBarAndFacilitiesLaundryAndFacilitiesFitness(Integer minPoint,
+                                                                                                                             Integer maxPoint,
+                                                                                                                             Boolean wifi,
+                                                                                                                             Boolean bar,
+                                                                                                                             Boolean laundry,
+                                                                                                                             Boolean fitness,
+                                                                                                                             Pageable pageable);
 }
