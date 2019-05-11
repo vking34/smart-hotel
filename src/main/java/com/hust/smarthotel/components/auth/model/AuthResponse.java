@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FailAuthenResponse {
+public class AuthResponse {
 
     @JsonProperty(value = "status")
     private Boolean status;

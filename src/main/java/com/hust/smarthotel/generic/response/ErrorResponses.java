@@ -1,6 +1,6 @@
 package com.hust.smarthotel.generic.response;
 
-import com.hust.smarthotel.components.auth.model.FailAuthenResponse;
+import com.hust.smarthotel.components.auth.model.AuthResponse;
 import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.booking.app_model.DetailBookingResponse;
 import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
@@ -17,7 +17,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ErrorResponses {
     public static final ErrorResponse NOT_FOUND = new ErrorResponse("Not found entity by id", "NOTFOUND", 101);
-    public static final FailAuthenResponse FAIL_AUTHEN_RESPONSE = new FailAuthenResponse(false, "Username/Password is wrong", 401);
+    public static final AuthResponse FAIL_AUTHEN_RESPONSE = new AuthResponse(false, "Username/Password is wrong", 401);
+    public static final AuthResponse INVALID_TOKEN = new AuthResponse(false, "Invalid Access Token", 102);
+    public static final AuthResponse MISSING_TOKEN = new AuthResponse(false, "Missing Access Token/Invalid Authorization Form", 103);
 
     public static final UsernameNotFoundException USER_NOT_FOUND_EXCEPTION = new UsernameNotFoundException("User not found");
     public static final UsernameNotFoundException USER_INACTIVE = new UsernameNotFoundException("User is inactive");
