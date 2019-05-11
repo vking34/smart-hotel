@@ -36,18 +36,20 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String authorizationField = request.getHeader(HeaderConstant.AUTHORIZATION);
         if (authorizationField == null || !authorizationField.startsWith(HeaderConstant.TOKEN_PREFIX)){
 //            filterChain.doFilter(request, response);
-            response.setStatus(403);
-            response.addHeader(CONTENT_TYPE, APP_JSON);
-            response.getWriter().write(OBJECT_MAPPER.writeValueAsString(MISSING_TOKEN));
+//            response.setStatus(403);
+//            response.addHeader(CONTENT_TYPE, APP_JSON);
+//            response.getWriter().write(OBJECT_MAPPER.writeValueAsString(MISSING_TOKEN));
+            filterChain.doFilter(request, response);
             return;
         }
 
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         UsernamePasswordAuthenticationToken authenticationToken = jwtUtil.getAuthorizationFromToken(token);
         if (authenticationToken == null){
-            response.setStatus(403);
-            response.addHeader(CONTENT_TYPE, APP_JSON);
-            response.getWriter().write(OBJECT_MAPPER.writeValueAsString(INVALID_TOKEN));
+//            response.setStatus(403);
+//            response.addHeader(CONTENT_TYPE, APP_JSON);
+//            response.getWriter().write(OBJECT_MAPPER.writeValueAsString(INVALID_TOKEN));
+            filterChain.doFilter(request, response);
             return;
         }
 
