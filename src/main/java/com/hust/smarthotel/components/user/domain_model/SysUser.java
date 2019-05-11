@@ -22,6 +22,7 @@ public class SysUser {
                                       // no _ or . at the beginning
                         // 8-100 chars long
     @Field("username")
+    @NotNull
     private String username;
 
     @Field("password")

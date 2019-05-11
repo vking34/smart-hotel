@@ -37,13 +37,18 @@ public class HotelsController {
                           @RequestParam(value = "name", required = false) String name,
                           @RequestParam(value = "lng", required = false) Double lng,
                           @RequestParam(value = "lat", required = false) Double lat,
-                          @RequestParam(value = "radius", required = false) Long radius
+                          @RequestParam(value = "radius", required = false) Long radius,
+                          @RequestParam(value = "min_point", required = false) Integer minPoint,
+                          @RequestParam(value = "max_point", required = false) Integer maxPoint,
+                          @RequestParam(value = "facilities", required = false) String facilities
     ){
 
         if (name != null)
             return hotelService.findHotelsByName(page, pageSize, name);
         if (radius != null || lng != null || lat != null)
             return hotelService.findHotelsAround(lng, lat, radius);
+        if (minPoint != null || maxPoint != null || facilities != null)
+            return hotelService.findHotelsByPointsAndFacilities(page, pageSize, minPoint, maxPoint, facilities);
 
         return hotelService.findAllSortedByPointDesc(page, pageSize);
     }

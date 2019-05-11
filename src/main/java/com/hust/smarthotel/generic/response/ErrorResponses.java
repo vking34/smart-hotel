@@ -8,6 +8,7 @@ import com.hust.smarthotel.components.mananging.app_model.ManagingResponse;
 import com.hust.smarthotel.components.photo.app_model.PhotoResponse;
 import com.hust.smarthotel.components.review.app_model.ReviewResponse;
 import com.hust.smarthotel.components.room.app_model.RoomResponse;
+import com.hust.smarthotel.components.user.app_model.ManagerResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
 import com.hust.smarthotel.generic.model.ErrorResponse;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,10 +28,16 @@ public class ErrorResponses {
     public static final HotelResponse HOTEL_OUT_OF_MANAGING = new HotelResponse(false, "Manager already manages the allowed number of hotels", 305, null);
     public static final HotelResponse HOTEL_NOT_MANAGED_BY_THIS_MANAGER = new HotelResponse(false, "This manager does not manager this hotel", 302, null);
 
-    public static final UserResponse USER_EXISTS = new UserResponse(false, "Username/Email/Phone exists", 201, null);
+    public static final UserResponse USER_USERNAME_TAKEN = new UserResponse(false, "Username is taken", 211, null);
+    public static final UserResponse USER_EMAIL_TAKEN = new UserResponse(false, "Email is taken", 212, null);
+    public static final UserResponse USER_PHONE_TAKEN = new UserResponse(false, "Email is taken", 212, null);
     public static final UserResponse USER_NOT_FOUND = new UserResponse(false, "User not found", 202, null);
     public static final UserResponse USER_EMAIL_PHONE_EXISTS = new UserResponse(false, "Email/Phone exists", 203, null);
     public static final UserResponse USER_FORBIDDEN = new UserResponse(false, "Access token does not belong to this user", 204, null);
+    public static final ManagerResponse MANAGER_USERNAME_TAKEN = new ManagerResponse(false, "Username is taken", 221, null);
+    public static final ManagerResponse MANAGER_EMAIL_TAKEN = new ManagerResponse(false, "Email is taken", 222, null);
+    public static final ManagerResponse MANAGER_PHONE_TAKEN = new ManagerResponse(false, "Phone number is taken", 223, null);
+    public static final UserResponse MANAGER_NOT_FOUND = new UserResponse(false, "Manager not found", 224, null);
 
     public static final BookingResponse BOOKING_HOTEL_NOT_FOUND = new BookingResponse(false, "Target hotel is not found", 501, null);
     public static final BookingResponse BOOKING_INVALID_DATE = new BookingResponse(false, "Checkin Date must be before Checkout Date", 502, null);
