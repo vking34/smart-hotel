@@ -57,7 +57,7 @@ public class JwtUtil {
             user_id = claims.getSubject();
 
         }catch (Exception e){
-            e.printStackTrace();
+            return null;
         }
         UserDetails userDetails = null;
         if (user_id != null){

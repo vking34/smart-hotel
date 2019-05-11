@@ -29,7 +29,7 @@ public class UsersController {
 
     @GetMapping
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    Page<User> getUsers(@RequestParam(value = "page", required = false) Integer page,
+    public Page<User> getUsers(@RequestParam(value = "page", required = false) Integer page,
                         @RequestParam(value = "page_size", required = false) Integer pageSize,
                         @RequestParam(value = "name", required = false) String name,
                         @RequestParam(value = "phone", required = false) String phone,
@@ -42,14 +42,14 @@ public class UsersController {
 
     @GetMapping("/clients")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    Page<User> getClients(@RequestParam(value = "page", required = false) Integer page,
+    public Page<User> getClients(@RequestParam(value = "page", required = false) Integer page,
                           @RequestParam(value = "page_size", required = false) Integer pageSize){
         return userService.findClients(page, pageSize);
     }
 
     @ApiOperation(value = "Create a client")
     @PostMapping("/clients")
-    ResponseEntity<UserResponse> createClient(@Valid @RequestBody User requestClient){
+    public ResponseEntity<UserResponse> createClient(@Valid @RequestBody User requestClient){
         UserResponse userResponse = userService.createClient(requestClient);
         if (!userResponse.getStatus())
             return new ResponseEntity<>(userResponse, HttpStatus.BAD_REQUEST);
@@ -59,14 +59,14 @@ public class UsersController {
     @ApiOperation(value = "Get/Search/Filter Managers... Manager have one more field hotel_id than Client")
     @GetMapping("/managers")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    Page<User> getManagers(@RequestParam(value = "page", required = false) Integer page,
+    public Page<User> getManagers(@RequestParam(value = "page", required = false) Integer page,
                            @RequestParam(value = "page_size", required = false) Integer pageSize){
         return userService.findManagers(page, pageSize);
     }
 
     @PostMapping("/managers")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    ResponseEntity<UserResponse> createManager(@Valid @RequestBody User manager){
+    public ResponseEntity<UserResponse> createManager(@Valid @RequestBody User manager){
         UserResponse userResponse = userService.createManager(manager);
         if (!userResponse.getStatus())
             return new ResponseEntity<>(userResponse, HttpStatus.BAD_REQUEST);
@@ -74,7 +74,7 @@ public class UsersController {
     }
 
     @PostMapping("/verifying-managers")
-    ResponseEntity<ManagerResponse> requestManager(@Valid @RequestBody BasicManager manager){
+    public ResponseEntity<ManagerResponse> requestManager(@Valid @RequestBody BasicManager manager){
         ManagerResponse managerResponse = userService.requestVerifyingManager(manager);
         if (!managerResponse.getStatus())
             return new ResponseEntity<>(managerResponse, HttpStatus.BAD_REQUEST);
@@ -83,7 +83,7 @@ public class UsersController {
 
     @GetMapping("/verifying-managers")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    Page<Manager> getVerifyingManagers(@RequestParam(value = "page", required = false) Integer page,
+    public Page<Manager> getVerifyingManagers(@RequestParam(value = "page", required = false) Integer page,
                                       @RequestParam(value = "page_size", required = false) Integer pageSize,
                                       @RequestParam(value = "name", required = false) String name,
                                       @RequestParam(value = "phone", required = false) String phone){
@@ -91,14 +91,14 @@ public class UsersController {
     }
 
     @GetMapping("/verifying-managers/{managerId}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    Manager getVerifyingManager(@PathVariable String managerId){
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public Manager getVerifyingManager(@PathVariable String managerId){
         return userService.findManager(managerId);
     }
 
     @PostMapping("/verifying-managers/{managerId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    ResponseEntity<UserResponse> changeVerifyingManagerStatus(@PathVariable String managerId,@Valid @RequestBody ManagerStatus managerStatus){
+    public ResponseEntity<UserResponse> changeVerifyingManagerStatus(@PathVariable String managerId,@Valid @RequestBody ManagerStatus managerStatus){
         UserResponse userResponse = userService.verifyManager(managerId, managerStatus);
         if (!userResponse.getStatus())
             return new ResponseEntity<>(userResponse, HttpStatus.BAD_REQUEST);
