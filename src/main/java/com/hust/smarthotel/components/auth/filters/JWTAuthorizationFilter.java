@@ -39,6 +39,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             response.setStatus(403);
             response.addHeader(CONTENT_TYPE, APP_JSON);
             response.getWriter().write(OBJECT_MAPPER.writeValueAsString(MISSING_TOKEN));
+            filterChain.doFilter(request, response);
             return;
         }
 
@@ -48,6 +49,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             response.setStatus(403);
             response.addHeader(CONTENT_TYPE, APP_JSON);
             response.getWriter().write(OBJECT_MAPPER.writeValueAsString(INVALID_TOKEN));
+            filterChain.doFilter(request, response);
             return;
         }
 
