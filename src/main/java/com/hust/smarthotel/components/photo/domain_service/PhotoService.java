@@ -6,8 +6,10 @@ import com.hust.smarthotel.components.photo.app_model.DeletePhotoRequest;
 import com.hust.smarthotel.components.photo.app_model.PhotoResponse;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.domain_service.UserService;
+import com.hust.smarthotel.configs.ResourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,11 +34,9 @@ public class PhotoService {
     private static final String PHOTO = "photo";
     private static final String ALL = "all";
 
-    @Value("${photo.dir-path}")
-    public String dirPath;
 
-    @Value("${photo.base-url}")
-    public String baseUrl;
+    @Autowired
+    private ResourceConfig resourceConfig;
 
     @Value("${photo.photo-max}")
     public Integer photoMax;
@@ -51,7 +51,7 @@ public class PhotoService {
     @Autowired
     private PhotoAsyncTask asyncTask;
 
-
+    @CacheEvict(value = "desc_hotels_cache", allEntries = true)
     public PhotoResponse addPhotoToHotel(String hotelId, MultipartFile multipartFile, String type){
 
         Hotel hotel = hotelService.findHotelById(hotelId);
@@ -63,10 +63,10 @@ public class PhotoService {
 
 
         String fileName = generateFileName(hotelId);
-        String filePath = ABSOLUTE_PATH.concat(dirPath).concat(fileName);
+        String filePath = ABSOLUTE_PATH.concat(resourceConfig.dirPath).concat(fileName);
 //        System.out.println(filePath);
 
-        String url = baseUrl.concat(fileName);
+        String url = resourceConfig.baseUrl.concat(fileName);
 
         try{
             File file = new File(filePath);
@@ -90,7 +90,8 @@ public class PhotoService {
         return new PhotoResponse(true, null, null, url);
     }
 
-    public PhotoResponse deletePhoto(String hotelId, DeletePhotoRequest request){
+    @CacheEvict(value = "desc_hotels_cache", allEntries = true)
+    public PhotoResponse deleteHotelPhoto(String hotelId, DeletePhotoRequest request){
         Hotel hotel = hotelService.findHotelById(hotelId);
         if (hotel == null)
             return PHOTO_HOTEL_NOT_FOUND;
@@ -125,8 +126,8 @@ public class PhotoService {
             return PHOTO_USER_NOT_FOUND;
 
         String fileName = generateFileName(userId);
-        String filePath = ABSOLUTE_PATH.concat(dirPath).concat(fileName);
-        String url = baseUrl.concat(fileName);
+        String filePath = ABSOLUTE_PATH.concat(resourceConfig.dirPath).concat(fileName);
+        String url = resourceConfig.baseUrl.concat(fileName);
 
         try{
             File file = new File(filePath);

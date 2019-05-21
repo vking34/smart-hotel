@@ -56,6 +56,7 @@ public class PhotoController {
 
 
     @PostMapping("/hotels/{hotelId}/photos")
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     public ResponseEntity<PhotoResponse> uploadPhoto(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                      @PathVariable String hotelId,
                                                      @NotNull @RequestParam("file") MultipartFile multipartFile,
@@ -87,7 +88,8 @@ public class PhotoController {
     }
 
     @DeleteMapping("/hotels/{hotelId}/photos")
-    public ResponseEntity<PhotoResponse> deletePhoto(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    public ResponseEntity<PhotoResponse> deleteHotelPhoto(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                      @PathVariable String hotelId,
                                                      @Valid @RequestBody DeletePhotoRequest deletePhotoRequest){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
@@ -103,12 +105,12 @@ public class PhotoController {
             return NOT_MANAGING;
         }
 
-        PhotoResponse photoResponse = photoService.deletePhoto(hotelId, deletePhotoRequest);
+        PhotoResponse photoResponse = photoService.deleteHotelPhoto(hotelId, deletePhotoRequest);
         return getPhotoResponseResponseEntity(photoResponse);
     }
 
     @PostMapping("/users/{userId}/photos")
-    @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_MANAGER')")
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT')")
     public ResponseEntity<PhotoResponse> setUserAvatar(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                        @PathVariable String userId,
                                                        @NotNull @RequestParam("file") MultipartFile multipartFile){
@@ -132,6 +134,7 @@ public class PhotoController {
     }
 
     @DeleteMapping("/users/{userId}/photos")
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT')")
     public ResponseEntity<PhotoResponse> removeUserAvatar(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                           @PathVariable String userId){
 
