@@ -1,0 +1,71 @@
+#Google Driver: https://drive.google.com/drive/folders/1Vb8snbfIGGrH43g9uDGE3T1Hi12xq2tX
+
+#Indexes:
+	+ Hotel: db.Hotel.createIndex({ point: -1, name: 1})
+		db.Hotel.createIndex({ location : "2dsphere"})
+	+ Room: db.Room.createIndex({ hotel_id : 1 })
+	+ User: db.User.createIndex({ username: 1 })
+	+ Review: 
+	+ Reservation:	
+
+https://viblo.asia/p/gioi-thieu-ve-indexes-trong-mongodb-E7bGo9oOR5e2
+
+
+#Geo 2dsphere:
+
++ Document form:
+{
+... 
+"location": {
+	"type" : "Point",
+	"coordinates": [
+		105.857756, 
+	        20.994927 ]
+	}
+..
+}
+
++ Create 2dsphere index: db.Hotel.createIndex({ location : "2dsphere"})
+
++ Query: db.Hotel.find({
+	location: { 
+		$near : {
+			$geometry: 
+				{ type: "Point", coordinates: [ 105.85096 , 21.005909 ]}, 				$maxDistance: 300 }
+		}}).pretty()
+
+# Pattern Regex expression in java
+https://viblo.asia/p/mot-so-vi-du-ve-su-dung-regex-trong-java-gkyREowZznv
+
+# controls the number of items of an array in MongoDb
+https://docs.mongodb.com/manual/reference/operator/projection/slice/
+db.getCollection('Review').find({hotel_id : "5c6fba14163ce00b500f6300"}, { reviews: { $slice: 2}} )
+
+https://stackoverflow.com/questions/18858021/mongodb-in-spring-push-array-with-update-first-then-found-object-null
+
+# upload photos
+https://github.com/rieckpil/blog-tutorials/tree/master/spring-boot-uploading-and-downloading-files-with-react
+
+https://rieckpil.de/howto-up-and-download-files-with-react-and-spring-boot/
+
+http://4youngpadawans.com/upload-file-to-server-react-and-spring
+
+# disable dev-tools
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <scope>provided</scope>
+</dependency>
+------------------------------------------------------
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>
+        <excludeDevtools>true</excludeDevtools>
+    </configuration>
+</plugin>
+
+# docker
+https://hellokoding.com/docker-compose-with-spring-boot-mongodb-nginx/
+https://github.com/hellokoding/dockercompose-springboot-mongodb-nginx
