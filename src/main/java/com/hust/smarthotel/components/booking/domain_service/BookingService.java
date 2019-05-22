@@ -66,7 +66,7 @@ public class BookingService {
             && price.getStartTime().equals(bookingRequest.getStartTime())
             && price.getEndTime().equals(bookingRequest.getEndTime())){
                 bookingRecord.setRentName(price.getName());
-                bookingRecord.setPrice(price.getPrice());
+                bookingRecord.setPrice(price.getPrice() * bookingRecord.getQuantity());
                 rentTypeValidation = true;
                 break;
             }
