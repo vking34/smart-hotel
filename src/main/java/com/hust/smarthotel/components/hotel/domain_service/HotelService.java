@@ -60,7 +60,7 @@ public class HotelService {
             List<Managing> managingList = managingService.findManagingByManagerId(managerId);
             if (managingList != null){
                 System.out.println(managingList.size());
-                if (managingList.size() >= 3){
+                if (managingList.size() >= 5){
                     return HOTEL_OUT_OF_MANAGING;
                 }
             }

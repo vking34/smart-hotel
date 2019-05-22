@@ -14,6 +14,8 @@ import java.util.List;
 
 import static com.hust.smarthotel.generic.response.ErrorResponses.MANAGING_EXISTING_RECORD;
 import static com.hust.smarthotel.generic.response.ErrorResponses.MANAGING_RECORD_NOT_FOUND;
+import static com.hust.smarthotel.generic.response.ErrorResponses.MANAGING_OUT_OF_HOTEL;
+
 
 @Service
 public class ManagingService {
@@ -36,6 +38,11 @@ public class ManagingService {
     public ManagingResponse addHotelToManager(String managerId, String hotelId){
         if (managingRepository.findManagingByUserIdAndAndHotelId(managerId, new ObjectId(hotelId)) != null)
             return MANAGING_EXISTING_RECORD;
+
+        List<Managing> managingList = findManagingByManagerId(managerId);
+        if (managingList.size() >= 5)
+            return MANAGING_OUT_OF_HOTEL;
+
         Managing managing = new Managing(managerId, hotelId);
         managing = managingRepository.save(managing);
         return new ManagingResponse(true, null, null, managing);

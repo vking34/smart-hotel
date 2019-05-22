@@ -58,7 +58,9 @@ public class ErrorResponses {
     public static final ManagingResponse MANAGING_NOT_MANAGER = new ManagingResponse(false, "User is not a manager", 802, null);
     public static final ManagingResponse MANAGING_HOTEL_NOT_FOUND = new ManagingResponse(false, "Hotel not found", 803, null);
     public static final ManagingResponse MANAGING_EXISTING_RECORD = new ManagingResponse(false, "The manager manages this hotel already", 804, null);
-    public static final ManagingResponse MANAGING_RECORD_NOT_FOUND = new ManagingResponse(false, "This manager doesn't manage this hotel", 805, null);
+    public static final ManagingResponse MANAGING_RECORD_NOT_FOUND = new ManagingResponse(false, "This manager does not manage this hotel", 805, null);
+    public static final ManagingResponse MANAGING_INVALID_TOKEN = new ManagingResponse(false, "Invalid Token", 806, null);
+    public static final ManagingResponse MANAGING_OUT_OF_HOTEL = new ManagingResponse(false, "A Manager can manage at most 5 hotels", 807, null);
 
     public static final RoomResponse ROOM_FORBIDDEN = new RoomResponse(false, "You are not the manager of this hotel", 901, null);
     public static final RoomResponse ROOM_EXISTS = new RoomResponse(false, "Hotel have rooms already", 902, null);
