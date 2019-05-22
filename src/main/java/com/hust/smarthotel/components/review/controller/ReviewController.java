@@ -23,7 +23,7 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.REVIEW_HOTEL_N
 @RequestMapping(UrlConstants.API + "/hotels/{hotelId}/reviews")
 public class ReviewController {
 
-    private static final ResponseEntity HOTEL_NOT_FOUND = new ResponseEntity<>(REVIEW_HOTEL_NOT_FOUND, HttpStatus.BAD_REQUEST);
+    private static final ResponseEntity<ReviewResponse> HOTEL_NOT_FOUND = new ResponseEntity<>(REVIEW_HOTEL_NOT_FOUND, HttpStatus.BAD_REQUEST);
 
     @Autowired
     private HotelService hotelService;
@@ -39,11 +39,11 @@ public class ReviewController {
 
     @PostMapping
     @PreAuthorize("hasRole('ROLE_CLIENT')")
-    ResponseEntity<ReviewResponse> postReview(@PathVariable String hotelId, @Valid @RequestBody BasicReview basicReview){
+    ResponseEntity<ReviewResponse> postReview(@PathVariable String hotelId,
+                                              @Valid @RequestBody BasicReview basicReview){
         Hotel hotel = hotelService.findHotelById(hotelId);
         if (hotel == null)
             return HOTEL_NOT_FOUND;
-
 
         Review review = new Review(basicReview);
 
