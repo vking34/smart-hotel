@@ -37,8 +37,20 @@ public class UserController {
 
     @ApiOperation("Get more information about an user")
     @GetMapping
-    User getUser(@PathVariable String userId){
-        return userService.findUser(userId);
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
+    ResponseEntity<User> getUser(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                 @PathVariable String userId){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+        String userIdInToken = claims.getSubject();
+        String role = claims.get(JwtUtil.ROLE, String.class);
+
+        if ( role.equals(CLIENT) && !userId.equals(userIdInToken))
+            return FORBIDDEN;
+
+        User user = userService.findUser(userId);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @ApiOperation("Update information a user")
