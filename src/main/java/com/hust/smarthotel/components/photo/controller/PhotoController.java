@@ -110,7 +110,7 @@ public class PhotoController {
     }
 
     @PostMapping("/users/{userId}/photos")
-    @PreAuthorize("hasAnyRole('ROLE_CLIENT')")
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<PhotoResponse> setUserAvatar(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                        @PathVariable String userId,
                                                        @NotNull @RequestParam("file") MultipartFile multipartFile){
@@ -134,7 +134,7 @@ public class PhotoController {
     }
 
     @DeleteMapping("/users/{userId}/photos")
-    @PreAuthorize("hasAnyRole('ROLE_CLIENT')")
+    @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<PhotoResponse> removeUserAvatar(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                           @PathVariable String userId){
 
