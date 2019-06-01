@@ -94,8 +94,10 @@ public class UserService {
         if (user == null)
             return USER_NOT_FOUND;
         List<User> users = userRepository.findUserByEmailOrPhone(requestUser.getEmail(), requestUser.getPhone());
-        if (users.size() > 1)
+        int numOfUsers = users.size();
+        if (numOfUsers > 1 || (numOfUsers == 1 && !users.get(0).getId().equals(userId)))
             return USER_EMAIL_PHONE_EXISTS;
+
         user.setName(requestUser.getName());
         user.setFullName(requestUser.getFullName());
         user.setEmail(requestUser.getEmail());
