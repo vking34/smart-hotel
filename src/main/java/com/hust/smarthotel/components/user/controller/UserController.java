@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import static com.hust.smarthotel.generic.response.ErrorResponses.USER_FORBIDDEN;
-import static com.hust.smarthotel.generic.constant.RoleConstants.CLIENT;
-
+import static com.hust.smarthotel.generic.constant.RoleConstants.ADMIN;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -37,7 +36,7 @@ public class UserController {
 
     @ApiOperation("Get more information about an user")
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT', 'ROLE_MANAGER')")
     ResponseEntity<User> getUser(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                  @PathVariable String userId){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
@@ -45,7 +44,7 @@ public class UserController {
         String userIdInToken = claims.getSubject();
         String role = claims.get(JwtUtil.ROLE, String.class);
 
-        if ( role.equals(CLIENT) && !userId.equals(userIdInToken))
+        if ( !role.equals(ADMIN) && !userId.equals(userIdInToken))
             return FORBIDDEN;
 
         User user = userService.findUser(userId);
@@ -55,7 +54,7 @@ public class UserController {
 
     @ApiOperation("Update information a user")
     @PutMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT', 'ROLE_MANAGER')")
     ResponseEntity<UserResponse> updateClient(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                               @PathVariable String userId,
                                               @Valid @RequestBody UpdatedUser requestedClient){
@@ -64,7 +63,7 @@ public class UserController {
         String userIdInToken = claims.getSubject();
         String role = claims.get(JwtUtil.ROLE, String.class);
 
-        if ( role.equals(CLIENT) && !userId.equals(userIdInToken))
+        if ( role.equals(ADMIN) && !userId.equals(userIdInToken))
             return FORBIDDEN;
 
         UserResponse userResponse = userService.updateClient(userId, requestedClient);
@@ -75,7 +74,7 @@ public class UserController {
 
     @ApiOperation("Delete an user")
     @DeleteMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT', 'ROLE_MANAGER')")
     ResponseEntity<UserResponse> deleteUser(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                             @PathVariable String userId){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
@@ -83,7 +82,7 @@ public class UserController {
         String userIdInToken = claims.getSubject();
         String role = claims.get(JwtUtil.ROLE, String.class);
 
-        if ( role.equals(CLIENT) && !userId.equals(userIdInToken))
+        if ( role.equals(ADMIN) && !userId.equals(userIdInToken))
             return FORBIDDEN;
 
         UserResponse userResponse = userService.deleteUser(userId);

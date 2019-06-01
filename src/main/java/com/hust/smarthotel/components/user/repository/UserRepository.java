@@ -28,7 +28,8 @@ public interface UserRepository extends MongoRepository<User, String> {
     @Query(value = "{ '$or' : [ { username : ?0 }, { email : ?1 }, { phone : ?2 } ] }")
     List<User> findUser(String username, String email, String phone);
 
-    @Query(value = "{ '$or' : [ { email : ?0 }, { phone : ?1 } ] }", fields = "{ full_name : 0 , email : 0 , phone : 0 , picture : 0, }")
+//    @Query(value = "{ '$or' : [ { email : ?0 }, { phone : ?1 } ] }", fields = "{ full_name : 0 , email : 0 , phone : 0 , picture : 0, }")
+    @Query(value = "{ '$or' : [ { email : ?0 }, { phone : ?1 } ] }")
     List<User> findUserByEmailOrPhone(String email, String phone);
 
     @Query(value = "{ role: \"MANAGER\"}", fields = "{ password : 0 }")
