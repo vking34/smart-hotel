@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_INTERNAL_ERROR;
@@ -58,9 +59,12 @@ public class PhotoService {
         if (hotel == null)
             return PHOTO_HOTEL_NOT_FOUND;
 
-        if (type.equals(PHOTO) && hotel.getPhotos().size() == photoMax)
-            return PHOTO_MAX_PHOTOS;
-
+        if (type.equals(PHOTO)){
+            if (hotel.getPhotos() != null && hotel.getPhotos().size() >= photoMax)
+                return PHOTO_MAX_PHOTOS;
+            else
+                hotel.setPhotos(new ArrayList<String>());
+        }
 
         String fileName = generateFileName(hotelId);
         String filePath = ABSOLUTE_PATH.concat(resourceConfig.dirPath).concat(fileName);

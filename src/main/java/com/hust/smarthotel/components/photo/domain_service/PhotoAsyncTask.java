@@ -38,7 +38,9 @@ public class PhotoAsyncTask {
     @Async
     public void deleteAllPhotosOfHotel(Hotel hotel){
         hotel.setLogo("");
-        hotel.getPhotos().clear();
+        if (hotel.getPhotos() != null)
+            hotel.getPhotos().clear();
+
         hotelRepository.save(hotel);
     }
 
