@@ -11,20 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class IndexController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     String getIndex(Model model){
         return "index";
-//        return "admin";
-    }
-
-    @GetMapping("/signup")
-    String getSignUp(Model model){
-        return "signup";
-    }
-
-    @GetMapping("/admin")
-    String getAdminPage(Model model){
-        System.out.println("get admin page");
-        return "admin";
     }
 }

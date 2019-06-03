@@ -39,7 +39,6 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_INTERNAL
 @CrossOrigin("*")
 public class PhotoController {
 
-    private static final ResponseEntity NOT_MANAGER = new ResponseEntity<>(PHOTO_HOTEL_NOT_MANAGER, HttpStatus.FORBIDDEN);
     private static final ResponseEntity NOT_MANAGING = new ResponseEntity<>(PHOTO_HOTEL_NOT_MANAGING, HttpStatus.FORBIDDEN);
     private static final ResponseEntity INVALID_TOKEN = new ResponseEntity<>(PHOTO_INVALID_TOKEN, HttpStatus.FORBIDDEN);
     private static final ResponseEntity NOT_IMAGE = new ResponseEntity<>(PHOTO_NOT_IMAGE, HttpStatus.BAD_REQUEST);
@@ -56,7 +55,7 @@ public class PhotoController {
 
 
     @PostMapping("/hotels/{hotelId}/photos")
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')")
     public ResponseEntity<PhotoResponse> uploadPhoto(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                      @PathVariable String hotelId,
                                                      @NotNull @RequestParam("file") MultipartFile multipartFile,
@@ -74,13 +73,12 @@ public class PhotoController {
         Claims claims = jwtUtil.getClaims(token);
         String role = claims.get(JwtUtil.ROLE, String.class);
 
-        if (!role.equals(MANAGER))
-            return NOT_MANAGER;
-
-        String managerId = claims.getSubject();
-        Managing managing = managingService.findManaging(managerId, hotelId);
-        if (managing == null){
-            return NOT_MANAGING;
+        if (role.equals(MANAGER)){
+            String managerId = claims.getSubject();
+            Managing managing = managingService.findManaging(managerId, hotelId);
+            if (managing == null){
+                return NOT_MANAGING;
+            }
         }
 
         PhotoResponse photoResponse = photoService.addPhotoToHotel(hotelId, multipartFile, type);
@@ -88,7 +86,7 @@ public class PhotoController {
     }
 
     @DeleteMapping("/hotels/{hotelId}/photos")
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')")
     public ResponseEntity<PhotoResponse> deleteHotelPhoto(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                      @PathVariable String hotelId,
                                                      @Valid @RequestBody DeletePhotoRequest deletePhotoRequest){
@@ -96,13 +94,12 @@ public class PhotoController {
         Claims claims = jwtUtil.getClaims(token);
         String role = claims.get(JwtUtil.ROLE, String.class);
 
-        if (!role.equals(MANAGER))
-            return NOT_MANAGER;
-
-        String managerId = claims.getSubject();
-        Managing managing = managingService.findManaging(managerId, hotelId);
-        if (managing == null){
-            return NOT_MANAGING;
+        if (role.equals(MANAGER)){
+            String managerId = claims.getSubject();
+            Managing managing = managingService.findManaging(managerId, hotelId);
+            if (managing == null){
+                return NOT_MANAGING;
+            }
         }
 
         PhotoResponse photoResponse = photoService.deleteHotelPhoto(hotelId, deletePhotoRequest);
