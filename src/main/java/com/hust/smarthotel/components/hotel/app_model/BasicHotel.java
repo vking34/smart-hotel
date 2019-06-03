@@ -47,14 +47,6 @@ public class BasicHotel {
     @Field("facilities")
     private Facilities facilities;
 
-    @ApiModelProperty("Avatar/Logo")
-    @Field("logo")
-    private String logo;
-
-    @ApiModelProperty(notes = "Photos about hotels")
-    @Field("photos")
-    private List<String> photos;
-
     @ApiModelProperty(notes = "Active or not?", required = true)
     @Field("status")
 //    @NotNull
