@@ -100,7 +100,12 @@ public class BookingService {
     }
 
     public Page<DetailBookingRecord> findBookingRecordsByUserId(String userId, Integer page, Integer pageSize){
-        return bookingRepository.findBookingRecordsOfUser(userId, PageRequestCreator.getSimplePageRequest(page, pageSize));
+        if (page == null)
+            page = 0;
+        if (pageSize == null)
+            pageSize = 10;
+
+        return bookingRepository.findBookingRecordsOfUser(userId, page, pageSize);
     }
 
     public DetailBookingResponse cancelBookingRequest(DetailBookingRecord bookingRecord){

@@ -3,10 +3,7 @@ package com.hust.smarthotel.components.booking.repository;
 import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -30,7 +27,7 @@ public class BookingRepositoryImpl implements BookingRepositoryCustom {
 
 
     @Override
-    public Page<DetailBookingRecord> findBookingRecordsOfUser(String userId, Pageable pageable) {
+    public Page<DetailBookingRecord> findBookingRecordsOfUser(String userId, Integer page, Integer pageSize) {
 
         LookupOperation lookupOperation = LookupOperation.newLookup()
                 .from("Hotel")
@@ -39,15 +36,15 @@ public class BookingRepositoryImpl implements BookingRepositoryCustom {
                 .as("hotel");
 
         MatchOperation matchOperation = Aggregation.match(Criteria.where(USER_ID).is(new ObjectId(userId)));
-        SkipOperation skipOperation = Aggregation.skip(pageable.getPageNumber() * pageable.getPageSize());
-        LimitOperation limitOperation = Aggregation.limit(pageable.getPageSize());
         SortOperation sortOperation = Aggregation.sort(DESC_CREATED_DATE);
 
-        Aggregation aggregation = Aggregation.newAggregation(matchOperation, skipOperation, limitOperation, sortOperation, lookupOperation);
+        Aggregation aggregation = Aggregation.newAggregation(matchOperation,lookupOperation, sortOperation);
 
         List<DetailBookingRecord> bookingRecordList = mongoTemplate.aggregate(aggregation, "Reservation", DetailBookingRecord.class).getMappedResults();
 
-        return new PageImpl<>(bookingRecordList, pageable, bookingRecordList.size());
+        List<DetailBookingRecord> result = bookingRecordList.subList(page*pageSize, (page + 1)*pageSize - 1);
+
+        return new PageImpl<>(result, PageRequest.of(page, pageSize), bookingRecordList.size());
     }
 
     @Override
