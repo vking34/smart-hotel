@@ -21,11 +21,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_REQUEST_COMPLETED;
-import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_INVALID_ROOM_TYPE;
-import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_INVALID_RENT_TYPE;
 import static com.hust.smarthotel.generic.constant.BookingState.CANCELED;
 import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
+import static com.hust.smarthotel.generic.response.ErrorResponses.*;
 
 
 @Service
@@ -87,6 +85,10 @@ public class BookingService {
         return record;
     }
 
+    public BookingRecord findBookingRecordById(String id){
+        return bookingRepository.findBookingRecordById(id);
+    }
+
     public DetailBookingRecord changeState(DetailBookingRecord bookingRecord, StateRequest stateRequest){
 
         if (stateRequest.getPrice() != null && !bookingRecord.getPrice().equals(stateRequest.getPrice())){
@@ -115,6 +117,14 @@ public class BookingService {
         bookingRecord.setStatus(CANCELED);
         asyncTask.updateBookingStatus(bookingRecord);
         return new DetailBookingResponse(true, null, null, bookingRecord);
+    }
+
+    public BookingResponse changeFetchedStatus(BookingRecord bookingRecord){
+        if (bookingRecord.getStatus().equals(NEW_CREATED))
+            return BOOKING_NOT_FETCHED;
+
+        asyncTask.changeFetchedStatus(bookingRecord);
+        return new BookingResponse(true, null, null, bookingRecord);
     }
 
     public Page<BookingRecord> getBookingRecords(){

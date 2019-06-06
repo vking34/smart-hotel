@@ -51,6 +51,9 @@ public class BookingRecord extends BookingRequest {
     @ApiModelProperty(hidden = true)
     private ObjectId hotelRef;
 
+    @Field("is_fetched")
+    @JsonProperty("is_fetched")
+    private Boolean isFetched;
 
     public BookingRecord(BookingRequest bookingRequest){
         super(bookingRequest);
@@ -58,5 +61,6 @@ public class BookingRecord extends BookingRequest {
         this.createdDate = LocalDateTime.now();
         this.updatedTime = LocalDateTime.now();
         this.status = NEW_CREATED;
+        this.isFetched = false;
     }
 }

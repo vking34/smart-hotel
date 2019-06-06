@@ -45,6 +45,7 @@ public class ErrorResponses {
     public static final BookingResponse BOOKING_INVALID_DATE = new BookingResponse(false, "Checkin Date must be before Checkout Date", 502, null);
     public static final BookingResponse BOOKING_FORBIDDEN_GETTING_RECORD = new BookingResponse(false, "Forbidden to get the booking record", 503, null);
     public static final BookingResponse BOOKING_NOT_FOUND = new BookingResponse(false, "Booking Request Not Found", 509, null);
+    public static final BookingResponse BOOKING_NOT_FETCHED = new BookingResponse(false, "Booking Request is not confirmed yet", 510, null);
     public static final DetailBookingResponse BOOKING_RECORD_NOT_FOUND = new DetailBookingResponse(false, "The booking record is not found", 504, null);
     public static final DetailBookingResponse BOOKING_REQUEST_COMPLETED = new DetailBookingResponse(false, "The booking request is completed, not in the PROCESSING state", 505, null);
     public static final DetailBookingResponse BOOKING_FORBIDDEN_CANCELATION = new DetailBookingResponse(false, "The booking request does not belong to you", 506, null);

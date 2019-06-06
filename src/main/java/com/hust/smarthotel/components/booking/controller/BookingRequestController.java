@@ -102,7 +102,7 @@ public class BookingRequestController {
     @DeleteMapping("/{bookingRecordId}")
     @PreAuthorize("hasRole('ROLE_CLIENT')")
     ResponseEntity<DetailBookingResponse> cancelBookingRequest(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
-                                                                  @PathVariable String bookingRecordId){
+                                                               @PathVariable String bookingRecordId){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
         String userId = claims.getSubject();
@@ -119,6 +119,28 @@ public class BookingRequestController {
             return new ResponseEntity<>(bookingResponse, HttpStatus.BAD_REQUEST);
 
         publisher.announceBookingCancelation(bookingRecord);
+        return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/{bookingRecordId}/is_fetched")
+    @PreAuthorize("hasRole('ROLE_CLIENT')")
+    ResponseEntity<BookingResponse> fetchBookingRequest(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                                        @PathVariable String bookingRecordId){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+        String userId = claims.getSubject();
+
+        BookingRecord bookingRecord = bookingService.findBookingRecordById(bookingRecordId);
+        if (bookingRecord == null)
+            return RECORD_NOT_FOUND;
+
+        if (!bookingRecord.getUser().getId().equals(userId))
+            return FORBIDDEN_CANCELATION;
+
+        BookingResponse bookingResponse = bookingService.changeFetchedStatus(bookingRecord);
+
+        if (!bookingResponse.getStatus())
+            return new ResponseEntity<>(bookingResponse, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
     }
 }

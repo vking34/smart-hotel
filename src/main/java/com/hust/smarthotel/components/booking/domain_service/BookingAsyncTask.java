@@ -14,7 +14,12 @@ public class BookingAsyncTask {
 
     @Async
     public void updateBookingStatus(BookingRecord bookingRecord){
+        bookingRepository.save(bookingRecord);
+    }
 
+    @Async
+    public void changeFetchedStatus(BookingRecord bookingRecord){
+        bookingRecord.setIsFetched(true);
         bookingRepository.save(bookingRecord);
     }
 
