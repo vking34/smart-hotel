@@ -13,9 +13,7 @@ public class BookingAsyncTask {
     private BookingRepository bookingRepository;
 
     @Async
-    public void updateBookingStatus(BookingRecord bookingRecord){
-
+    public void updateBookingRecord(BookingRecord bookingRecord){
         bookingRepository.save(bookingRecord);
     }
-
 }

@@ -11,12 +11,14 @@ import com.hust.smarthotel.components.room.app_model.RoomResponse;
 import com.hust.smarthotel.components.user.app_model.ManagerResponse;
 import com.hust.smarthotel.components.user.app_model.UserResponse;
 import com.hust.smarthotel.generic.model.ErrorResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ErrorResponses {
-    public static final ErrorResponse NOT_FOUND = new ErrorResponse("Not found entity by id", "NOTFOUND", 101);
+    public static final ErrorResponse TOKEN_EXPIRED = new ErrorResponse(false, "The access token is expired", 101);
     public static final AuthResponse FAIL_AUTHEN_RESPONSE = new AuthResponse(false, "Username/Password is wrong", 401);
     public static final AuthResponse INVALID_TOKEN = new AuthResponse(false, "Invalid Access Token", 102);
     public static final AuthResponse MISSING_TOKEN = new AuthResponse(false, "Missing Access Token/Invalid Authorization Form", 103);
@@ -45,6 +47,7 @@ public class ErrorResponses {
     public static final BookingResponse BOOKING_INVALID_DATE = new BookingResponse(false, "Checkin Date must be before Checkout Date", 502, null);
     public static final BookingResponse BOOKING_FORBIDDEN_GETTING_RECORD = new BookingResponse(false, "Forbidden to get the booking record", 503, null);
     public static final BookingResponse BOOKING_NOT_FOUND = new BookingResponse(false, "Booking Request Not Found", 509, null);
+    public static final BookingResponse BOOKING_NOT_FETCHED = new BookingResponse(false, "Booking Request is not confirmed yet", 510, null);
     public static final DetailBookingResponse BOOKING_RECORD_NOT_FOUND = new DetailBookingResponse(false, "The booking record is not found", 504, null);
     public static final DetailBookingResponse BOOKING_REQUEST_COMPLETED = new DetailBookingResponse(false, "The booking request is completed, not in the PROCESSING state", 505, null);
     public static final DetailBookingResponse BOOKING_FORBIDDEN_CANCELATION = new DetailBookingResponse(false, "The booking request does not belong to you", 506, null);
@@ -78,5 +81,5 @@ public class ErrorResponses {
     public static final PhotoResponse PHOTO_NOT_IMAGE = new PhotoResponse(false, "Not image file", 609, null);
     public static final PhotoResponse PHOTO_OVER_SIZE = new PhotoResponse(false, "The image file is over size", 610, null);
 
-
+    public static final ResponseEntity EXPIRED_TOKEN = new ResponseEntity<>(TOKEN_EXPIRED, HttpStatus.FORBIDDEN);
 }
