@@ -122,7 +122,7 @@ public class BookingRequestController {
         return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/{bookingRecordId}/is_fetched")
+    @PostMapping("/{bookingRecordId}/fetched")
     @PreAuthorize("hasRole('ROLE_CLIENT')")
     ResponseEntity<BookingResponse> fetchBookingRequest(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
                                                         @PathVariable String bookingRecordId){

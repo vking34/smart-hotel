@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_HOTEL_NOT_FOUND;
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_INVALID_DATE;;
+import static com.hust.smarthotel.generic.response.ErrorResponses.EXPIRED_TOKEN;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -76,6 +77,8 @@ public class BookingController {
                                                                 @RequestParam(value = "page_size", required = false) Integer pageSize){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
+        if (claims == null)
+            return EXPIRED_TOKEN;
         String role = claims.get(JwtUtil.ROLE, String.class);
         if (!role.equals(RoleConstants.CLIENT))
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -85,5 +88,21 @@ public class BookingController {
         return new ResponseEntity<>(bookingService.findBookingRecordsByUserId(userId, page, pageSize), HttpStatus.OK);
     }
 
+    @GetMapping("/not_fetched")
+    ResponseEntity<Page<DetailBookingRecord>> getBookingRecordsNotFetched(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                                                          @RequestParam(value = "page", required = false) Integer page,
+                                                                          @RequestParam(value = "page_size", required = false) Integer pageSize){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+        if (claims == null)
+            return EXPIRED_TOKEN;
+        String role = claims.get(JwtUtil.ROLE, String.class);
+        if (!role.equals(RoleConstants.CLIENT))
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
+        String userId = claims.getSubject();
+
+        return new ResponseEntity<>(bookingService.findBookingRecordsNotFetched(userId, page, pageSize), HttpStatus.OK);
+    }
 
 }
