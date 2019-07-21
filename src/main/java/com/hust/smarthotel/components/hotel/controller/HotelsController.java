@@ -5,7 +5,7 @@ import com.hust.smarthotel.components.hotel.app_model.HotelResponse;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.domain_service.HotelService;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
-import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 import com.hust.smarthotel.generic.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +21,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(UrlConstants.API + "/hotels")
+@RequestMapping(UrlConstant.API + "/hotels")
 public class HotelsController {
 
     @Autowired
@@ -40,7 +40,10 @@ public class HotelsController {
                           @RequestParam(value = "radius", required = false) Long radius,
                           @RequestParam(value = "min_point", required = false) Integer minPoint,
                           @RequestParam(value = "max_point", required = false) Integer maxPoint,
-                          @RequestParam(value = "facilities", required = false) String facilities
+                          @RequestParam(value = "facilities", required = false) String facilities,
+                          @RequestParam(value = "min_price", required = false) Integer minPrice,
+                          @RequestParam(value = "max_price", required = false) Integer maxPrice,
+                          @RequestParam(value = "direction", required = false) Integer direction
     ){
 
         if (name != null)
@@ -49,6 +52,8 @@ public class HotelsController {
             return hotelService.findHotelsAround(lng, lat, radius);
         if (minPoint != null || maxPoint != null || facilities != null)
             return hotelService.findHotelsByPointsAndFacilities(page, pageSize, minPoint, maxPoint, facilities);
+        if (maxPrice != null || minPrice != null)
+            return hotelService.findHotelsInPriceRange(minPrice, maxPrice, direction);
 
         return hotelService.findAllSortedByPointDesc(page, pageSize);
     }

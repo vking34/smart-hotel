@@ -13,6 +13,7 @@ import com.hust.smarthotel.components.room.domain_model.Room;
 import com.hust.smarthotel.components.room.domain_model.Rooms;
 import com.hust.smarthotel.components.room.repository.RoomRepository;
 import com.hust.smarthotel.generic.util.PageRequestCreator;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,8 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.*;
 
 @Service
 public class BookingService {
+
+    private static final String CREATED_DATE = "created_date";
 
     @Autowired
     private BookingRepository bookingRepository;
@@ -139,5 +142,9 @@ public class BookingService {
 
     public Page<BookingRecord> getBookingRecords(){
         return bookingRepository.findAll(PageRequestCreator.getSimplePageRequest(0,10));
+    }
+
+    public Page<BookingRecord> findBookingRecordsOfHotel(String hotelId, Integer page, Integer pageSize){
+        return bookingRepository.findBookingRecordsByHotelRef(new ObjectId(hotelId), PageRequestCreator.getDescPageRequest(page, pageSize, CREATED_DATE));
     }
 }

@@ -7,7 +7,7 @@ import com.hust.smarthotel.components.review.domain_model.BasicReview;
 import com.hust.smarthotel.components.review.domain_model.Review;
 import com.hust.smarthotel.components.review.domain_model.Reviews;
 import com.hust.smarthotel.components.review.domain_service.ReviewService;
-import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
+
 import static com.hust.smarthotel.generic.response.ErrorResponses.REVIEW_HOTEL_NOT_FOUND;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(UrlConstants.API + "/hotels/{hotelId}/reviews")
+@RequestMapping(UrlConstant.API + "/hotels/{hotelId}/reviews")
 public class ReviewController {
 
     private static final ResponseEntity<ReviewResponse> HOTEL_NOT_FOUND = new ResponseEntity<>(REVIEW_HOTEL_NOT_FOUND, HttpStatus.BAD_REQUEST);

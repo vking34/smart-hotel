@@ -6,7 +6,7 @@ import com.hust.smarthotel.components.user.app_model.UserResponse;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.domain_service.UserService;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
-import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 
 import com.hust.smarthotel.generic.util.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -23,7 +23,7 @@ import static com.hust.smarthotel.generic.constant.RoleConstants.ADMIN;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(UrlConstants.API+ "/users/{userId}")
+@RequestMapping(UrlConstant.API+ "/users/{userId}")
 public class UserController {
 
     private static final ResponseEntity FORBIDDEN = new ResponseEntity<>(USER_FORBIDDEN, HttpStatus.FORBIDDEN);

@@ -11,8 +11,7 @@ import com.hust.smarthotel.components.mananging.domain_model.Managing;
 import com.hust.smarthotel.components.mananging.domain_service.ManagingService;
 import com.hust.smarthotel.components.publish.Publisher;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
-import com.hust.smarthotel.generic.constant.UrlConstants;
-import com.hust.smarthotel.generic.response.ErrorResponses;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 import com.hust.smarthotel.generic.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(UrlConstants.API +"/booking")
+@RequestMapping(UrlConstant.API +"/booking")
 public class BookingRequestController {
 
     private static final ResponseEntity FORBIDDEN = new ResponseEntity<>(BOOKING_FORBIDDEN_GETTING_RECORD, HttpStatus.FORBIDDEN);

@@ -8,6 +8,7 @@ import com.hust.smarthotel.components.review.domain_model.Review;
 import com.hust.smarthotel.components.review.domain_model.Reviews;
 import com.hust.smarthotel.components.review.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,7 @@ public class ReviewService {
     }
 
     @Async
+    @CacheEvict(value = "desc_hotels_cache", allEntries = true)
     public void pushReview(String hotelId, Review review){
         Reviews reviews = reviewRepository.findReviewsByHotelId(hotelId);
 
@@ -69,7 +71,4 @@ public class ReviewService {
         hotel.setRatings(ratings);
         hotelAsyncTasks.updateHotel(hotel);
     }
-
-
-
 }
