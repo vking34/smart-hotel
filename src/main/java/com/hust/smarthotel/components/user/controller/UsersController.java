@@ -7,7 +7,7 @@ import com.hust.smarthotel.components.user.domain_model.BasicManager;
 import com.hust.smarthotel.components.user.domain_model.Manager;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.domain_service.UserService;
-import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,7 +21,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(UrlConstants.API+ "/users")
+@RequestMapping(UrlConstant.API+ "/users")
 public class UsersController {
 
     @Autowired

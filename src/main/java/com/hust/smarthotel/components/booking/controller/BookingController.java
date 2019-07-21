@@ -1,7 +1,6 @@
 package com.hust.smarthotel.components.booking.controller;
 
 import com.hust.smarthotel.components.booking.app_model.BookingRequest;
-import com.hust.smarthotel.components.booking.app_model.BookingResponse;
 import com.hust.smarthotel.components.booking.app_model.DetailBookingResponse;
 import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
@@ -11,7 +10,7 @@ import com.hust.smarthotel.components.hotel.domain_service.HotelService;
 import com.hust.smarthotel.components.publish.Publisher;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
 import com.hust.smarthotel.generic.constant.RoleConstants;
-import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 import com.hust.smarthotel.generic.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.EXPIRED_TOKEN;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(UrlConstants.API +"/booking")
+@RequestMapping(UrlConstant.API +"/booking")
 public class BookingController {
 
     private static final ResponseEntity HOTEL_NOT_FOUND = new ResponseEntity<>(BOOKING_HOTEL_NOT_FOUND, HttpStatus.BAD_REQUEST);

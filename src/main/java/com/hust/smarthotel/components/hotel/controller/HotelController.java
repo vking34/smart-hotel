@@ -6,8 +6,7 @@ import com.hust.smarthotel.components.hotel.app_model.HotelStatus;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
 import com.hust.smarthotel.components.hotel.domain_service.HotelService;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
-import com.hust.smarthotel.generic.constant.UrlConstants;
-import com.hust.smarthotel.generic.response.ErrorResponses;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 import com.hust.smarthotel.generic.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +20,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(UrlConstants.API + "/hotels/{hotelId}")
+@RequestMapping(UrlConstant.API + "/hotels/{hotelId}")
 public class HotelController {
 
     @Autowired

@@ -34,4 +34,7 @@ public interface HotelRepository extends MongoRepository<Hotel, String> {
                                                                                                                              Boolean laundry,
                                                                                                                              Boolean fitness,
                                                                                                                              Pageable pageable);
+
+    @Query("{ average_price : { $gte : ?0, $lte : ?1 } }")
+    public Page<Hotel> findHotelsByAveragePriceInRange(Integer minPrice, Integer maxPrice, Pageable pageable);
 }

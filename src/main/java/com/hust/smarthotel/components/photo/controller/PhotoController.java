@@ -7,11 +7,10 @@ import com.hust.smarthotel.components.photo.app_model.DeletePhotoRequest;
 import com.hust.smarthotel.components.photo.app_model.PhotoResponse;
 import com.hust.smarthotel.components.photo.domain_service.PhotoService;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
-import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 import com.hust.smarthotel.generic.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,12 +21,9 @@ import javax.imageio.ImageIO;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
-import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_HOTEL_NOT_MANAGER;
 import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_HOTEL_NOT_MANAGING;
 import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_INVALID_TOKEN;
 import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_NOT_IMAGE;
@@ -35,7 +31,7 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_OVER_SIZ
 import static com.hust.smarthotel.generic.response.ErrorResponses.PHOTO_INTERNAL_ERROR;
 
 @RestController
-@RequestMapping(UrlConstants.API)
+@RequestMapping(UrlConstant.API)
 @CrossOrigin("*")
 public class PhotoController {
 

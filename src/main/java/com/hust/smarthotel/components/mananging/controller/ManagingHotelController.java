@@ -5,12 +5,11 @@ import com.hust.smarthotel.components.hotel.domain_service.HotelService;
 import com.hust.smarthotel.components.mananging.app_model.HotelRequest;
 import com.hust.smarthotel.components.mananging.app_model.ManagingResponse;
 import com.hust.smarthotel.components.mananging.domain_model.ExtendedManaging;
-import com.hust.smarthotel.components.mananging.domain_model.Managing;
 import com.hust.smarthotel.components.mananging.domain_service.ManagingService;
 import com.hust.smarthotel.components.user.domain_model.User;
 import com.hust.smarthotel.components.user.domain_service.UserService;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
-import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 import com.hust.smarthotel.generic.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(UrlConstants.API + "/users/managers")
+@RequestMapping(UrlConstant.API + "/users/managers")
 public class ManagingHotelController {
 
     private static final ResponseEntity<ManagingResponse> USER_NOT_FOUND = new ResponseEntity<>(MANAGING_USER_NOT_FOUND, HttpStatus.BAD_REQUEST);

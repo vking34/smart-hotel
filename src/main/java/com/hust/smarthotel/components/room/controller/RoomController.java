@@ -8,11 +8,10 @@ import com.hust.smarthotel.components.room.app_model.RoomResponse;
 import com.hust.smarthotel.components.room.domain_model.Rooms;
 import com.hust.smarthotel.components.room.domain_service.RoomService;
 import com.hust.smarthotel.generic.constant.HeaderConstant;
-import com.hust.smarthotel.generic.constant.UrlConstants;
+import com.hust.smarthotel.generic.constant.UrlConstant;
 import com.hust.smarthotel.generic.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +24,7 @@ import static com.hust.smarthotel.generic.response.ErrorResponses.ROOM_FORBIDDEN
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(UrlConstants.API + "/hotels")
+@RequestMapping(UrlConstant.API + "/hotels")
 public class RoomController {
 
     private final static ResponseEntity<RoomResponse> FORBIDDEN = new ResponseEntity<>(ROOM_FORBIDDEN, HttpStatus.FORBIDDEN);
