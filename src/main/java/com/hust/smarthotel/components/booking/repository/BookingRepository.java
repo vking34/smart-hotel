@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface BookingRepository extends MongoRepository<BookingRecord, String>, BookingRepositoryCustom {
 
@@ -14,4 +16,5 @@ public interface BookingRepository extends MongoRepository<BookingRecord, String
 
     public Page<BookingRecord> findBookingRecordsByHotelRef(ObjectId hotelRef, Pageable pageable);
 
+    public Page<BookingRecord> findBookingRecordsByHotelRefIsIn(List<ObjectId> hotelList, Pageable pageable);
 }

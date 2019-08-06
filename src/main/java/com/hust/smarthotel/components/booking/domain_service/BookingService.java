@@ -8,6 +8,8 @@ import com.hust.smarthotel.components.booking.domain_model.BookingRecord;
 import com.hust.smarthotel.components.booking.domain_model.DetailBookingRecord;
 import com.hust.smarthotel.components.booking.repository.BookingRepository;
 import com.hust.smarthotel.components.hotel.domain_model.Hotel;
+import com.hust.smarthotel.components.mananging.domain_model.Managing;
+import com.hust.smarthotel.components.mananging.domain_service.ManagingService;
 import com.hust.smarthotel.components.room.domain_model.Price;
 import com.hust.smarthotel.components.room.domain_model.Room;
 import com.hust.smarthotel.components.room.domain_model.Rooms;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,6 +40,9 @@ public class BookingService {
 
     @Autowired
     private RoomRepository roomRepository;
+
+    @Autowired
+    private ManagingService managingService;
 
     @Autowired
     private BookingAsyncTask asyncTask;
@@ -76,8 +82,9 @@ public class BookingService {
         if (!rentTypeValidation)
             return BOOKING_INVALID_RENT_TYPE;
 
-        bookingRepository.save(bookingRecord);
         bookingRecord.setHotel(hotel);
+        bookingRepository.save(bookingRecord);
+
         return new DetailBookingResponse(true, null, null, bookingRecord);
     }
 
@@ -146,5 +153,16 @@ public class BookingService {
 
     public Page<BookingRecord> findBookingRecordsOfHotel(String hotelId, Integer page, Integer pageSize){
         return bookingRepository.findBookingRecordsByHotelRef(new ObjectId(hotelId), PageRequestCreator.getDescPageRequest(page, pageSize, CREATED_DATE));
+    }
+
+    public Page<BookingRecord> findBookingList(String managerId, Integer page, Integer pageSize){
+        List<Managing> managingList = managingService.findManagingByManagerId(managerId);
+
+        List<ObjectId> hotelList = new ArrayList<>();
+        for (Managing managing: managingList) {
+            hotelList.add(managing.getHotelId());
+        }
+
+        return bookingRepository.findBookingRecordsByHotelRefIsIn(hotelList, PageRequestCreator.getDescPageRequest(page, pageSize, CREATED_DATE));
     }
 }
