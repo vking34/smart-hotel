@@ -101,7 +101,7 @@ public class BookingController {
 
         String userId = claims.getSubject();
 
-        return new ResponseEntity<>(bookingService.findBookingRecordsNotFetched(userId, page, pageSize), HttpStatus.OK);
+        return new ResponseEntity<>(bookingService.findBookingRecordsNotFetchedByClient(userId, page, pageSize), HttpStatus.OK);
     }
 
 }
