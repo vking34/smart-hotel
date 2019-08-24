@@ -27,8 +27,11 @@ import java.util.List;
 
 import static com.hust.smarthotel.generic.constant.BookingState.CANCELED;
 import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
-import static com.hust.smarthotel.generic.response.ErrorResponses.*;
-
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_FETCHED;
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_INVALID_ROOM_TYPE;
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_INVALID_RENT_TYPE;
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_REQUEST_COMPLETED;
+import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_NOT_FETCHED;
 
 @Service
 public class BookingService {
@@ -129,22 +132,45 @@ public class BookingService {
         return new DetailBookingResponse(true, null, null, bookingRecord);
     }
 
-    public BookingResponse changeFetchedStatus(BookingRecord bookingRecord){
+    public BookingResponse fetchByClient(BookingRecord bookingRecord){
         if (bookingRecord.getStatus().equals(NEW_CREATED))
             return BOOKING_NOT_FETCHED;
 
-        bookingRecord.setIsFetched(true);
+        bookingRecord.setClientFetched(true);
         asyncTask.updateBookingRecord(bookingRecord);
         return new BookingResponse(true, null, null, bookingRecord);
     }
 
-    public Page<DetailBookingRecord> findBookingRecordsNotFetched(String userId, Integer page, Integer pageSize){
+    public BookingResponse fetchByHotel(BookingRecord bookingRecord){
+        if (!bookingRecord.getStatus().equals(NEW_CREATED)){
+            if (!bookingRecord.getHotelFetched()){
+                bookingRecord.setHotelFetched(true);
+                asyncTask.updateBookingRecord(bookingRecord);
+            }
+            return BOOKING_FETCHED;
+        }
+
+        bookingRecord.setHotelFetched(true);
+        asyncTask.updateBookingRecord(bookingRecord);
+        return new BookingResponse(true, null, null, bookingRecord);
+    }
+
+    public Page<DetailBookingRecord> findBookingRecordsNotFetchedByClient(String userId, Integer page, Integer pageSize){
         if (page == null)
             page = 0;
         if (pageSize == null)
             pageSize = 10;
 
-        return bookingRepository.findBookingRecordsNotFetched(userId, page, pageSize);
+        return bookingRepository.findBookingRecordsNotFetchedByClient(userId, page, pageSize);
+    }
+
+    public Page<BookingRecord> findBookingRecordsNotFetchedByHotel(String hotelId, Integer page, Integer pageSize){
+        if (page == null)
+            page = 0;
+        if (pageSize == null)
+            pageSize = 10;
+
+        return bookingRepository.findBookingRecordsNotFetchedByHotel(new ObjectId(hotelId), PageRequestCreator.getDescPageRequest(page, pageSize, CREATED_DATE));
     }
 
     public Page<BookingRecord> getBookingRecords(){

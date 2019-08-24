@@ -33,8 +33,8 @@ import static com.hust.smarthotel.generic.constant.RoleConstants.MANAGER;
 @RequestMapping(UrlConstant.API +"/booking")
 public class BookingRequestController {
 
-    private static final ResponseEntity FORBIDDEN = new ResponseEntity<>(BOOKING_FORBIDDEN_GETTING_RECORD, HttpStatus.FORBIDDEN);
-    private static final ResponseEntity FORBIDDEN_GET_BOOKING_RECORD = new ResponseEntity(HttpStatus.FORBIDDEN);
+    private static final ResponseEntity FORBIDDEN_GET_BOOKING_RECORD = new ResponseEntity<>(BOOKING_FORBIDDEN_GETTING_RECORD, HttpStatus.FORBIDDEN);
+    private static final ResponseEntity FORBIDDEN = new ResponseEntity(HttpStatus.FORBIDDEN);
     private static final ResponseEntity RECORD_NOT_FOUND = new ResponseEntity<>(BOOKING_RECORD_NOT_FOUND, HttpStatus.BAD_REQUEST);
     private static final ResponseEntity FORBIDDEN_CANCELATION = new ResponseEntity<>(BOOKING_FORBIDDEN_CANCELATION, HttpStatus.FORBIDDEN);
     private static final ResponseEntity BOOKING_REQUEST_NOT_FOUND = new ResponseEntity<>(BOOKING_NOT_FOUND, HttpStatus.BAD_REQUEST);
@@ -121,10 +121,10 @@ public class BookingRequestController {
         return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/{bookingRecordId}/fetched")
+    @PostMapping("/{bookingRecordId}/client_fetched")
     @PreAuthorize("hasRole('ROLE_CLIENT')")
-    ResponseEntity<BookingResponse> fetchBookingRequest(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
-                                                        @PathVariable String bookingRecordId){
+    ResponseEntity<BookingResponse> fetchBookingRequestByClient(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                                                @PathVariable String bookingRecordId){
         String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
         Claims claims = jwtUtil.getClaims(token);
         String userId = claims.getSubject();
@@ -136,8 +136,26 @@ public class BookingRequestController {
         if (!bookingRecord.getUser().getId().equals(userId))
             return FORBIDDEN_CANCELATION;
 
-        BookingResponse bookingResponse = bookingService.changeFetchedStatus(bookingRecord);
+        BookingResponse bookingResponse = bookingService.fetchByClient(bookingRecord);
+        if (!bookingResponse.getStatus())
+            return new ResponseEntity<>(bookingResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(bookingResponse, HttpStatus.OK);
+    }
 
+    @PostMapping("/{bookingRecordId}/hotel_fetched")
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    ResponseEntity<BookingResponse> fetchBookingRequestByHotel(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                                               @PathVariable String bookingRecordId){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+        String managerId = claims.getSubject();
+
+        BookingRecord bookingRecord = bookingService.findBookingRecordById(bookingRecordId);
+        Managing managing = managingService.findManaging(managerId, bookingRecord.getHotelId());
+        if (managing == null)
+            return FORBIDDEN;
+
+        BookingResponse bookingResponse = bookingService.fetchByHotel(bookingRecord);
         if (!bookingResponse.getStatus())
             return new ResponseEntity<>(bookingResponse, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(bookingResponse, HttpStatus.OK);

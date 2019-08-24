@@ -20,7 +20,7 @@ public class BookingRepositoryImpl implements BookingRepositoryCustom {
     private static final Sort DESC_CREATED_DATE = new Sort(Sort.Direction.DESC, "created_date");
     private static final String USER_ID = "user._id";
     private static final String ID = "_id";
-    private static final String FETCHED_STATUS = "is_fetched";
+    private static final String CLIENT_FETCHED = "client_fetched";
     private static final String STATUS = "status";
     private static final List<DetailBookingRecord> EMPTY_LIST = new ArrayList<>();
 
@@ -63,15 +63,17 @@ public class BookingRepositoryImpl implements BookingRepositoryCustom {
     }
 
     @Override
-    public Page<DetailBookingRecord> findBookingRecordsNotFetched(String userId, Integer page, Integer pageSize) {
+    public Page<DetailBookingRecord> findBookingRecordsNotFetchedByClient(String userId, Integer page, Integer pageSize) {
 
         MatchOperation matchOperation = Aggregation
                 .match(Criteria.where(USER_ID).is(new ObjectId(userId))
-                        .andOperator(Criteria.where(FETCHED_STATUS).is(false)
+                        .andOperator(Criteria.where(CLIENT_FETCHED).is(false)
                         .and(STATUS).ne(NEW_CREATED)));
 
         return getDetailBookingRecords(page, pageSize, matchOperation);
     }
+
+
 
     private Page<DetailBookingRecord> getDetailBookingRecords(Integer page, Integer pageSize, MatchOperation matchOperation) {
 
