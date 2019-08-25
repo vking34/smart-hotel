@@ -151,7 +151,7 @@ public class BookingRequestController {
         String managerId = claims.getSubject();
 
         BookingRecord bookingRecord = bookingService.findBookingRecordById(bookingRecordId);
-        Managing managing = managingService.findManaging(managerId, bookingRecord.getHotelId());
+        Managing managing = managingService.findManaging(managerId, bookingRecord.getHotelRef().toHexString());
         if (managing == null)
             return FORBIDDEN;
 

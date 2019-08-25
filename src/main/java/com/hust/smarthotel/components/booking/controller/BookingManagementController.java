@@ -83,4 +83,20 @@ public class BookingManagementController {
 
         return new ResponseEntity<>(bookingService.findBookingList(managerId, page, pageSize), HttpStatus.OK);
     }
+
+    @GetMapping("/hotels/{hotelId}/booking/new_created")
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    ResponseEntity<Page<BookingRecord>> getListOfNotProcessedBookingRequests(@RequestHeader(value = HeaderConstant.AUTHORIZATION) String authorizationField,
+                                                                             @PathVariable("hotelId") String hotelId,
+                                                                             @RequestParam(value = "page", required = false) Integer page,
+                                                                             @RequestParam(value = "page_size", required = false) Integer pageSize){
+        String token = authorizationField.replace(HeaderConstant.TOKEN_PREFIX, "");
+        Claims claims = jwtUtil.getClaims(token);
+        String managerId = claims.getSubject();
+
+        if (managingService.findManaging(managerId, hotelId) == null)
+            return FORBIDDEN;
+
+        return new ResponseEntity<>(bookingService.findNewCreatedBookingRequestsOfHotel(hotelId, page, pageSize) , HttpStatus.OK);
+    }
 }
