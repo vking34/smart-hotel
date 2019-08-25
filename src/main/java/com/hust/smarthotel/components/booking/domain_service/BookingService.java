@@ -24,7 +24,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static com.hust.smarthotel.generic.constant.BookingState.CANCELED;
 import static com.hust.smarthotel.generic.constant.BookingState.NEW_CREATED;
 import static com.hust.smarthotel.generic.response.ErrorResponses.BOOKING_FETCHED;
@@ -156,25 +155,15 @@ public class BookingService {
     }
 
     public Page<DetailBookingRecord> findBookingRecordsNotFetchedByClient(String userId, Integer page, Integer pageSize){
-        if (page == null)
-            page = 0;
-        if (pageSize == null)
-            pageSize = 10;
-
         return bookingRepository.findBookingRecordsNotFetchedByClient(userId, page, pageSize);
     }
 
     public Page<BookingRecord> findBookingRecordsNotFetchedByHotel(String hotelId, Integer page, Integer pageSize){
-        if (page == null)
-            page = 0;
-        if (pageSize == null)
-            pageSize = 10;
-
         return bookingRepository.findBookingRecordsNotFetchedByHotel(new ObjectId(hotelId), PageRequestCreator.getDescPageRequest(page, pageSize, CREATED_DATE));
     }
 
-    public Page<BookingRecord> getBookingRecords(){
-        return bookingRepository.findAll(PageRequestCreator.getSimplePageRequest(0,10));
+    public Page<BookingRecord> findNewCreatedBookingRequestsOfHotel(String hotelId, Integer page, Integer pageSize){
+        return bookingRepository.findBookingRecordsByHotelRefAndStatus(new ObjectId(hotelId), NEW_CREATED, PageRequestCreator.getDescPageRequest(page, pageSize, CREATED_DATE));
     }
 
     public Page<BookingRecord> findBookingRecordsOfHotel(String hotelId, Integer page, Integer pageSize){

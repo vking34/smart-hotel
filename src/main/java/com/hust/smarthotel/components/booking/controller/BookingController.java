@@ -103,5 +103,4 @@ public class BookingController {
 
         return new ResponseEntity<>(bookingService.findBookingRecordsNotFetchedByClient(userId, page, pageSize), HttpStatus.OK);
     }
-
 }

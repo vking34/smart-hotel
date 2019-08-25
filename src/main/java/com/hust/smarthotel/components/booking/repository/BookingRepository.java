@@ -21,4 +21,6 @@ public interface BookingRepository extends MongoRepository<BookingRecord, String
 
     @Query("{ hotel_ref : ?0 , hotel_fetched : false , status : { $eq : 'NEW_CREATED' } }")
     public Page<BookingRecord> findBookingRecordsNotFetchedByHotel(ObjectId hotelId, Pageable pageable);
+
+    public Page<BookingRecord> findBookingRecordsByHotelRefAndStatus(ObjectId hotelId,String status, Pageable pageable);
 }
