@@ -76,6 +76,10 @@ public class BookingRepositoryImpl implements BookingRepositoryCustom {
 
 
     private Page<DetailBookingRecord> getDetailBookingRecords(Integer page, Integer pageSize, MatchOperation matchOperation) {
+        if (page == null)
+            page = 0;
+        if (pageSize == null)
+            pageSize = 10;
 
         Aggregation aggregation = Aggregation.newAggregation(matchOperation, LOOKUP_OPERATION, SORT_OPERATION);
 
