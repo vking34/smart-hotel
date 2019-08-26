@@ -114,11 +114,6 @@ public class BookingService {
     }
 
     public Page<DetailBookingRecord> findBookingRecordsByUserId(String userId, Integer page, Integer pageSize){
-        if (page == null)
-            page = 0;
-        if (pageSize == null)
-            pageSize = 10;
-
         return bookingRepository.findBookingRecordsOfUser(userId, page, pageSize);
     }
 
