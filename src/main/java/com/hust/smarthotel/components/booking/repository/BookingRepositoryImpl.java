@@ -73,8 +73,6 @@ public class BookingRepositoryImpl implements BookingRepositoryCustom {
         return getDetailBookingRecords(page, pageSize, matchOperation);
     }
 
-
-
     private Page<DetailBookingRecord> getDetailBookingRecords(Integer page, Integer pageSize, MatchOperation matchOperation) {
         if (page == null)
             page = 0;
