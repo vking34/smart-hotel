@@ -42,6 +42,6 @@ pusher:
 
 #----------------------photo----------------------------
 photo:
-  dir-path: /images/
+  dir-path: images/
   base-url: /images/
   photo-max: 5
