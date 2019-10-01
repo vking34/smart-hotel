@@ -30,6 +30,8 @@ public class PhotoService {
 
     public static final String ABSOLUTE_PATH = System.getProperty("user.dir");
 
+//    public static final String ABSOLUTE_PATH ="/";
+
     // types
     private static final String LOGO = "logo";
     private static final String PHOTO = "photo";
@@ -156,7 +158,6 @@ public class PhotoService {
     private String generateFileName(String id){
         StringBuilder fileName = new StringBuilder(id);
         fileName.append(String.valueOf(new Date().getTime()));
-//        fileName.append(fileEnding);
         return fileName.toString();
     }
 }
